@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trampakí — Keynote Pitch & Teleprompter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080b;
+      --bg-surface: rgba(18, 19, 26, 0.88);
+      --bg-card: rgba(23, 24, 33, 0.92);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-pink: rgba(255, 45, 122, 0.42);
+      --pink: #ff2d7a;
+      --pink-dark: #c91458;
+      --pink-glow: rgba(255, 45, 122, 0.32);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --green: #10b981;
+      --amber: #facc15;
+      --red: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 78% 18%, rgba(255, 45, 122, 0.24) 0%, rgba(201, 20, 88, 0.08) 34%, transparent 65%),
+        radial-gradient(circle at 16% 85%, rgba(255, 45, 122, 0.10) 0%, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 54px 54px, 54px 54px;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(8, 8, 11, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    body.clean-audience .topbar {
+      display: none !important;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: baseline;
+      font-weight: 800;
+      font-size: 1.78rem;
+      letter-spacing: -0.045em;
+      color: #ffffff;
+      user-select: none;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .brand-logo .logo-i-pin {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 1px;
+      position: relative;
+      transform: translateY(2px);
+    }
+    .brand-logo .sub-tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 14px;
+      padding-left: 14px;
+      border-left: 1px solid var(--border);
+      letter-spacing: 0;
+      align-self: center;
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-top {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-top:hover {
+      border-color: var(--pink);
+      background: rgba(255, 45, 122, 0.14);
+    }
+    .btn-top.active {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: #ffffff;
+      box-shadow: 0 0 20px var(--pink-glow);
+    }
+
+    .sync-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+    }
+
+    .workspace {
+      position: relative;
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
+      padding-top: 64px;
+      padding-bottom: 58px;
+      display: grid;
+      grid-template-columns: 1fr;
+      transition: all 0.3s ease;
+    }
+
+    body.clean-audience .workspace {
+      padding-top: 16px;
+    }
+
+    body.presenter-mode .workspace {
+      grid-template-columns: 1.55fr 1fr;
+      gap: 20px;
+      padding: 74px 24px 66px 24px;
+    }
+
+    .slide-viewport {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 3vw;
+      overflow-y: auto;
+    }
+
+    .scene {
+      display: none;
+      width: 100%;
+      max-width: 1680px;
+      min-height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      animation: swipeIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .scene.active {
+      display: flex;
+    }
+
+    @keyframes swipeIn {
+      0% {
+        opacity: 0;
+        transform: translateX(48px) scale(0.985);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.82rem, 1vw, 1.02rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--pink);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .kicker::after {
+      content: "";
+      height: 1px;
+      width: 48px;
+      background: var(--pink);
+      opacity: 0.65;
+    }
+
+    .slide-title {
+      font-size: clamp(2.1rem, 3.8vw, 4.1rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .slide-subtitle {
+      font-size: clamp(1rem, 1.35vw, 1.38rem);
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 980px;
+      margin-bottom: 24px;
+    }
+
+    .pink-text {
+      color: var(--pink);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .grid-2-equal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      width: 100%;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(20px, 2vw, 32px);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .card.highlight {
+      border-color: var(--border-pink);
+      box-shadow: 0 20px 55px rgba(255, 45, 122, 0.14);
+    }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--pink);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: clamp(1.25rem, 1.65vw, 1.75rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .card p {
+      font-size: clamp(0.95rem, 1.1vw, 1.14rem);
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .big-metric {
+      font-size: clamp(2.4rem, 3.8vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--pink);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .chaos-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    .chaos-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: rgba(22, 23, 32, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 11px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.86rem, 1.02vw, 1.02rem);
+      color: #f1f5f9;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+      animation: floatPill 3.6s ease-in-out infinite alternate;
+    }
+    .chaos-pill:nth-child(even) {
+      margin-left: 26px;
+      animation-delay: 0.9s;
+    }
+    .chaos-pill::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 12px var(--pink);
+    }
+
+    @keyframes floatPill {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-7px); }
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .comp-table th, .comp-table td {
+      padding: clamp(13px, 1.4vw, 20px) clamp(15px, 1.6vw, 26px);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: clamp(0.92rem, 1.1vw, 1.15rem);
+    }
+    .comp-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .comp-table th.trampaki-col,
+    .comp-table td.trampaki-col {
+      background: rgba(255, 45, 122, 0.12);
+      border-left: 1px solid var(--border-pink);
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: 295px 1fr;
+      gap: 22px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .steps-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-btn {
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .step-btn:hover {
+      border-color: rgba(255, 45, 122, 0.4);
+      color: #fff;
+    }
+    .step-btn.active {
+      background: rgba(255, 45, 122, 0.16);
+      border-color: var(--pink);
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(255, 45, 122, 0.18);
+    }
+    .step-btn .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--pink);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .step-btn .step-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: block;
+      line-height: 1.25;
+    }
+
+    .phones-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 26px;
+      width: 100%;
+    }
+
+    .phone-mockup {
+      width: 318px;
+      height: 590px;
+      background: #f4f5f7;
+      color: #1e293b;
+      border-radius: 30px;
+      border: 6px solid #1e2436;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .phone-top-bar {
+      background: #0d111d;
+      color: #cbd5e1;
+      padding: 6px 12px;
+      font-size: 0.66rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .phone-top-bar .screen-tag {
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+      font-size: 0.62rem;
+    }
+
+    .phone-app-header {
+      background: #b3205d;
+      color: #fff;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .phone-app-header .user-chip {
+      background: rgba(255, 255, 255, 0.18);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      max-width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .phone-app-header .menu-bars {
+      font-size: 0.95rem;
+      font-weight: 700;
+      opacity: 0.9;
+      letter-spacing: 1px;
+    }
+
+    .phone-body {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f1f3f6;
+      position: relative;
+    }
+    .phone-body::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .app-white-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 11px 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .app-badge-green {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.64rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .app-badge-pink {
+      display: inline-block;
+      background: #fce7f3;
+      color: #b3205d;
+      font-size: 0.64rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-right: 3px;
+      margin-bottom: 3px;
+      border: 1px solid #fbcfe8;
+    }
+
+    .app-btn-pink {
+      width: 100%;
+      background: #b3205d;
+      color: #fff;
+      border: none;
+      padding: 9px;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .app-btn-outline {
+      width: 100%;
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 7px;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .app-btn-green {
+      width: 100%;
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .tinder-actions {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 8px;
+      padding-top: 4px;
+    }
+    .circle-action {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.16);
+    }
+    .circle-dislike { background: #ef4444; }
+    .circle-like { background: #22c55e; }
+
+    .phone-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      z-index: 20;
+    }
+    .phone-modal-card {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      font-size: 0.7rem;
+    }
+    .phone-modal-head-pink {
+      background: #b3205d;
+      color: #fff;
+      padding: 9px 12px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .phone-modal-head-amber {
+      background: #f59e0b;
+      color: #fff;
+      padding: 9px 12px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .presenter-panel {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
+      background: rgba(14, 15, 22, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    body.presenter-mode .presenter-panel {
+      display: flex;
+    }
+
+    .timers-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timer-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      border-radius: 10px;
+    }
+    .timer-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+    }
+    .timer-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .teleprompter-box {
+      flex: 1;
+      overflow-y: auto;
+      background: rgba(8, 8, 12, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 1.04rem;
+      line-height: 1.65;
+      color: #f1f5f9;
+    }
+    .teleprompter-box .stage-cue {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--amber);
+      background: rgba(250, 204, 21, 0.12);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin: 8px 0 4px 0;
+    }
+    .teleprompter-box strong {
+      color: var(--pink);
+      font-weight: 700;
+    }
+
+    .bottombar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 58px;
+      z-index: 50;
+      background: rgba(8, 8, 11, 0.88);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .dot.active {
+      width: 32px;
+      background: var(--pink);
+      box-shadow: 0 0 12px var(--pink);
+    }
+
+    .nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 72px;
+      right: 28px;
+      z-index: 100;
+      background: #12131a;
+      border: 1px solid var(--pink);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      display: none;
+    }
+  </style>
+</head>
+<body class="presenter-mode">
+
+  <div class="stage-bg"></div>
+  <div id="toastBox" class="toast-msg"></div>
+
+  <header class="topbar">
+    <div style="display:flex; align-items:center;">
+      <a href="#1" class="brand-logo" onclick="goToScene(0); return false;">
+        <span>trampak</span>
+        <span class="logo-i-pin">
+          <svg width="15" height="32" viewBox="0 0 24 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1Z" fill="#162b4d"/>
+            <circle cx="12" cy="10.2" r="3.4" fill="#c92a6a"/>
+            <rect x="7" y="27" width="10" height="17" rx="1.8" fill="#ffffff"/>
+          </svg>
+        </span>
+        <span class="sub-tag">Seu próximo emprego na palma da sua mão • FIAP Startup One</span>
+      </a>
+    </div>
+
+    <div class="top-controls">
+      <span id="syncIndicator" class="sync-badge">Telão pronto para sincronizar</span>
+      <button id="btnAudienceMode" class="btn-top" onclick="setViewMode('audience')">Modo Plateia</button>
+      <button id="btnPresenterMode" class="btn-top active" onclick="setViewMode('presenter')">Modo Apresentador + Teleprompter (P)</button>
+      <button class="btn-top" onclick="openSecondScreen()">Abrir 2ª Tela — Telão Banca</button>
+      <button class="btn-top" onclick="toggleFullScreen()">Tela Cheia (F)</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="slide-viewport">
+
+      <!-- SLIDE 01 -->
+      <article class="scene active" data-index="0">
+        <div class="kicker">TRAMPAKÍ • EMPREENDEDORISMO & INOVAÇÃO • FIAP</div>
+        <div style="margin-bottom: 18px;">
+          <span class="brand-logo" style="font-size: clamp(3.3rem, 5.6vw, 5.8rem); background:#b3205d; padding: 10px 28px 14px 28px; border-radius: 18px; box-shadow: 0 16px 40px rgba(179, 32, 93, 0.4);">
+            <span>trampak</span>
+            <span class="logo-i-pin" style="margin-left:3px; transform:translateY(4px);">
+              <svg width="36" height="76" viewBox="0 0 24 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1Z" fill="#162b4d"/>
+                <circle cx="12" cy="10.2" r="3.4" fill="#b3205d"/>
+                <rect x="7" y="27" width="10" height="17" rx="1.8" fill="#ffffff"/>
+              </svg>
+            </span>
+          </span>
+        </div>
+        <h1 class="slide-title">A Conexão Ágil do <span class="pink-text">Mercado Informal.</span></h1>
+        <p class="slide-subtitle">
+          Do diagnóstico do ecossistema ao produto funcional: conectando estabelecimentos comerciais e trabalhadores autônomos sob demanda através de geolocalização e match de interesse mútuo.
+        </p>
+        <div class="grid-3">
+          <div class="card highlight">
+            <span class="card-tag">01 / PROPOSTA CENTRAL</span>
+            <h3>Match Geolocalizado</h3>
+            <p>Conexão estilo Tinder entre comércios locais e profissionais para vagas pontuais, diárias e bicos urgentes.</p>
+          </div>
+          <div class="card">
+            <span class="card-tag">02 / PÚBLICO-ALVO</span>
+            <h3>Comércios & Classes C/D</h3>
+            <p>Bares, restaurantes, buffets e eventos que precisam repor equipe rápido, sem cobrar nada do trabalhador.</p>
+          </div>
+          <div class="card">
+            <span class="card-tag">03 / MODELO DE NEGÓCIO</span>
+            <h3>Créditos Pré-Pagos</h3>
+            <p>Vagas avulsas e pacotes de créditos pagos exclusivamente pelo contratante, destravando a adesão da base operacional.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 02 -->
+      <article class="scene" data-index="1">
+        <div class="grid-2">
+          <div>
+            <div class="kicker">02 / CAPÍTULO 01 • ECOSSISTEMA & CONTEXTO</div>
+            <h2 class="slide-title">Bares perdem mesas.<br>Autônomos perdem <span class="pink-text">renda.</span></h2>
+            <p class="slide-subtitle">
+              Grupos caóticos de WhatsApp, no-shows sem aviso prévio, calotes informais e escalas de plantão remendadas às 19h de sábado.
+            </p>
+            <div class="grid-3" style="margin-top: 12px;">
+              <div class="card highlight" style="padding:20px;">
+                <span class="card-tag">FRAGILIDADE (BANI)</span>
+                <div class="big-metric" style="font-size:2.4rem;">39M</div>
+                <p style="font-size:0.92rem;">Trabalhadores informais no Brasil sem previsibilidade de renda (IBGE).</p>
+              </div>
+              <div class="card" style="padding:20px;">
+                <span class="card-tag">ANSIEDADE OPERACIONAL</span>
+                <h3 style="font-size:1.25rem;">Faltas de Última Hora</h3>
+                <p style="font-size:0.92rem;">Desfalques inesperados paralisam bares, restaurantes e eventos locais.</p>
+              </div>
+              <div class="card" style="padding:20px;">
+                <span class="card-tag">NÃO-LINEARIDADE</span>
+                <h3 style="font-size:1.25rem;">Busca às Cegas</h3>
+                <p style="font-size:0.92rem;">Contratação em redes sociais sem histórico, notas ou referências reais.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chaos-stack">
+            <div class="chaos-pill">“Mandei mensagem em 5 grupos de freela e ninguém responde”</div>
+            <div class="chaos-pill">“O garçom faltou às 19h45 com o salão já lotado”</div>
+            <div class="chaos-pill">“Fiz a diária sábado passado e até hoje não recebi o Pix”</div>
+            <div class="chaos-pill">“Escala de sábado desfalcada de última hora”</div>
+            <div class="chaos-pill">“Alguém indica um cozinheiro urgente para hoje à noite??”</div>
+            <div class="chaos-pill">“Comandas travadas na cozinha por falta de equipe”</div>
+            <div class="chaos-pill">“Mandou áudio desmarcando o plantão em cima da hora”</div>
+            <div class="chaos-pill">“Fechamento de caixa no prejuízo por mesas perdidas”</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 03 -->
+      <article class="scene" data-index="2">
+        <div class="kicker">03 / CAPÍTULO 01 • INVESTIGAÇÃO & ENTREVISTAS</div>
+        <h2 class="slide-title">Validação do Problema Real <span class="pink-text">(The Mom Test)</span></h2>
+        <p class="slide-subtitle">
+          Em vez de perguntar opiniões hipotéticas, fomos a campo investigar ocorrências passadas e prejuízos financeiros reais nos estabelecimentos locais.
+        </p>
+        <div class="grid-2-equal">
+          <div class="card">
+            <span class="card-tag" style="color:#94a3b8;">ABORDAGEM TRADICIONAL FALHA</span>
+            <h3 style="font-size:2rem; color:#cbd5e1; margin-bottom:18px;">“Você usaria um aplicativo para contratar ajudantes?”</h3>
+            <p>
+              Gera respostas complacentes, elogios vazios e opiniões hipotéticas que não validam disposição real de pagamento nem urgência operacional.
+            </p>
+          </div>
+          <div class="card highlight">
+            <span class="card-tag">APLICAÇÃO PRÁTICA TRAMPAKÍ</span>
+            <h3 style="font-size:2rem; color:#ffffff; margin-bottom:18px;">“Quantas vezes faltou um garçom ou cozinheiro no último mês e o que você fez?”</h3>
+            <p>
+              Extrai prejuízos financeiros concretos (até 30% do faturamento da noite perdido), horas desperdiçadas em grupos de WhatsApp e dor aguda comprovada.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 04 -->
+      <article class="scene" data-index="3">
+        <div class="kicker">04 / CAPÍTULO 02 • PROPOSTA DE VALOR</div>
+        <h2 class="slide-title">Jobs to Be Done <span class="pink-text">(JTBD) dos Dois Lados</span></h2>
+        <p class="slide-subtitle">
+          Resolvemos simultaneamente a urgência do estabelecimento comercial e a barreira financeira de entrada do profissional autônomo.
+        </p>
+        <div class="grid-2-equal">
+          <div class="card highlight">
+            <span class="card-tag">LADO A • O CONTRATANTE LOCAL</span>
+            <h3>Restaurantes, Bares, Buffets e Eventos</h3>
+            <div style="display:flex; flex-direction:column; gap:14px; margin-top:18px;">
+              <div>
+                <strong class="pink-text">Job Funcional:</strong>
+                <p>Repor mão de obra urgente (cozinheiro, barman, diarista, segurança) em raio próximo de até 5 km.</p>
+              </div>
+              <div>
+                <strong class="pink-text">Dor Crítica:</strong>
+                <p>Incerteza de pontualidade, no-show sem aviso e perfis sem avaliação de outros estabelecimentos.</p>
+              </div>
+              <div>
+                <strong class="pink-text">Ganho Esperado:</strong>
+                <p>Anunciar vaga em 1 minuto, avaliar candidatos que curtiram a vaga, dar match e formalizar o início do serviço.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="card-tag">LADO B • O PROFISSIONAL INFORMAL</span>
+            <h3>Trabalhadores Operacionais (Classes C e D)</h3>
+            <div style="display:flex; flex-direction:column; gap:14px; margin-top:18px;">
+              <div>
+                <strong class="pink-text">Job Funcional:</strong>
+                <p>Encontrar turnos e diárias remuneradas perto de casa filtradas pelas suas habilidades reais.</p>
+              </div>
+              <div>
+                <strong class="pink-text">Dor Crítica:</strong>
+                <p>Ter que pagar adiantado por moedas ou pacotes de leads (como no GetNinjas) apenas para enviar orçamento sem garantia.</p>
+              </div>
+              <div>
+                <strong class="pink-text">Ganho Esperado:</strong>
+                <p>Cadastro 100% gratuito, escolha visual de vagas (Curtir / Passar), recebimento direto via Pix e construção de reputação 5 estrelas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 05: SIMULADOR FIEL AO VÍDEO -->
+      <article class="scene" data-index="4">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div class="kicker">05 / PRODUTO EM OPERAÇÃO • TELAS REAIS DO PROJETO TRAMPAKÍ</div>
+            <h2 class="slide-title" style="font-size:clamp(1.6rem, 2.3vw, 2.3rem); margin-bottom:2px;">
+              Visão Lado a Lado: <span class="pink-text">Candidato & Estabelecimento</span>
+            </h2>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--text-muted);">Clique nas telas ao lado</span>
+            <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()">Pausar Auto-Play</button>
+            <button class="btn-top" onclick="setAppStep(0, true)">↺ Reiniciar</button>
+          </div>
+        </div>
+
+        <div class="demo-layout">
+          <div class="steps-sidebar">
+            <button class="step-btn active" onclick="setAppStep(0, true)">
+              <span class="step-num">TELA 01 • LOGIN & NOVA VAGA</span>
+              <span class="step-title">Restaurante Come Bem anuncia Cozinheiro a R$ 123/h</span>
+            </button>
+            <button class="step-btn" onclick="setAppStep(1, true)">
+              <span class="step-num">TELA 02 • PERFIL & VAGA ABERTA</span>
+              <span class="step-title">Bruno Carvalho (★ 4.5) inclui Cozinheiro e busca vagas</span>
+            </button>
+            <button class="step-btn" onclick="setAppStep(2, true)">
+              <span class="step-num">TELA 03 • SWIPE & MAPA 3,8 KM</span>
+              <span class="step-title">Bruno vê mapa, curte no joinha 👍 e envia candidatura</span>
+            </button>
+            <button class="step-btn" onclick="setAppStep(3, true)">
+              <span class="step-num">TELA 04 • AVALIAR CANDIDATO</span>
+              <span class="step-title">Restaurante vê 1 curtida, lê avaliações Zoff Club e dá Match</span>
+            </button>
+            <button class="step-btn" onclick="setAppStep(4, true)">
+              <span class="step-num">TELA 05 • CHAT, DUPLO OK & START</span>
+              <span class="step-title">Chat ("Aprendi em BH"), Acordo Selado e Iniciar Prestação (Dar Start)</span>
+            </button>
+            <button class="step-btn" onclick="setAppStep(5, true)">
+              <span class="step-num">TELA 06 • MODAL PIX & AVALIAÇÃO 5★</span>
+              <span class="step-title">Upload de comprovante pix.png e nota 5★ ("Cozinha muito bem")</span>
+            </button>
+          </div>
+
+          <div class="phones-stage">
+            <div class="phone-mockup">
+              <div class="phone-top-bar">
+                <span id="leftTopLabel">👤 Candidato: Bruno Carvalho</span>
+                <span class="screen-tag" id="leftScreenTag">Tela: login</span>
+              </div>
+              <div class="phone-app-header">
+                <span class="brand-logo" style="font-size:1.12rem;">
+                  <span>trampak</span>
+                  <span class="logo-i-pin" style="transform:translateY(1px);">
+                    <svg width="10" height="21" viewBox="0 0 24 46" fill="none">
+                      <path d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1Z" fill="#162b4d"/>
+                      <circle cx="12" cy="10.2" r="3.4" fill="#b3205d"/>
+                      <rect x="7" y="27" width="10" height="17" rx="1.8" fill="#ffffff"/>
+                    </svg>
+                  </span>
+                </span>
+                <span class="user-chip" id="leftHeaderChip">Bruno Carvalho</span>
+                <span class="menu-bars">☰</span>
+              </div>
+              <div class="phone-body" id="phoneLeftBody"></div>
+            </div>
+
+            <div class="phone-mockup">
+              <div class="phone-top-bar">
+                <span id="rightTopLabel">🏪 Estabelecimento: Come Bem</span>
+                <span class="screen-tag" id="rightScreenTag">Tela: create_job</span>
+              </div>
+              <div class="phone-app-header">
+                <span class="brand-logo" style="font-size:1.12rem;">
+                  <span>trampak</span>
+                  <span class="logo-i-pin" style="transform:translateY(1px);">
+                    <svg width="10" height="21" viewBox="0 0 24 46" fill="none">
+                      <path d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1Z" fill="#162b4d"/>
+                      <circle cx="12" cy="10.2" r="3.4" fill="#b3205d"/>
+                      <rect x="7" y="27" width="10" height="17" rx="1.8" fill="#ffffff"/>
+                    </svg>
+                  </span>
+                </span>
+                <span class="user-chip" id="rightHeaderChip">Restaurante Come Bem</span>
+                <span class="menu-bars">☰</span>
+              </div>
+              <div class="phone-body" id="phoneRightBody"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 06 -->
+      <article class="scene" data-index="5">
+        <div class="kicker">06 / CAPÍTULO 02 • POSICIONAMENTO ESTRATÉGICO</div>
+        <h2 class="slide-title">Matriz de Avaliação de Valor: <span class="pink-text">O Diferencial Trampakí</span></h2>
+        <p class="slide-subtitle">
+          Enquanto GetNinjas e Parafuso cobram do trabalhador ou focam em reparos domésticos, o Trampakí destrava a base operacional cobrando apenas do contratante.
+        </p>
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Critério Competitivo</th>
+              <th>GetNinjas / Parafuso</th>
+              <th>Grupos de Redes Sociais</th>
+              <th class="trampaki-col">trampakí</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Quem Paga a Conta?</strong></td>
+              <td>Trabalhador (Compra pacote de moedas/leads)</td>
+              <td>Gratuito / Sem suporte ou filtro</td>
+              <td class="trampaki-col">Apenas o Contratante (100% Grátis para o Trabalhador)</td>
+            </tr>
+            <tr>
+              <td><strong>Filtro de Localização</strong></td>
+              <td>Cidades ou regiões amplas</td>
+              <td>Inexistente (postagens soltas)</td>
+              <td class="trampaki-col">Geolocalização e Mapa de Distância (Raio até 5 km)</td>
+            </tr>
+            <tr>
+              <td><strong>Barreira de Entrada</strong></td>
+              <td>Média / Burocrática (exige saldo prévio)</td>
+              <td>Baixa / Caótica</td>
+              <td class="trampaki-col">Zero Fricção (Match por Joinha / Swipe em 3 cliques)</td>
+            </tr>
+            <tr>
+              <td><strong>Histórico e Confiança</strong></td>
+              <td>Foco em serviços técnicos e reformas</td>
+              <td>Nulo (risco alto de calote e no-show)</td>
+              <td class="trampaki-col">Duplo Aceite, Comprovante Pix Anexado e Avaliação Mútua 1 a 5★</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- SLIDE 07 -->
+      <article class="scene" data-index="6">
+        <div class="kicker">07 / CAPÍTULO 03 • DIMENSIONAMENTO DE MERCADO</div>
+        <h2 class="slide-title">Oportunidade em Camadas: <span class="pink-text">Do Brasil ao Bairro Polo</span></h2>
+        <p class="slide-subtitle">
+          Estratégia de expansão hiperlocal: começamos dominando a densidade comercial da Zona Leste de São Paulo antes de escalar para as regiões metropolitanas.
+        </p>
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-tag">TAM • MERCADO TOTAL BRASIL</span>
+            <div class="big-metric">39M</div>
+            <h3>Força de Trabalho Informal</h3>
+            <p>Contingente total de trabalhadores na informalidade no Brasil segundo a PNAD Contínua (IBGE) buscando renda flexível.</p>
+          </div>
+          <div class="card">
+            <span class="card-tag">SAM • MERCADO DISPONÍVEL</span>
+            <div class="big-metric">1,5M</div>
+            <h3>Alimentação, Bares e Eventos</h3>
+            <p>Estabelecimentos de hospitalidade, restaurantes, buffets e comércios urbanos com demanda recorrente por turnos extras.</p>
+          </div>
+          <div class="card highlight">
+            <span class="card-tag">SOM • META PILOTO ANO 1</span>
+            <div class="big-metric">1.000</div>
+            <h3>Comércios no Polo Zona Leste SP</h3>
+            <p>Estabelecimentos pagantes ativos no cluster inicial de lançamento (Tatuapé, Mooca e entorno) garantindo liquidez imediata.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 08 -->
+      <article class="scene" data-index="7">
+        <div class="kicker">08 / CAPÍTULO 03 • MONETIZAÇÃO & PROJEÇÕES FINANCEIRAS</div>
+        <h2 class="slide-title">Precificação Pré-Paga e <span class="pink-text">Projeção de 6 Meses a 10 Anos</span></h2>
+        <div class="grid-3" style="margin-bottom: 20px;">
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">VAGA AVULSA PRÉ-PAGA</span>
+            <div class="big-metric" style="font-size:2.3rem;">R$ 19,90</div>
+            <p style="font-size:0.95rem;">Crédito unitário: vaga ativa por 48 horas ou até o fechamento do match com o candidato.</p>
+          </div>
+          <div class="card highlight" style="padding:20px;">
+            <span class="card-tag">PACOTE BÁSICO RECORRENTE</span>
+            <div class="big-metric" style="font-size:2.3rem;">R$ 49,90</div>
+            <p style="font-size:0.95rem;">Pacote com 3 créditos de contratação (R$ 16,63/vaga) para bares e restaurantes de giro médio.</p>
+          </div>
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">RECEITA COMPLEMENTAR</span>
+            <div class="big-metric" style="font-size:2.3rem;">Selo Premium</div>
+            <p style="font-size:0.95rem;">Opção de destaque de perfil ("Ficar em Evidência nas Vagas") para profissionais autônomos.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">HORIZONTE 6 MESES</span>
+            <h3>R$ 38,8 mil <span style="font-size:0.85rem; color:var(--text-muted);">ARR</span></h3>
+            <p style="font-size:0.9rem;"><strong>120 comércios ativos</strong> (Piloto Zona Leste SP) • 180 vagas/mês • MRR de R$ 3.240.</p>
+          </div>
+          <div class="card highlight" style="padding:20px;">
+            <span class="card-tag">HORIZONTE 1 ANO</span>
+            <h3>R$ 288k – 324k <span style="font-size:0.85rem; color:var(--text-muted);">ARR</span></h3>
+            <p style="font-size:0.9rem;"><strong>1.000 comércios ativos</strong> • Média de 1,5 vagas/mês (1.500 vagas mensais em SP).</p>
+          </div>
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">HORIZONTE 5 ANOS</span>
+            <h3>R$ 10,28 mi <span style="font-size:0.85rem; color:var(--text-muted);">ARR</span></h3>
+            <p style="font-size:0.9rem;"><strong>28.000 comércios ativos</strong> nas principais capitais • 47.600 vagas fechadas/mês.</p>
+          </div>
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">HORIZONTE 10 ANOS</span>
+            <h3>R$ 51,84 mi+ <span style="font-size:0.85rem; color:var(--text-muted);">ARR</span></h3>
+            <p style="font-size:0.9rem;"><strong>120.000 comércios</strong> em escala nacional + soluções financeiras e planos corporativos.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 09 -->
+      <article class="scene" data-index="8">
+        <div class="kicker">09 / CAPÍTULOS 04 & 05 • VALIDAÇÃO LEAN & ANÁLISE CRÍTICA DE BANCA</div>
+        <h2 class="slide-title">Ciclo Lean e Mitigação dos <span class="pink-text">Três Riscos Fatais</span></h2>
+        <div class="grid-3" style="margin-bottom:20px;">
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">FASE 1 • CONSTRUIR (MVP)</span>
+            <h3>Protótipo Funcional</h3>
+            <p style="font-size:0.95rem;">Plataforma web mobile com jornada dupla (Candidato e Contratante), match, chat e confirmação de Pix.</p>
+          </div>
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">FASE 2 • MEDIR MÉTRICAS</span>
+            <h3>Liquidez & Show-up</h3>
+            <p style="font-size:0.95rem;">Medição do tempo até o primeiro match (&lt; 60 min) e taxa de comparecimento efetivo ao turno.</p>
+          </div>
+          <div class="card" style="padding:20px;">
+            <span class="card-tag">FASE 3 • APRENDER & PIVOTAR</span>
+            <h3>Calibragem Hiperlocal</h3>
+            <p style="font-size:0.95rem;">Ajuste de pacotes de créditos e densidade de raio geográfico por bairro polo.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="card highlight" style="padding:20px;">
+            <span class="card-tag">RISCO 01 • O OVO E A GALINHA</span>
+            <h3>Pré-Povoamento de Oferta</h3>
+            <p style="font-size:0.95rem;">Cadastro gratuito prévio de profissionais em pontos de transporte público e centros comerciais antes de cobrar os bares.</p>
+          </div>
+          <div class="card highlight" style="padding:20px;">
+            <span class="card-tag">RISCO 02 • DESINTERMEDIAÇÃO</span>
+            <h3>Rotatividade & Reputação</h3>
+            <p style="font-size:0.95rem;">Alta rotatividade natural do setor aliada à necessidade constante de novos perfis avaliados e histórico de comprovantes Pix.</p>
+          </div>
+          <div class="card highlight" style="padding:20px;">
+            <span class="card-tag">RISCO 03 • CAC DIGITAL ALTO</span>
+            <h3>Aquisição Porta a Porta</h3>
+            <p style="font-size:0.95rem;">Venda direta de calçada em polos gastronômicos e parcerias com associações comerciais de bairro.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 10 -->
+      <article class="scene" data-index="9">
+        <div class="kicker">10 / CAPÍTULO 05 • CONEXÃO COM INVESTIDORES</div>
+        <h2 class="slide-title">O Próximo Passo: <span class="pink-text">Tração do Piloto Comercial</span></h2>
+        <p class="slide-subtitle">
+          O produto já está construído e validado. Buscamos mentoria e parceiros estratégicos para escalar a operação nos polos gastronômicos de São Paulo.
+        </p>
+        <div class="grid-3" style="margin-bottom:24px;">
+          <div class="card highlight">
+            <span class="card-tag">META DE ESTABELECIMENTOS</span>
+            <div class="big-metric">100</div>
+            <h3>Comércios Pagantes no Piloto</h3>
+            <p>Bares, restaurantes e buffets ativos validando a recorrência dos pacotes pré-pagos.</p>
+          </div>
+          <div class="card highlight">
+            <span class="card-tag">BASE DE OFERTA QUALIFICADA</span>
+            <div class="big-metric">5.000</div>
+            <h3>Profissionais Cadastrados</h3>
+            <p>Cozinheiros, garçons, barmans, diaristas e seguranças avaliados e geolocalizados.</p>
+          </div>
+          <div class="card highlight">
+            <span class="card-tag">VELOCIDADE DE LIQUIDEZ</span>
+            <div class="big-metric">&lt; 60 min</div>
+            <h3>Tempo Médio para o Match</h3>
+            <p>Da publicação da vaga urgente até o acordo selado no chat entre empresa e trabalhador.</p>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- CONSOLE DO APRESENTADOR -->
+    <aside class="presenter-panel">
+      <div class="timers-row">
+        <div class="timer-box">
+          <span class="timer-label">Tempo Slide</span>
+          <span class="timer-val" id="sceneTimer">00:25</span>
+        </div>
+        <div class="timer-box">
+          <span class="timer-label">Pitch Total</span>
+          <span class="timer-val" id="totalTimer">04:00</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <button class="btn-top" onclick="toggleTimer()" id="btnTimerToggle">Pausar (T)</button>
+          <button class="btn-top" onclick="resetPitch()">Resetar (R)</button>
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--pink); text-transform:uppercase; letter-spacing:0.1em;">
+        Roteiro do Teleprompter — Fala para a Banca
+      </div>
+      <div class="teleprompter-box" id="teleprompterContent"></div>
+      <div class="timer-box" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="timer-label">Próximo Slide</span>
+          <strong id="nextSlideTitle" style="font-size:0.9rem; color:#fff;">02 / Ecossistema e Dor</strong>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text-muted);">Setas ← → para navegar</span>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="bottombar">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-muted);">
+      <strong style="color:var(--pink);" id="slideCounter">01 / 10</strong> — <span id="slideFooterName">Capa Executiva Trampakí</span>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+    <div class="nav-btns">
+      <button class="btn-top" onclick="prevScene()">← Anterior</button>
+      <button class="btn-top active" onclick="nextScene()">Próximo →</button>
+    </div>
+  </footer>
+
+  <script>
+    const SCENES_DATA = [
+      {
+        name: "Capa Executiva Trampakí",
+        duration: 20,
+        script: `<span class="stage-cue">[OLHAR FIRME PARA A BANCA • TOM EXECUTIVO]</span><br>Olá a todos. Nós somos o <strong>trampakí</strong> — a conexão ágil do mercado informal.<br><br>Hoje vamos mostrar como saímos do diagnóstico de uma dor real enfrentada por bares, restaurantes e milhões de autônomos para construir uma plataforma funcional de <strong>match geolocalizado sob demanda</strong>.`
+      },
+      {
+        name: "Cap. 01 — Ecossistema e Força da Informalidade",
+        duration: 25,
+        script: `<span class="stage-cue">[APONTAR PARA AS FRASES À DIREITA]</span><br>O Brasil possui hoje <strong>39 milhões de trabalhadores na informalidade</strong>. Quando um garçom ou cozinheiro falta numa sexta à noite, o dono do restaurante entra em desespero em grupos de WhatsApp.`
+      },
+      {
+        name: "Cap. 01 — Validação do Problema (The Mom Test)",
+        duration: 20,
+        script: `<span class="stage-cue">[DESTACAR A PERGUNTA PRÁTICA]</span><br>Para validar essa dor sem elogios vazios, aplicamos a metodologia <strong>The Mom Test</strong>. Perguntamos: "Quantas vezes faltou alguém no último mês e quanto isso custou?". Uma sexta desfalcada custa até 30% da noite.`
+      },
+      {
+        name: "Cap. 02 — Proposta de Valor (JTBD dos Dois Lados)",
+        duration: 25,
+        script: `<span class="stage-cue">[EXPLICAR OS DOIS LADOS]</span><br>O <strong>Contratante Local</strong> precisa repor mão de obra em até 5 km. Já o <strong>Profissional Informal</strong> precisa de diárias sem ter que pagar adiantado por leads.`
+      },
+      {
+        name: "Demonstração em Tempo Real — O App Trampakí",
+        duration: 45,
+        script: `<span class="stage-cue">[ACOMPANHAR OS DOIS CELULARES]</span><br>Vejam o produto funcionando: à direita, o <strong>Restaurante Come Bem</strong> publica vaga de Cozinheiro a R$ 123/h. À esquerda, <strong>Bruno Carvalho</strong> vê a vaga a 3,8 km, dá o joinha verde e envia a candidatura.`
+      },
+      {
+        name: "Cap. 02 — Matriz de Posicionamento Competitivo",
+        duration: 25,
+        script: `<span class="stage-cue">[DESTACAR A COLUNA DO TRAMPAKÍ]</span><br>Diferente do GetNinjas que cobra do trabalhador, no <strong>trampakí</strong> o app é 100% gratuito para quem trabalha. Quem paga é apenas o contratante.`
+      },
+      {
+        name: "Cap. 03 — Dimensionamento de Mercado (TAM/SAM/SOM)",
+        duration: 20,
+        script: `<span class="stage-cue">[APONTAR DO BRASIL AO POLO ZONA LESTE]</span><br>Nosso TAM abrange <strong>39 milhões de informais</strong> e 1,5 milhão de estabelecimentos (SAM). No Ano 1 (SOM), focamos em 1.000 comércios na Zona Leste de SP.`
+      },
+      {
+        name: "Cap. 03 — Monetização e Projeção (6 Meses a 10 Anos)",
+        duration: 25,
+        script: `<span class="stage-cue">[MOSTRAR OS 4 HORIZONTES]</span><br>Monetização pré-paga: R$ 19,90 avulso ou R$ 49,90 o pacote. Projetamos R$ 38,8 mil em 6 meses, R$ 288k no Ano 1, R$ 10,28 mi em 5 anos e R$ 51,8 mi em 10 anos.`
+      },
+      {
+        name: "Cap. 04 e 05 — Ciclo Lean e Mitigação de Riscos",
+        duration: 20,
+        script: `<span class="stage-cue">[ANTECIPAR PERGUNTAS DA BANCA]</span><br>Mitigamos o ovo e a galinha com pré-povoamento em transporte, a desintermediação com histórico Pix e reputação, e o CAC com venda porta a porta.`
+      },
+      {
+        name: "Cap. 05 — Conexão com Investidores e Próximo Passo",
+        duration: 15,
+        script: `<span class="stage-cue">[ENCERRAMENTO CONFIANTE]</span><br>O trampakí já é realidade. Nosso próximo passo é tracionar os primeiros 100 estabelecimentos pagantes e 5.000 profissionais cadastrados.`
+      }
+    ];
+
+    const APP_STEPS = [
+      {
+        leftScreen: "Tela: login",
+        rightScreen: "Tela: create_job",
+        left: `
+          <div class="app-white-card" style="text-align:center; padding:14px 12px;">
+            <div style="font-weight:800; font-size:0.95rem; line-height:1.3; color:#0f172a; margin-bottom:12px;">
+              Encontre seu <span style="color:#b3205d;">match</span> perfeito no mercado de trabalho com o <span style="font-weight:800;">trampakí.</span>
+            </div>
+            <div style="font-weight:700; font-size:0.8rem; margin-bottom:8px;">Entrar</div>
+            <div style="text-align:left; background:#f8fafc; border:1px solid #cbd5e1; border-radius:7px; padding:7px 9px; font-size:0.66rem; color:#94a3b8; margin-bottom:6px;">Bruno Carvalho</div>
+            <div style="text-align:left; background:#f8fafc; border:1px solid #cbd5e1; border-radius:7px; padding:7px 9px; font-size:0.66rem; color:#94a3b8; margin-bottom:8px;">••••••••</div>
+            <button class="app-btn-pink" onclick="setAppStep(1, true)">ENTRAR</button>
+          </div>
+        `,
+        right: `
+          <div class="app-white-card">
+            <div style="font-weight:800; font-size:0.9rem; text-align:center; margin-bottom:8px; color:#0f172a;">Nova vaga</div>
+            <div style="font-size:0.62rem; color:#64748b;">Área selecionada</div>
+            <div style="border:1px solid #cbd5e1; border-radius:6px; padding:5px 8px; font-size:0.7rem; font-weight:600; margin-bottom:6px;">Cozinheiro ▾</div>
+            <div style="font-size:0.6rem; color:#64748b;">Endereço</div>
+            <div style="border:1px solid #cbd5e1; border-radius:6px; padding:4px 7px; font-size:0.66rem; margin-bottom:6px;">Rua Christiano Steffen, Indaiatuba</div>
+            <div style="font-size:0.6rem; color:#64748b;">Descrição</div>
+            <div style="border:1.5px solid #b3205d; background:#fff; border-radius:6px; padding:6px; font-size:0.66rem; margin-bottom:6px;">Precisamos de um cozinheiro especialista em comida mineira.</div>
+            <div style="font-size:0.6rem; color:#64748b;">Valor hora (R$)</div>
+            <div style="border:1px solid #cbd5e1; border-radius:6px; padding:5px; font-size:0.74rem; font-weight:700; margin-bottom:6px;">123</div>
+            <button class="app-btn-pink" onclick="setAppStep(1, true)">ANUNCIAR VAGA</button>
+          </div>
+        `
+      },
+      {
+        leftScreen: "Tela: profile",
+        rightScreen: "Tela: job_details",
+        left: `
+          <div class="app-white-card" style="text-align:center; padding:10px;">
+            <div style="width:48px; height:48px; border-radius:50%; background:#1e293b; color:#fff; margin:0 auto 4px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; border:2px solid #b3205d;">BC</div>
+            <div style="font-size:0.66rem; color:#d97706; font-weight:700; margin-bottom:6px;">★ 4.5 estrelas (2 avaliações)</div>
+            <div style="text-align:left; font-size:0.65rem; display:grid; gap:3px; margin-bottom:6px;">
+              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Nome:</span><strong>Bruno Carvalho</strong></div>
+              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Chave PIX:</span><strong style="color:#15803d;">325812231144</strong></div>
+            </div>
+            <div style="text-align:left; margin-bottom:6px;">
+              <span class="app-badge-pink">Segurança</span>
+              <span class="app-badge-pink">Cozinheiro</span>
+            </div>
+            <button class="app-btn-pink" onclick="setAppStep(2, true)">PROCURAR VAGAS</button>
+          </div>
+        `,
+        right: `
+          <div class="app-white-card">
+            <div style="font-size:0.75rem; font-weight:800; margin-bottom:8px;">← Detalhes da vaga</div>
+            <div style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Precisa-se de cozinheiro</div>
+            <div style="font-size:0.65rem; display:grid; gap:4px; margin-bottom:8px;">
+              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Endereço:</span><strong>Indaiatuba</strong></div>
+              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Valor hora:</span><strong style="font-size:0.82rem;">R$ 123,00</strong></div>
+              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Status:</span><span class="app-badge-green">● Aberta</span></div>
+            </div>
+            <div style="text-align:center; padding:12px; background:#f8fafc; border-radius:8px;">
+              <div style="font-size:0.65rem; color:#94a3b8;">Ainda nenhum candidato</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        leftScreen: "Tela: search_jobs",
+        rightScreen: "Tela: job_details",
+        left: `
+          <div class="app-white-card" id="swipeCardDemo" style="padding:12px;">
+            <div style="font-size:1.1rem; font-weight:800; color:#0f172a; margin-bottom:4px;">Cozinheiro</div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <div><strong>Restaurante Come Bem</strong> ★ 4.8</div>
+              <div style="font-size:1rem; font-weight:800; color:#1e293b;">R$ 123,0/h</div>
+            </div>
+            <div style="font-size:0.65rem; color:#334155; margin-bottom:6px;">Precisamos de um cozinheiro especialista em comida mineira.</div>
+            <div style="height:74px; border-radius:8px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border:1px solid #cbd5e1; display:flex; align-items:center; justify-content:between; padding:8px; font-size:0.68rem; font-weight:700;">
+              <span>📍 Mapa • Indaiatuba</span>
+              <span style="background:#fff; padding:2px 6px; border-radius:4px;">3,8 km de você</span>
+            </div>
+            <div class="tinder-actions">
+              <button class="circle-action circle-dislike" onclick="animateSwipe('left')">👎</button>
+              <button class="circle-action circle-like" onclick="animateSwipe('right')">👍</button>
+            </div>
+          </div>
+        `,
+        right: `
+          <div class="app-white-card">
+            <div style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Minhas Vagas (Restaurante Come Bem)</div>
+            <div style="border:1.5px solid #b3205d; background:#fff1f2; border-radius:9px; padding:8px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:0.72rem; font-weight:800;">Cozinheiro <span class="app-badge-green">Aberta</span></div>
+                <div style="font-size:0.6rem; color:#475569;">R$ 123,00/h</div>
+              </div>
+              <div style="font-size:0.85rem; font-weight:800; color:#16a34a;" onclick="setAppStep(3, true)">👍 1 (Ver)</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        leftScreen: "Tela: search_jobs",
+        rightScreen: "Tela: candidate_review",
+        left: `
+          <div class="app-white-card" style="text-align:center; padding:26px 14px;">
+            <div style="background:#b3205d; color:#fff; font-weight:800; font-size:0.74rem; padding:6px; border-radius:6px; margin-bottom:12px;">
+              Candidatura enviada com sucesso!
+            </div>
+            <p style="font-size:0.68rem; color:#64748b;">Aguardando o aceite do contratante no chat...</p>
+          </div>
+        `,
+        right: `
+          <div class="app-white-card">
+            <div style="font-size:0.72rem; font-weight:800; margin-bottom:6px;">← AVALIAR CANDIDATO</div>
+            <div style="text-align:center; margin-bottom:6px;">
+              <div style="font-size:0.84rem; font-weight:800;">Bruno Carvalho ★ 4.5</div>
+            </div>
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:5px; font-size:0.6rem; margin-bottom:4px;">
+              <strong>Zoff Club:</strong> <span style="color:#f59e0b;">★★★★★</span><br><em>"Profissional calmo, firme e muito educado."</em>
+            </div>
+            <button class="app-btn-pink" onclick="setAppStep(4, true)">💬 INICIAR CONVERSA (DAR MATCH)</button>
+          </div>
+        `
+      },
+      {
+        leftScreen: "Tela: chat",
+        rightScreen: "Tela: chat",
+        left: `
+          <div class="app-white-card" style="padding:9px;">
+            <div style="font-size:0.72rem; font-weight:800; margin-bottom:6px;">Restaurante Come Bem ★ 5.0</div>
+            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:7px; margin-bottom:6px;">
+              <strong style="font-size:0.65rem; color:#166534; display:block; margin-bottom:3px;">🤝 Acordo Selado!</strong>
+              <button class="app-btn-green" onclick="setAppStep(5, true)">✓ OK, CONFIRMO QUE VOU TRABALHAR</button>
+            </div>
+            <div style="font-size:0.62rem; background:#f1f5f9; padding:6px; border-radius:8px;">
+              <strong>Bruno Carvalho:</strong> Aprendi em BH, sou especialista em comida mineira.
+            </div>
+          </div>
+        `,
+        right: `
+          <div class="app-white-card" style="padding:9px;">
+            <div style="font-size:0.72rem; font-weight:800; margin-bottom:6px;">Bruno Carvalho ★ 4.5</div>
+            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:7px; margin-bottom:6px;">
+              <strong style="font-size:0.65rem; color:#166534; display:block; margin-bottom:3px;">🤝 Acordo Selado!</strong>
+              <button class="app-btn-green" onclick="setAppStep(5, true)">▶ Iniciar Prestação de Serviço (Dar Start)</button>
+            </div>
+          </div>
+        `
+      },
+      {
+        leftScreen: "Tela: chat (Pix & Avaliação)",
+        rightScreen: "Tela: profile (5.0 ★)",
+        left: `
+          <div class="phone-modal-card" style="border:1px solid #cbd5e1;">
+            <div class="phone-modal-head-pink"><span>💠 Pagamento PIX</span><span>✕</span></div>
+            <div style="padding:10px;">
+              <div style="font-size:0.68rem; margin-bottom:6px;"><strong>Chave Pix:</strong> 325812231144</div>
+              <div style="background:#f0fdf4; border:1px solid #10b981; border-radius:6px; padding:6px; font-size:0.62rem; color:#15803d; text-align:center; margin-bottom:6px;">
+                ✓ Comprovante pix.png anexado
+              </div>
+              <button class="app-btn-pink" onclick="setAppStep(0, true)">★ AVALIAR TRABALHADOR (5 ESTRELAS)</button>
+            </div>
+          </div>
+        `,
+        right: `
+          <div class="app-white-card" style="padding:9px;">
+            <div style="font-size:0.65rem; font-weight:800; color:#15803d; margin-bottom:4px;">
+              🎉 Serviço 100% Concluído e Avaliado! (★ 4.7)
+            </div>
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:5px; font-size:0.58rem;">
+              <strong>Restaurante Come Bem:</strong> "Cozinha muito bem, os clientes elogiaram" ★★★★★
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    let currentScene = 0;
+    let currentAppStep = 0;
+    let appAutoTimer = null;
+    let appAutoPlaying = true;
+    let timerRunning = true;
+    let sceneRemaining = SCENES_DATA[0].duration;
+    let totalRemaining = SCENES_DATA.reduce((acc, s) => acc + s.duration, 0);
+
+    const syncChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('trampaki_pitch_v4') : null;
+    let audiencePopup = null;
+
+    function renderAppStep(stepIdx) {
+      currentAppStep = stepIdx;
+      const leftEl = document.getElementById('phoneLeftBody');
+      const rightEl = document.getElementById('phoneRightBody');
+      if (leftEl && rightEl) {
+        leftEl.innerHTML = APP_STEPS[stepIdx].left;
+        rightEl.innerHTML = APP_STEPS[stepIdx].right;
+      }
+      document.querySelectorAll('.step-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx === stepIdx);
+      });
+    }
+
+    function setAppStep(stepIdx, manualClick = false) {
+      renderAppStep(stepIdx);
+      if (manualClick && appAutoPlaying) restartAppAutoInterval();
+      broadcastState();
+    }
+
+    function animateSwipe(dir) {
+      const card = document.getElementById('swipeCardDemo');
+      if (card) {
+        card.style.transform = dir === 'right' ? 'translateX(120px) rotate(10deg)' : 'translateX(-120px) rotate(-10deg)';
+        card.style.opacity = '0';
+        setTimeout(() => setAppStep(2, true), 280);
+      }
+    }
+
+    function toggleAppAutoPlay() {
+      appAutoPlaying = !appAutoPlaying;
+      const btn = document.getElementById('btnAutoPlayApp');
+      if (btn) {
+        btn.textContent = appAutoPlaying ? 'Pausar Auto-Play' : 'Retomar Auto-Play';
+        btn.classList.toggle('active', appAutoPlaying);
+      }
+      restartAppAutoInterval();
+    }
+
+    function restartAppAutoInterval() {
+      if (appAutoTimer) clearInterval(appAutoTimer);
+      if (appAutoPlaying) {
+        appAutoTimer = setInterval(() => {
+          if (currentScene === 4) {
+            const next = (currentAppStep + 1) % APP_STEPS.length;
+            renderAppStep(next);
+            broadcastState();
+          }
+        }, 4200);
+      }
+    }
+
+    function goToScene(index, fromRemote = false) {
+      if (index < 0 || index >= SCENES_DATA.length) return;
+      currentScene = index;
+
+      document.querySelectorAll('.scene').forEach((el, idx) => {
+        el.classList.toggle('active', idx === currentScene);
+      });
+
+      document.querySelectorAll('.dot').forEach((d, idx) => {
+        d.classList.toggle('active', idx === currentScene);
+      });
+
+      const data = SCENES_DATA[currentScene];
+      sceneRemaining = data.duration;
+      document.getElementById('slideCounter').textContent =
+        String(currentScene + 1).padStart(2, '0') + ' / ' + String(SCENES_DATA.length).padStart(2, '0');
+      document.getElementById('slideFooterName').textContent = data.name;
+      document.getElementById('teleprompterContent').innerHTML = data.script;
+
+      const nextData = SCENES_DATA[currentScene + 1];
+      document.getElementById('nextSlideTitle').textContent = nextData
+        ? `${String(currentScene + 2).padStart(2, '0')} / ${nextData.name}`
+        : 'Fim da Apresentação';
+
+      updateTimerDisplay();
+      if (!fromRemote) broadcastState();
+    }
+
+    function nextScene() { if (currentScene < SCENES_DATA.length - 1) goToScene(currentScene + 1); }
+    function prevScene() { if (currentScene > 0) goToScene(currentScene - 1); }
+
+    function setViewMode(mode) {
+      const isPresenter = mode === 'presenter';
+      document.body.classList.toggle('presenter-mode', isPresenter);
+      document.getElementById('btnPresenterMode').classList.toggle('active', isPresenter);
+      document.getElementById('btnAudienceMode').classList.toggle('active', !isPresenter);
+    }
+
+    function openSecondScreen() {
+      audiencePopup = window.open('', 'TrampakiAudienceScreen', 'width=1280,height=720');
+      if (!audiencePopup) { alert('Permita pop-ups no navegador.'); return; }
+      const htmlClone = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      audiencePopup.document.open();
+      audiencePopup.document.write(htmlClone);
+      audiencePopup.document.close();
+      setViewMode('presenter');
+      setTimeout(() => {
+        if (audiencePopup && audiencePopup.document && audiencePopup.document.body) {
+          audiencePopup.document.body.classList.remove('presenter-mode');
+          audiencePopup.document.body.classList.add('clean-audience');
+          broadcastState();
+        }
+      }, 350);
+      document.getElementById('syncIndicator').textContent = '2ª Tela (Banca) Sincronizada';
+    }
+
+    function broadcastState() {
+      const payload = { type: 'SYNC', scene: currentScene, appStep: currentAppStep };
+      if (syncChannel) syncChannel.postMessage(payload);
+      if (audiencePopup && !audiencePopup.closed) audiencePopup.postMessage(payload, '*');
+    }
+
+    window.addEventListener('message', (ev) => {
+      if (ev.data && ev.data.type === 'SYNC') {
+        goToScene(ev.data.scene, true);
+        renderAppStep(ev.data.appStep || 0);
+      }
+    });
+
+    function formatSec(sec) {
+      const s = Math.max(0, sec);
+      return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    }
+
+    function updateTimerDisplay() {
+      document.getElementById('sceneTimer').textContent = formatSec(sceneRemaining);
+      document.getElementById('totalTimer').textContent = formatSec(totalRemaining);
+    }
+
+    function toggleTimer() { timerRunning = !timerRunning; }
+    function resetPitch() { totalRemaining = SCENES_DATA.reduce((acc, s) => acc + s.duration, 0); goToScene(0); }
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else document.exitFullscreen();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextScene(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevScene(); }
+      else if (e.key.toLowerCase() === 'p') {
+        setViewMode(document.body.classList.contains('presenter-mode') ? 'audience' : 'presenter');
+      }
+      else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+    });
+
+    const dotsContainer = document.getElementById('progressDots');
+    SCENES_DATA.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (idx === 0 ? ' active' : '');
+      dot.onclick = () => goToScene(idx);
+      dotsContainer.appendChild(dot);
+    });
+
+    renderAppStep(0);
+    goToScene(0);
+    restartAppAutoInterval();
+
+    setInterval(() => {
+      if (timerRunning) {
+        if (sceneRemaining > 0) sceneRemaining--;
+        if (totalRemaining > 0) totalRemaining--;
+        updateTimerDisplay();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
