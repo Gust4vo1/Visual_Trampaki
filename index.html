@@ -447,228 +447,92 @@
       line-height: 1.25;
     }
 
-    .phones-stage {
+    .real-screens-stage {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 26px;
       width: 100%;
     }
 
-    .phone-mockup {
-      width: 318px;
-      height: 590px;
-      background: #f4f5f7;
-      color: #1e293b;
-      border-radius: 30px;
-      border: 6px solid #1e2436;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(255,255,255,0.08);
+    .real-screens-card {
+      width: 100%;
+      background: #090c14;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
     }
 
-    .phone-top-bar {
-      background: #0d111d;
-      color: #cbd5e1;
-      padding: 6px 12px;
-      font-size: 0.66rem;
-      font-weight: 600;
+    .real-screens-header {
+      background: #0f1523;
+      padding: 10px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .phone-top-bar .screen-tag {
-      font-family: 'JetBrains Mono', monospace;
-      color: #94a3b8;
-      font-size: 0.62rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 12px;
     }
 
-    .phone-app-header {
-      background: #b3205d;
-      color: #fff;
-      padding: 9px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-    }
-    .phone-app-header .user-chip {
-      background: rgba(255, 255, 255, 0.18);
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      max-width: 140px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .phone-app-header .menu-bars {
-      font-size: 0.95rem;
-      font-weight: 700;
-      opacity: 0.9;
-      letter-spacing: 1px;
-    }
-
-    .phone-body {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background: #f1f3f6;
-      position: relative;
-    }
-    .phone-body::-webkit-scrollbar {
-      width: 4px;
-    }
-    .phone-body::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 999px;
-    }
-
-    .app-white-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 11px 12px;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-    }
-
-    .app-badge-green {
-      display: inline-block;
-      background: #dcfce7;
-      color: #15803d;
-      font-size: 0.64rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 999px;
-    }
-
-    .app-badge-pink {
-      display: inline-block;
-      background: #fce7f3;
-      color: #b3205d;
-      font-size: 0.64rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 999px;
-      margin-right: 3px;
-      margin-bottom: 3px;
-      border: 1px solid #fbcfe8;
-    }
-
-    .app-btn-pink {
-      width: 100%;
-      background: #b3205d;
-      color: #fff;
-      border: none;
-      padding: 9px;
-      border-radius: 7px;
-      font-weight: 700;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin-top: 6px;
-      letter-spacing: 0.02em;
-    }
-
-    .app-btn-outline {
-      width: 100%;
-      background: #ffffff;
-      color: #334155;
-      border: 1px solid #cbd5e1;
-      padding: 7px;
-      border-radius: 7px;
-      font-weight: 700;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    .app-btn-green {
-      width: 100%;
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 8px;
-      border-radius: 7px;
-      font-weight: 700;
-      font-size: 0.72rem;
-      cursor: pointer;
-      margin-top: 6px;
-    }
-
-    .tinder-actions {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      margin-top: 8px;
-      padding-top: 4px;
-    }
-    .circle-action {
-      width: 44px;
-      height: 44px;
+    .screen-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      border: none;
+      background: #22c55e;
+      display: inline-block;
+      box-shadow: 0 0 8px #22c55e;
+      flex-shrink: 0;
+    }
+
+    .screen-nav-arrows {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .screen-nav-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      font-weight: 800;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 5px 14px rgba(0,0,0,0.16);
+      line-height: 1;
+      transition: all 0.2s ease;
     }
-    .circle-dislike { background: #ef4444; }
-    .circle-like { background: #22c55e; }
+    .screen-nav-btn:hover {
+      background: var(--pink);
+      border-color: var(--pink);
+    }
 
-    .phone-modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.62);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      z-index: 20;
-    }
-    .phone-modal-card {
+    .real-screen-viewport {
       width: 100%;
-      background: #ffffff;
-      border-radius: 12px;
+      height: 540px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #06080e;
+      padding: 10px;
+      cursor: pointer;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-      font-size: 0.7rem;
     }
-    .phone-modal-head-pink {
-      background: #b3205d;
-      color: #fff;
-      padding: 9px 12px;
-      font-weight: 800;
-      font-size: 0.74rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .phone-modal-head-amber {
-      background: #f59e0b;
-      color: #fff;
-      padding: 9px 12px;
-      font-weight: 800;
-      font-size: 0.74rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+
+    .real-screen-img {
+      max-width: 100%;
+      max-height: 520px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      transition: opacity 0.22s ease-in-out, transform 0.22s ease-in-out;
     }
 
     .presenter-panel {
@@ -1002,71 +866,47 @@
           <div class="steps-sidebar">
             <button class="step-btn active" onclick="setAppStep(0, true)">
               <span class="step-num">TELA 01 • LOGIN & NOVA VAGA</span>
-              <span class="step-title">Restaurante Come Bem anuncia Cozinheiro a R$ 123/h</span>
+              <span class="step-title">Restaurante Come Bem cria vaga de Cozinheiro (R$ 230,00 • Raio até 25 km)</span>
             </button>
             <button class="step-btn" onclick="setAppStep(1, true)">
-              <span class="step-num">TELA 02 • PERFIL & VAGA ABERTA</span>
-              <span class="step-title">Bruno Carvalho (★ 4.5) inclui Cozinheiro e busca vagas</span>
+              <span class="step-num">TELA 02 • PERFIL & DETALHES DA VAGA</span>
+              <span class="step-title">Bruno Carvalho configura perfil e raio de 50 km; vaga aberta a R$ 225,00</span>
             </button>
             <button class="step-btn" onclick="setAppStep(2, true)">
-              <span class="step-num">TELA 03 • SWIPE & RAIO PERSONALIZADO</span>
-              <span class="step-title">Bruno ajusta o raio de busca, vê vaga a 3,8 km no mapa, curte 👍 e envia candidatura</span>
+              <span class="step-num">TELA 03 • SWIPE & DISTÂNCIA NO MAPA</span>
+              <span class="step-title">Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte 👍</span>
             </button>
             <button class="step-btn" onclick="setAppStep(3, true)">
-              <span class="step-num">TELA 04 • AVALIAR CANDIDATO</span>
-              <span class="step-title">Restaurante vê 1 curtida, lê avaliações Zoff Club e dá Match</span>
+              <span class="step-num">TELA 04 • CANDIDATURA RECEBIDA</span>
+              <span class="step-title">Restaurante Come Bem vê 1 candidato e analisa perfil de Bruno Carvalho (★ 4.5)</span>
             </button>
             <button class="step-btn" onclick="setAppStep(4, true)">
-              <span class="step-num">TELA 05 • CHAT, DUPLO OK & START</span>
-              <span class="step-title">Chat ("Aprendi em BH"), Acordo Selado e Iniciar Prestação (Dar Start)</span>
+              <span class="step-num">TELA 05 • MATCH & ACORDO DE TRABALHO</span>
+              <span class="step-title">Match confirmado, abertura de chat e tela de Acordo com botão de confirmação</span>
             </button>
             <button class="step-btn" onclick="setAppStep(5, true)">
-              <span class="step-num">TELA 06 • MODAL PIX & AVALIAÇÃO 5★</span>
-              <span class="step-title">Upload de comprovante pix.png e nota 5★ ("Cozinha muito bem")</span>
+              <span class="step-num">TELA 06 • PAGAMENTO PIX & AVALIAÇÃO</span>
+              <span class="step-title">Comprovante Pix anexado (R$ 225,00) e fluxo para avaliação 1 a 5★</span>
             </button>
           </div>
 
-          <div class="phones-stage">
-            <div class="phone-mockup">
-              <div class="phone-top-bar">
-                <span id="leftTopLabel">👤 Candidato: Bruno Carvalho</span>
-                <span class="screen-tag" id="leftScreenTag">Tela: login</span>
+          <div class="real-screens-stage">
+            <div class="real-screens-card">
+              <div class="real-screens-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="screen-dot"></span>
+                  <span id="screenHeaderStep" style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#fff; font-weight:700;">TELA 01 / 06</span>
+                  <span style="color:rgba(255,255,255,0.2);">|</span>
+                  <span id="screenHeaderDesc" style="font-size:0.78rem; color:#cbd5e1; font-weight:600;">Candidato acessa login e Restaurante anuncia serviço com valor e raio definidos</span>
+                </div>
+                <div class="screen-nav-arrows">
+                  <button class="screen-nav-btn" onclick="prevAppStep()" title="Tela anterior">‹</button>
+                  <button class="screen-nav-btn" onclick="nextAppStep()" title="Próxima tela">›</button>
+                </div>
               </div>
-              <div class="phone-app-header">
-                <span class="brand-logo" style="font-size:1.12rem;">
-                  <span>trampak</span>
-                  <span class="logo-i-pin" style="margin-left:-0.05em; transform:translateY(1px);">
-                    <svg width="10" height="21" viewBox="0 0 24 46" fill="none">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1ZM12 6.6A3.8 3.8 0 1 0 12 14.2A3.8 3.8 0 1 0 12 6.6Z" fill="#162b4d"/>
-                      <rect x="7" y="27" width="10" height="17" rx="0.8" fill="#ffffff"/>
-                    </svg>
-                  </span>
-                </span>
-                <span class="user-chip" id="leftHeaderChip">Bruno Carvalho</span>
-                <span class="menu-bars">☰</span>
+              <div class="real-screen-viewport" onclick="nextAppStep()" title="Clique na imagem para avançar a tela">
+                <img id="realScreenImage" src="/assets/aistudio/Tela_001_a289d616.png" alt="Tela 01 Trampakí" class="real-screen-img" />
               </div>
-              <div class="phone-body" id="phoneLeftBody"></div>
-            </div>
-
-            <div class="phone-mockup">
-              <div class="phone-top-bar">
-                <span id="rightTopLabel">🏪 Estabelecimento: Come Bem</span>
-                <span class="screen-tag" id="rightScreenTag">Tela: create_job</span>
-              </div>
-              <div class="phone-app-header">
-                <span class="brand-logo" style="font-size:1.12rem;">
-                  <span>trampak</span>
-                  <span class="logo-i-pin" style="margin-left:-0.05em; transform:translateY(1px);">
-                    <svg width="10" height="21" viewBox="0 0 24 46" fill="none">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1ZM12 6.6A3.8 3.8 0 1 0 12 14.2A3.8 3.8 0 1 0 12 6.6Z" fill="#162b4d"/>
-                      <rect x="7" y="27" width="10" height="17" rx="0.8" fill="#ffffff"/>
-                    </svg>
-                  </span>
-                </span>
-                <span class="user-chip" id="rightHeaderChip">Restaurante Come Bem</span>
-                <span class="menu-bars">☰</span>
-              </div>
-              <div class="phone-body" id="phoneRightBody"></div>
             </div>
           </div>
         </div>
@@ -1456,7 +1296,7 @@
       {
         name: "Demonstração em Tempo Real — O App Trampakí",
         duration: 45,
-        script: `<span class="stage-cue">[ACOMPANHAR OS DOIS CELULARES]</span><br>Vejam o produto funcionando: à direita, o <strong>Restaurante Come Bem</strong> publica vaga de Cozinheiro a R$ 123/h definindo seu raio de busca. À esquerda, <strong>Bruno Carvalho</strong> ajustou seu próprio raio de distância personalizado, visualiza a vaga a 3,8 km no mapa, dá o joinha verde e envia a candidatura.`
+        script: `<span class="stage-cue">[ACOMPANHAR AS 6 TELAS DO PRODUTO REAL]</span><br>Vejam o app trampakí em operação real nas 6 etapas da jornada:<br>• <strong>Tela 1:</strong> O <strong>Restaurante Come Bem</strong> anuncia a vaga de Cozinheiro (R$ 230,00) definindo seu raio de 25 km.<br>• <strong>Telas 2 & 3:</strong> <strong>Bruno Carvalho</strong> configura seu perfil e raio de 50 km, visualiza a vaga a 2.5 km no mapa com geolocalização e curte 👍.<br>• <strong>Telas 4 & 5:</strong> O comércio visualiza a candidatura (★ 4.5), dá o match, abre o chat e confirma o Acordo de Trabalho.<br>• <strong>Tela 6:</strong> Pagamento via Pix com upload de comprovante e liberação da avaliação mútua.`
       },
       {
         name: "Cap. 02 — Matriz de Posicionamento Competitivo",
@@ -1487,175 +1327,52 @@
 
     const APP_STEPS = [
       {
-        leftScreen: "Tela: login",
-        rightScreen: "Tela: create_job",
-        left: `
-          <div class="app-white-card" style="text-align:center; padding:14px 12px;">
-            <div style="font-weight:800; font-size:0.95rem; line-height:1.3; color:#0f172a; margin-bottom:12px;">
-              Encontre seu <span style="color:#b3205d;">match</span> perfeito no mercado de trabalho com o <span style="font-weight:800;">trampakí.</span>
-            </div>
-            <div style="font-weight:700; font-size:0.8rem; margin-bottom:8px;">Entrar</div>
-            <div style="text-align:left; background:#f8fafc; border:1px solid #cbd5e1; border-radius:7px; padding:7px 9px; font-size:0.66rem; color:#94a3b8; margin-bottom:6px;">Bruno Carvalho</div>
-            <div style="text-align:left; background:#f8fafc; border:1px solid #cbd5e1; border-radius:7px; padding:7px 9px; font-size:0.66rem; color:#94a3b8; margin-bottom:8px;">••••••••</div>
-            <button class="app-btn-pink" onclick="setAppStep(1, true)">ENTRAR</button>
-          </div>
-        `,
-        right: `
-          <div class="app-white-card">
-            <div style="font-weight:800; font-size:0.9rem; text-align:center; margin-bottom:8px; color:#0f172a;">Nova vaga</div>
-            <div style="font-size:0.62rem; color:#64748b;">Área selecionada</div>
-            <div style="border:1px solid #cbd5e1; border-radius:6px; padding:5px 8px; font-size:0.7rem; font-weight:600; margin-bottom:6px;">Cozinheiro ▾</div>
-            <div style="font-size:0.6rem; color:#64748b;">Endereço</div>
-            <div style="border:1px solid #cbd5e1; border-radius:6px; padding:4px 7px; font-size:0.66rem; margin-bottom:6px;">Rua Christiano Steffen, Indaiatuba</div>
-            <div style="font-size:0.6rem; color:#64748b;">Descrição</div>
-            <div style="border:1.5px solid #b3205d; background:#fff; border-radius:6px; padding:6px; font-size:0.66rem; margin-bottom:6px;">Precisamos de um cozinheiro especialista em comida mineira.</div>
-            <div style="font-size:0.6rem; color:#64748b;">Valor hora (R$)</div>
-            <div style="border:1px solid #cbd5e1; border-radius:6px; padding:5px; font-size:0.74rem; font-weight:700; margin-bottom:6px;">123</div>
-            <button class="app-btn-pink" onclick="setAppStep(1, true)">ANUNCIAR VAGA</button>
-          </div>
-        `
+        stepNum: "TELA 01 / 06",
+        badge: "TELA 01 • LOGIN & NOVA VAGA",
+        title: "Restaurante Come Bem cria vaga de Cozinheiro (R$ 230,00 • Raio até 25 km)",
+        subtitle: "Candidato acessa login e Restaurante anuncia serviço com valor e raio definidos",
+        img: "/assets/aistudio/Tela_001_a289d616.png",
+        alt: "Tela 1: Login do candidato e Restaurante Come Bem criando vaga de Cozinheiro"
       },
       {
-        leftScreen: "Tela: profile",
-        rightScreen: "Tela: job_details",
-        left: `
-          <div class="app-white-card" style="text-align:center; padding:10px;">
-            <div style="width:48px; height:48px; border-radius:50%; background:#1e293b; color:#fff; margin:0 auto 4px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; border:2px solid #b3205d;">BC</div>
-            <div style="font-size:0.66rem; color:#d97706; font-weight:700; margin-bottom:6px;">★ 4.5 estrelas (2 avaliações)</div>
-            <div style="text-align:left; font-size:0.65rem; display:grid; gap:3px; margin-bottom:6px;">
-              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Nome:</span><strong>Bruno Carvalho</strong></div>
-              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Chave PIX:</span><strong style="color:#15803d;">325812231144</strong></div>
-            </div>
-            <div style="text-align:left; margin-bottom:6px;">
-              <span class="app-badge-pink">Segurança</span>
-              <span class="app-badge-pink">Cozinheiro</span>
-            </div>
-            <button class="app-btn-pink" onclick="setAppStep(2, true)">PROCURAR VAGAS</button>
-          </div>
-        `,
-        right: `
-          <div class="app-white-card">
-            <div style="font-size:0.75rem; font-weight:800; margin-bottom:8px;">← Detalhes da vaga</div>
-            <div style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Precisa-se de cozinheiro</div>
-            <div style="font-size:0.65rem; display:grid; gap:4px; margin-bottom:8px;">
-              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Endereço:</span><strong>Indaiatuba</strong></div>
-              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Valor hora:</span><strong style="font-size:0.82rem;">R$ 123,00</strong></div>
-              <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">Status:</span><span class="app-badge-green">● Aberta</span></div>
-            </div>
-            <div style="text-align:center; padding:12px; background:#f8fafc; border-radius:8px;">
-              <div style="font-size:0.65rem; color:#94a3b8;">Ainda nenhum candidato</div>
-            </div>
-          </div>
-        `
+        stepNum: "TELA 02 / 06",
+        badge: "TELA 02 • PERFIL & DETALHES DA VAGA",
+        title: "Bruno Carvalho configura perfil e raio de 50 km; vaga aberta a R$ 225,00",
+        subtitle: "Perfil completo de Bruno (Chave Pix, raio 50 km) e detalhes da vaga no restaurante",
+        img: "/assets/aistudio/Tela_002_1eb82baf.png",
+        alt: "Tela 2: Perfil do candidato e detalhes da vaga no Come Bem"
       },
       {
-        leftScreen: "Tela: search_jobs",
-        rightScreen: "Tela: job_details",
-        left: `
-          <div class="app-white-card" id="swipeCardDemo" style="padding:12px;">
-            <div style="font-size:1.1rem; font-weight:800; color:#0f172a; margin-bottom:4px;">Cozinheiro</div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <div><strong>Restaurante Come Bem</strong> ★ 4.8</div>
-              <div style="font-size:1rem; font-weight:800; color:#1e293b;">R$ 123,0/h</div>
-            </div>
-            <div style="font-size:0.65rem; color:#334155; margin-bottom:6px;">Precisamos de um cozinheiro especialista em comida mineira.</div>
-            <div style="height:74px; border-radius:8px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border:1px solid #cbd5e1; display:flex; align-items:center; justify-content:between; padding:8px; font-size:0.68rem; font-weight:700;">
-              <span>📍 Mapa • Indaiatuba</span>
-              <span style="background:#fff; padding:2px 6px; border-radius:4px;">3,8 km de você</span>
-            </div>
-            <div class="tinder-actions">
-              <button class="circle-action circle-dislike" onclick="animateSwipe('left')">👎</button>
-              <button class="circle-action circle-like" onclick="animateSwipe('right')">👍</button>
-            </div>
-          </div>
-        `,
-        right: `
-          <div class="app-white-card">
-            <div style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Minhas Vagas (Restaurante Come Bem)</div>
-            <div style="border:1.5px solid #b3205d; background:#fff1f2; border-radius:9px; padding:8px; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="font-size:0.72rem; font-weight:800;">Cozinheiro <span class="app-badge-green">Aberta</span></div>
-                <div style="font-size:0.6rem; color:#475569;">R$ 123,00/h</div>
-              </div>
-              <div style="font-size:0.85rem; font-weight:800; color:#16a34a;" onclick="setAppStep(3, true)">👍 1 (Ver)</div>
-            </div>
-          </div>
-        `
+        stepNum: "TELA 03 / 06",
+        badge: "TELA 03 • SWIPE & DISTÂNCIA NO MAPA",
+        title: "Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte 👍",
+        subtitle: "Feed de vagas com distância real, trajeto Google Maps e gestão de créditos do comércio",
+        img: "/assets/aistudio/Tela_003_f0401238.png",
+        alt: "Tela 3: Swipe de vagas a 2.5 km no mapa e saldo de créditos do estabelecimento"
       },
       {
-        leftScreen: "Tela: search_jobs",
-        rightScreen: "Tela: candidate_review",
-        left: `
-          <div class="app-white-card" style="text-align:center; padding:26px 14px;">
-            <div style="background:#b3205d; color:#fff; font-weight:800; font-size:0.74rem; padding:6px; border-radius:6px; margin-bottom:12px;">
-              Candidatura enviada com sucesso!
-            </div>
-            <p style="font-size:0.68rem; color:#64748b;">Aguardando o aceite do contratante no chat...</p>
-          </div>
-        `,
-        right: `
-          <div class="app-white-card">
-            <div style="font-size:0.72rem; font-weight:800; margin-bottom:6px;">← AVALIAR CANDIDATO</div>
-            <div style="text-align:center; margin-bottom:6px;">
-              <div style="font-size:0.84rem; font-weight:800;">Bruno Carvalho ★ 4.5</div>
-            </div>
-            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:5px; font-size:0.6rem; margin-bottom:4px;">
-              <strong>Zoff Club:</strong> <span style="color:#f59e0b;">★★★★★</span><br><em>"Profissional calmo, firme e muito educado."</em>
-            </div>
-            <button class="app-btn-pink" onclick="setAppStep(4, true)">💬 INICIAR CONVERSA (DAR MATCH)</button>
-          </div>
-        `
+        stepNum: "TELA 04 / 06",
+        badge: "TELA 04 • CANDIDATURA RECEBIDA",
+        title: "Restaurante Come Bem vê 1 candidato e analisa perfil de Bruno Carvalho (★ 4.5)",
+        subtitle: "Notificação de candidatura recebida no painel do restaurante para avaliar o profissional",
+        img: "/assets/aistudio/Tela_004_1c2027f6.png",
+        alt: "Tela 4: Restaurante Come Bem visualiza candidatura de Bruno Carvalho"
       },
       {
-        leftScreen: "Tela: chat",
-        rightScreen: "Tela: chat",
-        left: `
-          <div class="app-white-card" style="padding:9px;">
-            <div style="font-size:0.72rem; font-weight:800; margin-bottom:6px;">Restaurante Come Bem ★ 5.0</div>
-            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:7px; margin-bottom:6px;">
-              <strong style="font-size:0.65rem; color:#166534; display:block; margin-bottom:3px;">🤝 Acordo Selado!</strong>
-              <button class="app-btn-green" onclick="setAppStep(5, true)">✓ OK, CONFIRMO QUE VOU TRABALHAR</button>
-            </div>
-            <div style="font-size:0.62rem; background:#f1f5f9; padding:6px; border-radius:8px;">
-              <strong>Bruno Carvalho:</strong> Aprendi em BH, sou especialista em comida mineira.
-            </div>
-          </div>
-        `,
-        right: `
-          <div class="app-white-card" style="padding:9px;">
-            <div style="font-size:0.72rem; font-weight:800; margin-bottom:6px;">Bruno Carvalho ★ 4.5</div>
-            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:7px; margin-bottom:6px;">
-              <strong style="font-size:0.65rem; color:#166534; display:block; margin-bottom:3px;">🤝 Acordo Selado!</strong>
-              <button class="app-btn-green" onclick="setAppStep(5, true)">▶ Iniciar Prestação de Serviço (Dar Start)</button>
-            </div>
-          </div>
-        `
+        stepNum: "TELA 05 / 06",
+        badge: "TELA 05 • MATCH & ACORDO DE TRABALHO",
+        title: "Match confirmado, abertura de chat e tela de Acordo com botão de confirmação",
+        subtitle: "Notificação de match bilateral, tela de chat liberada e termo de acordo com confirmação",
+        img: "/assets/aistudio/Tela_005_80ae1e27.png",
+        alt: "Tela 5: Deu match! Chat direto e termo de acordo de trabalho"
       },
       {
-        leftScreen: "Tela: chat (Pix & Avaliação)",
-        rightScreen: "Tela: profile (5.0 ★)",
-        left: `
-          <div class="phone-modal-card" style="border:1px solid #cbd5e1;">
-            <div class="phone-modal-head-pink"><span>💠 Pagamento PIX</span><span>✕</span></div>
-            <div style="padding:10px;">
-              <div style="font-size:0.68rem; margin-bottom:6px;"><strong>Chave Pix:</strong> 325812231144</div>
-              <div style="background:#f0fdf4; border:1px solid #10b981; border-radius:6px; padding:6px; font-size:0.62rem; color:#15803d; text-align:center; margin-bottom:6px;">
-                ✓ Comprovante pix.png anexado
-              </div>
-              <button class="app-btn-pink" onclick="setAppStep(0, true)">★ AVALIAR TRABALHADOR (5 ESTRELAS)</button>
-            </div>
-          </div>
-        `,
-        right: `
-          <div class="app-white-card" style="padding:9px;">
-            <div style="font-size:0.65rem; font-weight:800; color:#15803d; margin-bottom:4px;">
-              🎉 Serviço 100% Concluído e Avaliado! (★ 4.7)
-            </div>
-            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:5px; font-size:0.58rem;">
-              <strong>Restaurante Come Bem:</strong> "Cozinha muito bem, os clientes elogiaram" ★★★★★
-            </div>
-          </div>
-        `
+        stepNum: "TELA 06 / 06",
+        badge: "TELA 06 • PAGAMENTO PIX & AVALIAÇÃO",
+        title: "Comprovante Pix anexado (R$ 225,00) e fluxo para avaliação 1 a 5★",
+        subtitle: "Modal de pagamento via Pix com upload de comprovante e avaliação mútua por estrelas",
+        img: "/assets/aistudio/Tela_006_e6e7b79f.png",
+        alt: "Tela 6: Modal de pagamento via Pix com comprovante e avaliação"
       }
     ];
 
@@ -1672,12 +1389,26 @@
 
     function renderAppStep(stepIdx) {
       currentAppStep = stepIdx;
-      const leftEl = document.getElementById('phoneLeftBody');
-      const rightEl = document.getElementById('phoneRightBody');
-      if (leftEl && rightEl) {
-        leftEl.innerHTML = APP_STEPS[stepIdx].left;
-        rightEl.innerHTML = APP_STEPS[stepIdx].right;
+      const screenImg = document.getElementById('realScreenImage');
+      const stepHeaderNum = document.getElementById('screenHeaderStep');
+      const stepHeaderDesc = document.getElementById('screenHeaderDesc');
+      const stepData = APP_STEPS[stepIdx];
+
+      if (stepData) {
+        if (stepHeaderNum) stepHeaderNum.textContent = stepData.stepNum;
+        if (stepHeaderDesc) stepHeaderDesc.textContent = stepData.subtitle;
+        if (screenImg) {
+          screenImg.style.opacity = '0';
+          screenImg.style.transform = 'scale(0.985)';
+          setTimeout(() => {
+            screenImg.src = stepData.img;
+            screenImg.alt = stepData.alt;
+            screenImg.style.opacity = '1';
+            screenImg.style.transform = 'scale(1)';
+          }, 90);
+        }
       }
+
       document.querySelectorAll('.step-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', idx === stepIdx);
       });
@@ -1688,6 +1419,22 @@
       if (manualClick && appAutoPlaying) restartAppAutoInterval();
       broadcastState();
     }
+
+    function nextAppStep() {
+      const next = (currentAppStep + 1) % APP_STEPS.length;
+      setAppStep(next, true);
+    }
+
+    function prevAppStep() {
+      const prev = (currentAppStep - 1 + APP_STEPS.length) % APP_STEPS.length;
+      setAppStep(prev, true);
+    }
+
+    // Pré-carregamento imediato das 6 telas do produto real
+    APP_STEPS.forEach(step => {
+      const preImg = new Image();
+      preImg.src = step.img;
+    });
 
     function animateSwipe(dir) {
       const card = document.getElementById('swipeCardDemo');
