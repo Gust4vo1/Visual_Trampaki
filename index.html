@@ -874,7 +874,7 @@
             </button>
             <button class="step-btn" onclick="setAppStep(2, true)">
               <span class="step-num">TELA 03 • SWIPE & DISTÂNCIA NO MAPA</span>
-              <span class="step-title">Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte 👍</span>
+              <span class="step-title">Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte a vaga</span>
             </button>
             <button class="step-btn" onclick="setAppStep(3, true)">
               <span class="step-num">TELA 04 • CANDIDATURA RECEBIDA</span>
@@ -989,13 +989,13 @@
       <!-- SLIDE 08 -->
       <article class="scene" data-index="7">
         <div class="kicker">08 / CAPÍTULO 03 • MONETIZAÇÃO & PROJEÇÕES FINANCEIRAS</div>
-        <h2 class="slide-title">Precificação nos Dois Mundos e <span class="pink-text">Projeção Financeira (3 Anos)</span></h2>
+        <h2 class="slide-title">Precificação nos Dois Mundos e <span class="pink-text">Projeção Financeira</span></h2>
         <div class="grid-2-equal" style="margin-bottom: 20px;">
           <!-- MUNDO 1: ESTABELECIMENTO -->
           <div class="card highlight" style="padding: 22px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
               <div>
-                <span class="card-tag" style="margin-bottom:4px;">🏪 MUNDO DO CONTRATANTE • DESCONTO PROGRESSIVO</span>
+                <span class="card-tag" style="margin-bottom:4px;">MUNDO DO CONTRATANTE • DESCONTO PROGRESSIVO</span>
                 <h3 style="font-size:1.35rem; margin-bottom:4px; color:#fff;">Pacotes de Vagas Trampakí</h3>
               </div>
               <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
@@ -1049,7 +1049,7 @@
           <div class="card" style="padding: 22px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
               <div>
-                <span class="card-tag" style="margin-bottom:4px;">👤 MUNDO DO CANDIDATO • 100% GRÁTIS + PREMIUM</span>
+                <span class="card-tag" style="margin-bottom:4px;">MUNDO DO CANDIDATO • 100% GRÁTIS + PREMIUM</span>
                 <h3 style="font-size:1.35rem; margin-bottom:4px; color:#fff;">Trabalho Grátis & Trampakí Premium</h3>
               </div>
               <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
@@ -1063,38 +1063,39 @@
               <span style="font-weight:800; color:var(--pink); font-family:'JetBrains Mono',monospace;">R$ 0,00</span>
             </div>
 
-            <!-- Planos Premium Opcional -->
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                  <div style="font-size:0.76rem; font-weight:800; color:#fff;">Plano Mensal</div>
-                  <div style="font-size:0.64rem; color:#94a3b8;">Destaque imediato no topo</div>
+            <!-- Planos Premium Opcional (Balões Verticais) + Lista de Vantagens ao Lado -->
+            <div style="display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center;">
+              <!-- Balões de Plano Mensal e Anual -->
+              <div style="display:flex; gap:8px;">
+                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:10px 10px; text-align:center; min-width:110px;">
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff;">PLANO MENSAL</div>
+                  <div style="font-size:1.15rem; font-weight:800; color:#fff; margin:4px 0;">R$ 19,90</div>
+                  <div style="font-size:0.62rem; color:#94a3b8;">por mês</div>
                 </div>
-                <div style="text-align:right;">
-                  <div style="font-size:1.1rem; font-weight:800; color:#fff;">R$ 19,90</div>
-                  <div style="font-size:0.6rem; color:#94a3b8;">por mês</div>
+
+                <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:10px; padding:10px 10px; text-align:center; min-width:115px; position:relative;">
+                  <span style="position:absolute; top:-7px; left:50%; transform:translateX(-50%); font-size:0.55rem; background:var(--pink); color:#fff; padding:1px 6px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap;">Economize 75%</span>
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff;">PLANO ANUAL</div>
+                  <div style="font-size:1.15rem; font-weight:800; color:var(--pink); margin:4px 0;">R$ 49,90</div>
+                  <div style="font-size:0.62rem; color:#cbd5e1;">R$ 4,16/mês</div>
                 </div>
               </div>
 
-              <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; position:relative;">
-                <span style="position:absolute; top:-7px; right:10px; font-size:0.55rem; background:var(--pink); color:#fff; padding:1px 6px; border-radius:4px; font-weight:800; text-transform:uppercase;">Economize 75%</span>
-                <div>
-                  <div style="font-size:0.76rem; font-weight:800; color:#fff;">Plano Anual</div>
-                  <div style="font-size:0.64rem; color:#94a3b8;">Apenas R$ 4,16/mês</div>
+              <!-- Lista de Vantagens ao Lado com o mesmo Tique '✓' rosa -->
+              <div style="display:flex; flex-direction:column; gap:5px; font-size:0.78rem; color:#cbd5e1;">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Selo VIP</strong> com destaque visual no perfil</span>
                 </div>
-                <div style="text-align:right;">
-                  <div style="font-size:1.1rem; font-weight:800; color:var(--pink);">R$ 49,90</div>
-                  <div style="font-size:0.6rem; color:#94a3b8;">por ano</div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Topo da lista</strong> de inscritos do contratante</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Até 4x mais chances</strong> de match e visualizações</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Acesso prioritário</strong> a vagas recém-publicadas</span>
                 </div>
               </div>
-            </div>
-
-            <!-- Vantagens Premium -->
-            <div style="font-size:0.75rem; color:#cbd5e1; display:flex; flex-wrap:wrap; gap:8px;">
-              <span>★ <strong>Selo VIP</strong></span>
-              <span>✦ <strong>Topo da lista</strong> de inscritos</span>
-              <span>✦ <strong>Até 4x mais matches</strong></span>
-              <span>✦ Vagas prioritárias</span>
             </div>
           </div>
         </div>
@@ -1296,7 +1297,7 @@
       {
         name: "Demonstração em Tempo Real — O App Trampakí",
         duration: 45,
-        script: `<span class="stage-cue">[ACOMPANHAR AS 6 TELAS DO PRODUTO REAL]</span><br>Vejam o app trampakí em operação real nas 6 etapas da jornada:<br>• <strong>Tela 1:</strong> O <strong>Restaurante Come Bem</strong> anuncia a vaga de Cozinheiro (R$ 225,00) definindo seu raio de 25 km.<br>• <strong>Telas 2 & 3:</strong> <strong>Bruno Carvalho</strong> configura seu perfil e raio de 50 km, visualiza a vaga a 2.5 km no mapa com geolocalização e curte 👍.<br>• <strong>Telas 4 & 5:</strong> O comércio visualiza a candidatura (★ 4.5), dá o match, abre o chat e confirma o Acordo de Trabalho.<br>• <strong>Tela 6:</strong> Pagamento via Pix com upload de comprovante e liberação da avaliação mútua.`
+        script: `<span class="stage-cue">[ACOMPANHAR AS 6 TELAS DO PRODUTO REAL]</span><br>Vejam o app trampakí em operação real nas 6 etapas da jornada:<br>• <strong>Tela 1:</strong> O <strong>Restaurante Come Bem</strong> anuncia a vaga de Cozinheiro (R$ 225,00) definindo seu raio de 25 km.<br>• <strong>Telas 2 & 3:</strong> <strong>Bruno Carvalho</strong> configura seu perfil e raio de 50 km, visualiza a vaga a 2.5 km no mapa com geolocalização e curte a vaga.<br>• <strong>Telas 4 & 5:</strong> O comércio visualiza a candidatura (★ 4.5), dá o match, abre o chat e confirma o Acordo de Trabalho.<br>• <strong>Tela 6:</strong> Pagamento via Pix com upload de comprovante e liberação da avaliação mútua.`
       },
       {
         name: "Cap. 02 — Matriz de Posicionamento Competitivo",
@@ -1311,7 +1312,7 @@
       {
         name: "Cap. 03 — Monetização e Projeção (3 Anos)",
         duration: 25,
-        script: `<span class="stage-cue">[MOSTRAR OS DOIS MUNDOS E A PROJEÇÃO DE 3 ANOS]</span><br>Nossa monetização abrange os dois lados: pacotes de vagas de R$ 1,99 a R$ 1,59 para contratantes e gratuidade com plano Premium opcional para candidatos. Pelas nossas projeções financeiras validadas, atingimos <strong>R$ 432 mil de ARR no Ano 1</strong> com 2.400 clientes, saltando para <strong>R$ 1,64 milhão no Ano 2</strong> (+280%) e <strong>R$ 5,86 milhões no Ano 3</strong> com quase 20 mil clientes ativos, mantendo um LTV/CAC próximo de 6 vezes e payback de 1,7 a 3,4 meses.`
+        script: `<span class="stage-cue">[MOSTRAR OS DOIS MUNDOS E A PROJEÇÃO FINANCEIRA]</span><br>Nossa monetização abrange os dois lados: pacotes de vagas de R$ 1,99 a R$ 1,59 para contratantes e gratuidade com plano Premium opcional para candidatos. Pelas nossas projeções financeiras validadas, atingimos <strong>R$ 432 mil de ARR no Ano 1</strong> com 2.400 clientes, saltando para <strong>R$ 1,64 milhão no Ano 2</strong> (+280%) e <strong>R$ 5,86 milhões no Ano 3</strong> com quase 20 mil clientes ativos, mantendo um LTV/CAC próximo de 6 vezes e payback de 1,7 a 3,4 meses.`
       },
       {
         name: "Cap. 04 e 05 — Ciclo Lean e Mitigação de Riscos",
@@ -1345,7 +1346,7 @@
       {
         stepNum: "TELA 03 / 06",
         badge: "TELA 03 • SWIPE & DISTÂNCIA NO MAPA",
-        title: "Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte 👍",
+        title: "Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte a vaga",
         subtitle: "Feed de vagas com distância real, trajeto Google Maps e gestão de créditos do comércio",
         img: "./assets/aistudio/Tela_003_f0401238.png",
         alt: "Tela 3: Swipe de vagas a 2.5 km no mapa e saldo de créditos do estabelecimento"
