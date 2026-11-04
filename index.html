@@ -905,7 +905,7 @@
                 </div>
               </div>
               <div class="real-screen-viewport" onclick="nextAppStep()" title="Clique na imagem para avançar a tela">
-                <img id="realScreenImage" src="/assets/aistudio/Tela_001_46e3b5d8.png" alt="Tela 01 Trampakí" class="real-screen-img" />
+                <img id="realScreenImage" src="./assets/aistudio/Tela_001_46e3b5d8.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Gust4vo1/Visual_Trampaki/main/assets/aistudio/Tela_001_46e3b5d8.png'" alt="Tela 01 Trampakí" class="real-screen-img" />
               </div>
             </div>
           </div>
@@ -1331,7 +1331,7 @@
         badge: "TELA 01 • LOGIN & NOVA VAGA",
         title: "Restaurante Come Bem cria vaga de Cozinheiro (R$ 225,00 • Raio até 25 km)",
         subtitle: "Candidato acessa login e Restaurante anuncia serviço com valor e raio definidos",
-        img: "/assets/aistudio/Tela_001_46e3b5d8.png",
+        img: "./assets/aistudio/Tela_001_46e3b5d8.png",
         alt: "Tela 1: Login do candidato e Restaurante Come Bem criando vaga de Cozinheiro"
       },
       {
@@ -1339,7 +1339,7 @@
         badge: "TELA 02 • PERFIL & DETALHES DA VAGA",
         title: "Bruno Carvalho configura perfil e raio de 50 km; vaga aberta a R$ 225,00",
         subtitle: "Perfil completo de Bruno (Chave Pix, raio 50 km) e detalhes da vaga no restaurante",
-        img: "/assets/aistudio/Tela_002_1eb82baf.png",
+        img: "./assets/aistudio/Tela_002_1eb82baf.png",
         alt: "Tela 2: Perfil do candidato e detalhes da vaga no Come Bem"
       },
       {
@@ -1347,7 +1347,7 @@
         badge: "TELA 03 • SWIPE & DISTÂNCIA NO MAPA",
         title: "Bruno visualiza vaga a 2.5 km no mapa com geolocalização e curte 👍",
         subtitle: "Feed de vagas com distância real, trajeto Google Maps e gestão de créditos do comércio",
-        img: "/assets/aistudio/Tela_003_f0401238.png",
+        img: "./assets/aistudio/Tela_003_f0401238.png",
         alt: "Tela 3: Swipe de vagas a 2.5 km no mapa e saldo de créditos do estabelecimento"
       },
       {
@@ -1355,7 +1355,7 @@
         badge: "TELA 04 • CANDIDATURA RECEBIDA",
         title: "Restaurante Come Bem vê 1 candidato e analisa perfil de Bruno Carvalho (★ 4.5)",
         subtitle: "Notificação de candidatura recebida no painel do restaurante para avaliar o profissional",
-        img: "/assets/aistudio/Tela_004_1c2027f6.png",
+        img: "./assets/aistudio/Tela_004_1c2027f6.png",
         alt: "Tela 4: Restaurante Come Bem visualiza candidatura de Bruno Carvalho"
       },
       {
@@ -1363,7 +1363,7 @@
         badge: "TELA 05 • MATCH & ACORDO DE TRABALHO",
         title: "Match confirmado, abertura de chat e tela de Acordo com botão de confirmação",
         subtitle: "Notificação de match bilateral, tela de chat liberada e termo de acordo com confirmação",
-        img: "/assets/aistudio/Tela_005_80ae1e27.png",
+        img: "./assets/aistudio/Tela_005_80ae1e27.png",
         alt: "Tela 5: Deu match! Chat direto e termo de acordo de trabalho"
       },
       {
@@ -1371,7 +1371,7 @@
         badge: "TELA 06 • PAGAMENTO PIX & AVALIAÇÃO",
         title: "Comprovante Pix anexado (R$ 225,00) e fluxo para avaliação 1 a 5★",
         subtitle: "Modal de pagamento via Pix com upload de comprovante e avaliação mútua por estrelas",
-        img: "/assets/aistudio/Tela_006_e6e7b79f.png",
+        img: "./assets/aistudio/Tela_006_e6e7b79f.png",
         alt: "Tela 6: Modal de pagamento via Pix com comprovante e avaliação"
       }
     ];
@@ -1400,6 +1400,14 @@
         if (screenImg) {
           screenImg.style.opacity = '0';
           screenImg.style.transform = 'scale(0.985)';
+          delete screenImg.dataset.triedFallback;
+          screenImg.onerror = function() {
+            if (!this.dataset.triedFallback) {
+              this.dataset.triedFallback = '1';
+              const cleanPath = stepData.img.replace(/^\.\//, '').replace(/^\//, '');
+              this.src = 'https://raw.githubusercontent.com/Gust4vo1/Visual_Trampaki/main/' + cleanPath;
+            }
+          };
           setTimeout(() => {
             screenImg.src = stepData.img;
             screenImg.alt = stepData.alt;
