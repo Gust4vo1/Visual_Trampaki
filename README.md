@@ -11,6 +11,7 @@ Apresentação interativa executiva e técnica do **Trampakí** (marketplace sob
   npm run dev
   ```
   Ou abra o arquivo `index.html` diretamente em qualquer navegador moderno.
+  Ou abra por meio do link: https://gust4vo1.github.io/Visual_Trampaki/
 
 ## 📂 Estrutura do Repositório
 
