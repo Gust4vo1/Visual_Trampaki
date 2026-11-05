@@ -326,27 +326,49 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 11px;
+      gap: 18px;
+      padding: 10px 0;
     }
 
     .chaos-pill {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 18px;
+      padding: 13px 20px;
       background: rgba(22, 23, 32, 0.94);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
-      font-size: clamp(0.86rem, 1.02vw, 1.02rem);
+      font-size: clamp(0.9rem, 1.05vw, 1.08rem);
       color: #f1f5f9;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.45);
-      animation: floatPill 3.6s ease-in-out infinite alternate;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      animation: floatPill 3.4s ease-in-out infinite alternate;
+      transition: transform 0.3s ease;
     }
-    .chaos-pill:nth-child(even) {
-      margin-left: 26px;
-      animation-delay: 0.9s;
+    .chaos-pill:nth-child(1) {
+      margin-left: 0px;
+      animation-duration: 3.2s;
+    }
+    .chaos-pill:nth-child(2) {
+      margin-left: 55px;
+      animation-delay: 0.6s;
+      animation-duration: 4.1s;
+    }
+    .chaos-pill:nth-child(3) {
+      margin-left: 15px;
+      animation-delay: 1.2s;
+      animation-duration: 3.6s;
+    }
+    .chaos-pill:nth-child(4) {
+      margin-left: 70px;
+      animation-delay: 1.8s;
+      animation-duration: 4.4s;
+    }
+    .chaos-pill:nth-child(5) {
+      margin-left: 25px;
+      animation-delay: 0.4s;
+      animation-duration: 3.8s;
     }
     .chaos-pill::before {
       content: "";
@@ -359,8 +381,9 @@
     }
 
     @keyframes floatPill {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-7px); }
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(0.4deg); }
+      100% { transform: translateY(-14px) rotate(-0.5deg); }
     }
 
     .comp-table {
@@ -712,7 +735,7 @@
         </div>
         <h1 class="slide-title">A Conexão Ágil do <span class="pink-text">Mercado Informal.</span></h1>
         <p class="slide-subtitle">
-          Do diagnóstico do ecossistema ao produto funcional: conectando estabelecimentos comerciais e trabalhadores autônomos sob demanda através de geolocalização e match de interesse mútuo.
+          Conectando comércios e autônomos sob demanda por geolocalização e interesse mútuo
         </p>
         <div class="grid-3">
           <div class="card highlight">
@@ -738,11 +761,8 @@
         <div class="grid-2">
           <div>
             <div class="kicker">02 / CAPÍTULO 01 • ECOSSISTEMA & CONTEXTO</div>
-            <h2 class="slide-title">Bares perdem mesas.<br>Autônomos perdem <span class="pink-text">renda.</span></h2>
-            <p class="slide-subtitle">
-              Grupos caóticos de WhatsApp, no-shows sem aviso prévio, calotes informais e escalas de plantão remendadas às 19h de sábado.
-            </p>
-            <div class="grid-3" style="margin-top: 12px;">
+            <h2 class="slide-title">Negócios perdem vendas.<br>Autônomos perdem <span class="pink-text">renda.</span></h2>
+            <div class="grid-3" style="margin-top: 24px;">
               <div class="card highlight" style="padding:20px;">
                 <span class="card-tag">FRAGILIDADE (BANI)</span>
                 <div class="big-metric" style="font-size:2.4rem;">39M</div>
@@ -751,7 +771,7 @@
               <div class="card" style="padding:20px;">
                 <span class="card-tag">ANSIEDADE OPERACIONAL</span>
                 <h3 style="font-size:1.25rem;">Faltas de Última Hora</h3>
-                <p style="font-size:0.92rem;">Desfalques inesperados paralisam bares, restaurantes e eventos locais.</p>
+                <p style="font-size:0.92rem;">Desfalques inesperados prejudicam comércios.</p>
               </div>
               <div class="card" style="padding:20px;">
                 <span class="card-tag">NÃO-LINEARIDADE</span>
@@ -763,12 +783,9 @@
 
           <div class="chaos-stack">
             <div class="chaos-pill">Mandei mensagem em 5 grupos de freela e ninguém responde</div>
-            <div class="chaos-pill">O garçom faltou às 19h45 com o salão já lotado</div>
             <div class="chaos-pill">Fiz a diária sábado passado e até hoje não recebi o Pix</div>
             <div class="chaos-pill">Escala de sábado desfalcada de última hora</div>
             <div class="chaos-pill">Alguém indica um cozinheiro urgente para hoje à noite??</div>
-            <div class="chaos-pill">Comandas travadas na cozinha por falta de equipe</div>
-            <div class="chaos-pill">Mandou áudio desmarcando o plantão em cima da hora</div>
             <div class="chaos-pill">Fechamento de caixa no prejuízo por mesas perdidas</div>
           </div>
         </div>
@@ -985,176 +1002,127 @@
 
       <!-- SLIDE 08 -->
       <article class="scene" data-index="7">
-        <div class="kicker">08 / CAPÍTULO 03 • MONETIZAÇÃO & PROJEÇÕES FINANCEIRAS</div>
-        <h2 class="slide-title">Precificação nos Dois Mundos e <span class="pink-text">Projeção Financeira</span></h2>
-        <div class="grid-2-equal" style="margin-bottom: 0;">
+        <div class="kicker">08 / CAPÍTULO 03 • MODELO DE MONETIZAÇÃO</div>
+        <h2 class="slide-title">Precificação nos <span class="pink-text">Dois Mundos</span></h2>
+        <p class="slide-subtitle">
+          Sem mensalidade obrigatória para quem contrata e barreira zero de custo para quem quer trabalhar.
+        </p>
+        <div class="grid-2-equal" style="margin-top: 14px; gap: 26px;">
           <!-- MUNDO 1: ESTABELECIMENTO -->
-          <div class="card highlight" style="padding: 22px;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-              <div>
-                <span class="card-tag" style="margin-bottom:4px;">MUNDO DO CONTRATANTE • DESCONTO PROGRESSIVO</span>
-                <h3 style="font-size:1.35rem; margin-bottom:4px; color:#fff;">Pacotes de Vagas Trampakí</h3>
+          <div class="card highlight" style="padding: clamp(24px, 2.3vw, 34px); display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div>
+                  <span class="card-tag" style="margin-bottom:6px;">MUNDO DO CONTRATANTE • DESCONTO PROGRESSIVO</span>
+                  <h3 style="font-size:1.55rem; margin-bottom:6px; color:#fff;">Pacotes de Vagas Trampakí</h3>
+                </div>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
+                  Sem mensalidade fixa
+                </span>
               </div>
-              <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
-                Sem mensalidade fixa
-              </span>
+              <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:18px; line-height:1.5;">
+                O comércio adquire créditos de vagas sob demanda. Quanto maior o pacote adquirido, menor o custo unitário por vaga anunciada.
+              </p>
+
+              <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; margin-top:8px;">
+                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">01 VAGA</div>
+                  <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 1,99</div>
+                  <div style="font-size:0.68rem; color:#94a3b8;">R$ 1,99/vaga</div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">03 VAGAS</div>
+                  <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 5,67</div>
+                  <div style="font-size:0.68rem; color:#94a3b8;">R$ 1,89/vaga</div>
+                </div>
+
+                <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:12px; padding:24px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center; box-shadow:0 0 22px rgba(255,45,122,0.2);">
+                  <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.58rem; background:var(--pink); color:#fff; padding:3px 8px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Popular</span>
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">05 VAGAS</div>
+                  <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 8,95</div>
+                  <div style="font-size:0.68rem; color:#cbd5e1;">R$ 1,79/vaga</div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">10 VAGAS</div>
+                  <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 16,90</div>
+                  <div style="font-size:0.68rem; color:#94a3b8;">R$ 1,69/vaga</div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.22); border-radius:12px; padding:24px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center;">
+                  <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.58rem; background:#ffffff; color:#000; padding:3px 8px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economia</span>
+                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">25 VAGAS</div>
+                  <div style="font-size:1.32rem; font-weight:800; color:#fff; margin:6px 0;">R$ 39,75</div>
+                  <div style="font-size:0.68rem; color:#cbd5e1;">R$ 1,59/vaga</div>
+                </div>
+              </div>
             </div>
 
-            <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; margin-top:16px;">
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:20px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-                <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">01 VAGA</div>
-                <div style="font-size:1.22rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 1,99</div>
-                <div style="font-size:0.65rem; color:#94a3b8;">R$ 1,99/vaga</div>
-              </div>
-
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:20px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-                <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">03 VAGAS</div>
-                <div style="font-size:1.22rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 5,67</div>
-                <div style="font-size:0.65rem; color:#94a3b8;">R$ 1,89/vaga</div>
-              </div>
-
-              <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:10px; padding:20px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center;">
-                <span style="position:absolute; top:-8px; left:50%; transform:translateX(-50%); font-size:0.55rem; background:var(--pink); color:#fff; padding:2px 7px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Popular</span>
-                <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">05 VAGAS</div>
-                <div style="font-size:1.22rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 8,95</div>
-                <div style="font-size:0.65rem; color:#cbd5e1;">R$ 1,79/vaga</div>
-              </div>
-
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:20px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
-                <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">10 VAGAS</div>
-                <div style="font-size:1.22rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 16,90</div>
-                <div style="font-size:0.65rem; color:#94a3b8;">R$ 1,69/vaga</div>
-              </div>
-
-              <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; padding:20px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center;">
-                <span style="position:absolute; top:-8px; left:50%; transform:translateX(-50%); font-size:0.55rem; background:#ffffff; color:#000; padding:2px 7px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economia</span>
-                <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">25 VAGAS</div>
-                <div style="font-size:1.22rem; font-weight:800; color:#fff; margin:6px 0;">R$ 39,75</div>
-                <div style="font-size:0.65rem; color:#cbd5e1;">R$ 1,59/vaga</div>
-              </div>
+            <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; color:#94a3b8;">
+              <span>Créditos nunca expiram</span>
+              <span style="color:#fff; font-weight:600;">Match sem limites até a vaga ser preenchida</span>
             </div>
           </div>
 
           <!-- MUNDO 2: CANDIDATO -->
-          <div class="card" style="padding: 22px;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-              <div>
-                <span class="card-tag" style="margin-bottom:4px;">MUNDO DO CANDIDATO • 100% GRÁTIS + PREMIUM</span>
-                <h3 style="font-size:1.35rem; margin-bottom:4px; color:#fff;">Trabalho Grátis & Trampakí Premium</h3>
-              </div>
-              <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
-                Zero Custo para Trabalhar
-              </span>
-            </div>
-
-            <!-- Faixa 100% Grátis -->
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:7px 12px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem;">
-              <span style="color:#f8fafc;"><strong>Acesso Gratuito Universal:</strong> Cadastro, busca de vagas, match e recebimento via Pix sem taxa alguma.</span>
-              <span style="font-weight:800; color:var(--pink); font-family:'JetBrains Mono',monospace;">R$ 0,00</span>
-            </div>
-
-            <!-- Planos Premium Opcional (Balões Verticais) + Lista de Vantagens ao Lado -->
-            <div style="display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center; margin-top:14px;">
-              <!-- Balões de Plano Mensal e Anual -->
-              <div style="display:flex; gap:10px;">
-                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:18px 12px; text-align:center; min-width:115px; display:flex; flex-direction:column; justify-content:center;">
-                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO MENSAL</div>
-                  <div style="font-size:1.22rem; font-weight:800; color:#fff; margin:6px 0;">R$ 19,90</div>
-                  <div style="font-size:0.65rem; color:#94a3b8;">por mês</div>
-                </div>
-
-                <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:10px; padding:18px 12px; text-align:center; min-width:120px; position:relative; display:flex; flex-direction:column; justify-content:center;">
-                  <span style="position:absolute; top:-8px; left:50%; transform:translateX(-50%); font-size:0.55rem; background:var(--pink); color:#fff; padding:2px 7px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economize 75%</span>
-                  <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO ANUAL</div>
-                  <div style="font-size:1.22rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 49,90</div>
-                  <div style="font-size:0.65rem; color:#cbd5e1;">R$ 4,16/mês</div>
-                </div>
-              </div>
-
-              <!-- Lista de Vantagens ao Lado com espaçamento para a direita e o mesmo Tique '✓' rosa -->
-              <div style="display:flex; flex-direction:column; gap:7px; font-size:0.78rem; color:#cbd5e1; padding-left:14px;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Selo VIP</strong> com destaque visual no perfil</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Topo da lista</strong> de inscritos do contratante</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Até 4x mais chances</strong> de match e visualizações</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span style="color:var(--pink); font-weight:800;">✓</span> <span><strong>Acesso prioritário</strong> a vagas recém-publicadas</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Linha Rosa de Separação (estilo capítulo) e Espaçamento Ampliado -->
-        <div style="margin: 32px 0 28px 0; width: 100%; display: flex; align-items: center;">
-          <div style="width: 100%; height: 1.5px; background: var(--pink); opacity: 0.65; box-shadow: 0 0 10px rgba(255,45,122,0.35);"></div>
-        </div>
-
-        <div class="grid-3">
-          <!-- ANO 1 -->
-          <div class="card" style="padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div class="card" style="padding: clamp(24px, 2.3vw, 34px); display:flex; flex-direction:column; justify-content:space-between;">
             <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span class="card-tag" style="margin-bottom:0;">ANO 1 • VALIDAÇÃO INICIAL</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--pink); font-weight:700;">Payback 1,7m</span>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div>
+                  <span class="card-tag" style="margin-bottom:6px;">MUNDO DO CANDIDATO • 100% GRÁTIS + PREMIUM</span>
+                  <h3 style="font-size:1.55rem; margin-bottom:6px; color:#fff;">Trabalho Grátis & Trampakí Premium</h3>
+                </div>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
+                  Zero Custo para Trabalhar
+                </span>
               </div>
-              <div style="font-size:1.9rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
-                R$ 432 mil <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">ARR</span>
-              </div>
-              <div style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
-                <strong>2.400 Clientes Ativos</strong> (500 novos/mês)
-              </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:7px 10px; font-size:0.75rem; color:#94a3b8; display:flex; justify-content:space-between; margin-top:8px;">
-              <span>LTV: <strong style="color:#fff;">R$ 150</strong> / CAC: <strong style="color:#fff;">R$ 26</strong></span>
-              <span style="color:var(--pink); font-weight:700;">LTV/CAC 5,8x</span>
-            </div>
-          </div>
 
-          <!-- ANO 2 -->
-          <div class="card highlight" style="padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span class="card-tag" style="margin-bottom:0;">ANO 2 • ESCALA (+280% YoY)</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--pink); font-weight:700;">Payback 2,1m</span>
+              <!-- Faixa 100% Grátis -->
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px 16px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; font-size:0.86rem;">
+                <span style="color:#f8fafc;"><strong>Acesso Gratuito Universal:</strong> Cadastro, busca de vagas, match e recebimento via Pix sem taxa alguma.</span>
+                <span style="font-weight:800; color:var(--pink); font-family:'JetBrains Mono',monospace; font-size:1.05rem;">R$ 0,00</span>
               </div>
-              <div style="font-size:1.9rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
-                R$ 1,64 mi <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">ARR</span>
-              </div>
-              <div style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
-                <strong>6.840 Clientes Ativos</strong> (1.000 novos/mês)<br>
-                <span style="color:#94a3b8; font-size:0.78rem;">Margem: 21,1%</span>
-              </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:7px 10px; font-size:0.75rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:8px;">
-              <span>LTV: <strong style="color:#fff;">R$ 267</strong> / CAC: <strong style="color:#fff;">R$ 42</strong></span>
-              <span style="color:var(--pink); font-weight:700;">LTV/CAC 6,3x</span>
-            </div>
-          </div>
 
-          <!-- ANO 3 -->
-          <div class="card" style="padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span class="card-tag" style="margin-bottom:0;">ANO 3 • CONSOLIDAÇÃO (+257% YoY)</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:#fff; font-weight:700;">EBITDA R$ 5,9M</span>
-              </div>
-              <div style="font-size:1.9rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
-                R$ 5,86 mi <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">ARR</span>
-              </div>
-              <div style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
-                <strong>19.536 Clientes Ativos</strong> (2.000 novos/mês)<br>
-                <span style="color:#94a3b8; font-size:0.78rem;">Margem Bruta: 37,7%</span>
+              <!-- Planos Premium Opcional (Balões Verticais) + Lista de Vantagens ao Lado -->
+              <div style="display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center; margin-top:14px;">
+                <!-- Balões de Plano Mensal e Anual -->
+                <div style="display:flex; gap:12px;">
+                  <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:22px 14px; text-align:center; min-width:125px; display:flex; flex-direction:column; justify-content:center;">
+                    <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO MENSAL</div>
+                    <div style="font-size:1.32rem; font-weight:800; color:#fff; margin:6px 0;">R$ 19,90</div>
+                    <div style="font-size:0.68rem; color:#94a3b8;">por mês</div>
+                  </div>
+
+                  <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:12px; padding:22px 14px; text-align:center; min-width:130px; position:relative; display:flex; flex-direction:column; justify-content:center; box-shadow:0 0 22px rgba(255,45,122,0.2);">
+                    <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.58rem; background:var(--pink); color:#fff; padding:3px 8px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economize 75%</span>
+                    <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO ANUAL</div>
+                    <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 49,90</div>
+                    <div style="font-size:0.68rem; color:#cbd5e1;">R$ 4,16/mês</div>
+                  </div>
+                </div>
+
+                <!-- Lista de Vantagens ao Lado com espaçamento para a direita e o mesmo Tique '✓' rosa -->
+                <div style="display:flex; flex-direction:column; gap:10px; font-size:0.86rem; color:#cbd5e1; padding-left:14px;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Selo VIP</strong> com destaque visual no perfil</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Topo da lista</strong> de inscritos do contratante</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Até 4x mais chances</strong> de match e visualizações</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Acesso prioritário</strong> a vagas recém-publicadas</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:7px 10px; font-size:0.75rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:8px;">
-              <span>LTV: <strong style="color:#fff;">R$ 500</strong> / CAC: <strong style="color:#fff;">R$ 85</strong></span>
-              <span style="color:var(--pink); font-weight:700;">LTV/CAC 5,9x</span>
+
+            <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; color:#94a3b8;">
+              <span>Assinatura 100% Opcional</span>
+              <span style="color:#fff; font-weight:600;">O profissional nunca paga nada para trabalhar ou receber</span>
             </div>
           </div>
         </div>
@@ -1162,7 +1130,162 @@
 
       <!-- SLIDE 09 -->
       <article class="scene" data-index="8">
-        <div class="kicker">09 / CAPÍTULOS 04 & 05 • VALIDAÇÃO LEAN & ANÁLISE CRÍTICA DE BANCA</div>
+        <div class="kicker">09 / CAPÍTULO 03 • PROJEÇÕES FINANCEIRAS & INDICADORES (FIAP)</div>
+        <h2 class="slide-title">Projeção Financeira e <span class="pink-text">Unit Economics (3 Anos)</span></h2>
+        <p class="slide-subtitle">
+          Evolução consolidada de receita recorrente anual, escala da base de clientes e eficiência de capital.
+        </p>
+
+        <!-- 3 CARDS SUPERIORES: ANO 1, ANO 2, ANO 3 -->
+        <div class="grid-3" style="margin-top: 14px; margin-bottom: 20px;">
+          <!-- ANO 1 -->
+          <div class="card" style="padding:22px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span class="card-tag" style="margin-bottom:0;">ANO 1 • VALIDAÇÃO INICIAL</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pink); font-weight:700;">Payback 1,7m</span>
+              </div>
+              <div style="font-size:2.2rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
+                R$ 432 mil <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">ARR</span>
+              </div>
+              <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
+                <strong>2.400 Clientes Ativos</strong> (500 novos/mês)<br>
+                <span style="color:#94a3b8; font-size:0.8rem;">EBITDA: R$ 400 mil (Margem 92,6%)</span>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#94a3b8; display:flex; justify-content:space-between; margin-top:8px;">
+              <span>LTV: <strong style="color:#fff;">R$ 150</strong> / CAC: <strong style="color:#fff;">R$ 26</strong></span>
+              <span style="color:var(--pink); font-weight:700;">LTV/CAC 5,8x</span>
+            </div>
+          </div>
+
+          <!-- ANO 2 -->
+          <div class="card highlight" style="padding:22px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span class="card-tag" style="margin-bottom:0;">ANO 2 • ESCALA (+280% YoY)</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pink); font-weight:700;">Payback 2,1m</span>
+              </div>
+              <div style="font-size:2.2rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
+                R$ 1,64 mi <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">ARR</span>
+              </div>
+              <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
+                <strong>6.840 Clientes Ativos</strong> (1.000 novos/mês)<br>
+                <span style="color:#94a3b8; font-size:0.8rem;">EBITDA: R$ 1,52 mi • Margem Bruta: 21,1%</span>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:8px;">
+              <span>LTV: <strong style="color:#fff;">R$ 267</strong> / CAC: <strong style="color:#fff;">R$ 42</strong></span>
+              <span style="color:var(--pink); font-weight:700;">LTV/CAC 6,3x</span>
+            </div>
+          </div>
+
+          <!-- ANO 3 -->
+          <div class="card" style="padding:22px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span class="card-tag" style="margin-bottom:0;">ANO 3 • CONSOLIDAÇÃO (+257% YoY)</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#fff; font-weight:700;">EBITDA R$ 5,9M</span>
+              </div>
+              <div style="font-size:2.2rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
+                R$ 5,86 mi <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">ARR</span>
+              </div>
+              <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
+                <strong>19.536 Clientes Ativos</strong> (2.000 novos/mês)<br>
+                <span style="color:#94a3b8; font-size:0.8rem;">EBITDA: R$ 5,94 mi • Margem Bruta: 37,7%</span>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:8px;">
+              <span>LTV: <strong style="color:#fff;">R$ 500</strong> / CAC: <strong style="color:#fff;">R$ 85</strong></span>
+              <span style="color:var(--pink); font-weight:700;">LTV/CAC 5,9x</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISUALIZAÇÃO GRÁFICA / BENCHMARKS DA PLANILHA FIAP -->
+        <div class="grid-2-equal" style="gap:20px;">
+          <!-- GRÁFICO 1: EVOLUÇÃO DE ARR E EBITDA -->
+          <div class="card" style="padding:18px 22px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <span class="card-tag" style="margin-bottom:0;">EVOLUÇÃO DE RECEITA & RESULTADO (ARR / EBITDA)</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#94a3b8;">Fonte: Modelo Financeiro MVP FIAP</span>
+            </div>
+
+            <!-- Barras Comparativas Visuais -->
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <!-- Ano 1 -->
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
+                  <span style="color:#fff; font-weight:700;">Ano 1: R$ 432k ARR</span>
+                  <span style="color:#94a3b8;">EBITDA: R$ 400.165 • Caixa: R$ 700k</span>
+                </div>
+                <div style="width:100%; height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; display:flex;">
+                  <div style="width:7.4%; background:var(--pink); border-radius:6px;"></div>
+                </div>
+              </div>
+
+              <!-- Ano 2 -->
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
+                  <span style="color:#fff; font-weight:700;">Ano 2: R$ 1,64M ARR <span style="color:var(--pink); font-size:0.72rem; font-weight:800;">(+280% YoY)</span></span>
+                  <span style="color:#94a3b8;">EBITDA: R$ 1.522.526 • Caixa: R$ 2,72M</span>
+                </div>
+                <div style="width:100%; height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; display:flex;">
+                  <div style="width:28%; background:linear-gradient(90deg, var(--pink), #ff6b9d); border-radius:6px;"></div>
+                </div>
+              </div>
+
+              <!-- Ano 3 -->
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
+                  <span style="color:#fff; font-weight:700;">Ano 3: R$ 5,86M ARR <span style="color:var(--pink); font-size:0.72rem; font-weight:800;">(+257% YoY • 13,5x)</span></span>
+                  <span style="color:#fff; font-weight:700;">EBITDA: R$ 5.943.515 • Caixa: R$ 10,91M</span>
+                </div>
+                <div style="width:100%; height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; display:flex;">
+                  <div style="width:100%; background:linear-gradient(90deg, var(--pink), #ff2d7a, #ffffff); border-radius:6px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRÁFICO 2: EXPANSÃO DE CLIENTES & EFICIÊNCIA DE CAPITAL -->
+          <div class="card" style="padding:18px 22px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <span class="card-tag" style="margin-bottom:0;">TRAÇÃO DE CLIENTES & EFICIÊNCIA DE CAPITAL</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--pink); font-weight:700;">LTV/CAC ~ 6.0x</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; text-align:center;">
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 8px;">
+                <div style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Clientes Ano 1</div>
+                <div style="font-size:1.45rem; font-weight:800; color:#fff; margin:4px 0;">2.400</div>
+                <div style="font-size:0.68rem; color:var(--pink); font-weight:600;">500 novos/mês</div>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 8px;">
+                <div style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Clientes Ano 2</div>
+                <div style="font-size:1.45rem; font-weight:800; color:#fff; margin:4px 0;">6.840</div>
+                <div style="font-size:0.68rem; color:var(--pink); font-weight:600;">1.000 novos/mês</div>
+              </div>
+
+              <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:10px; padding:12px 8px;">
+                <div style="font-size:0.7rem; color:#cbd5e1; text-transform:uppercase; font-weight:700;">Clientes Ano 3</div>
+                <div style="font-size:1.45rem; font-weight:800; color:var(--pink); margin:4px 0;">19.536</div>
+                <div style="font-size:0.68rem; color:#fff; font-weight:600;">2.000 novos/mês</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; display:flex; justify-content:space-between; align-items:center; font-size:0.76rem; color:#94a3b8; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
+              <span>Ticket Médio: <strong style="color:#fff;">R$ 15 → R$ 25</strong></span>
+              <span>Caixa Final Ano 3: <strong style="color:var(--pink);">R$ 10.916.206</strong></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 10 -->
+      <article class="scene" data-index="9">
+        <div class="kicker">10 / CAPÍTULOS 04 & 05 • VALIDAÇÃO LEAN & ANÁLISE CRÍTICA DE BANCA</div>
         <h2 class="slide-title">Ciclo Lean e Mitigação dos <span class="pink-text">Três Riscos Fatais</span></h2>
         <div class="grid-3" style="margin-bottom:20px;">
           <div class="card" style="padding:20px;">
@@ -1200,9 +1323,9 @@
         </div>
       </article>
 
-      <!-- SLIDE 10 -->
-      <article class="scene" data-index="9">
-        <div class="kicker">10 / CAPÍTULO 05 • CONEXÃO COM INVESTIDORES</div>
+      <!-- SLIDE 11 -->
+      <article class="scene" data-index="10">
+        <div class="kicker">11 / CAPÍTULO 05 • CONEXÃO COM INVESTIDORES</div>
         <h2 class="slide-title">O Próximo Passo: <span class="pink-text">Metas de Crescimento Conjunto</span></h2>
         <p class="slide-subtitle">
           Crescimento balanceado entre oferta e demanda: alavancando de forma sincronizada a base de clientes pagantes e profissionais qualificados.
@@ -1263,7 +1386,7 @@
 
   <footer class="bottombar">
     <div style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-muted); min-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-      <strong style="color:var(--pink);" id="slideCounter">01 / 10</strong> — <span id="slideFooterName">Capa Executiva Trampakí</span>
+      <strong style="color:var(--pink);" id="slideCounter">01 / 11</strong> — <span id="slideFooterName">Capa Executiva Trampakí</span>
     </div>
     <div style="display:flex; align-items:center; gap:22px; margin-left:auto;">
       <div class="progress-dots" id="progressDots"></div>
@@ -1285,12 +1408,12 @@
       {
         name: "Capa Executiva Trampakí",
         duration: 20,
-        script: `<span class="stage-cue">[OLHAR FIRME PARA A BANCA • TOM EXECUTIVO]</span><br>Olá a todos. Nós somos o <strong>trampakí</strong> — a conexão ágil do mercado informal.<br><br>Hoje vamos mostrar como saímos do diagnóstico de uma dor real enfrentada por bares, restaurantes e milhões de autônomos para construir uma plataforma funcional de <strong>match geolocalizado sob demanda</strong>.`
+        script: `<span class="stage-cue">[OLHAR FIRME PARA A BANCA • TOM EXECUTIVO]</span><br>Olá a todos. Nós somos o <strong>trampakí</strong> — a conexão ágil do mercado informal.<br><br>Hoje vamos mostrar como saímos do diagnóstico de uma dor real enfrentada por comércios e milhões de autônomos para construir uma plataforma funcional de <strong>match geolocalizado sob demanda</strong>.`
       },
       {
         name: "Cap. 01 — Ecossistema e Força da Informalidade",
         duration: 25,
-        script: `<span class="stage-cue">[APONTAR PARA AS FRASES À DIREITA]</span><br>O Brasil possui hoje <strong>39 milhões de trabalhadores na informalidade</strong>. Quando um garçom ou cozinheiro falta numa sexta à noite, o dono do restaurante entra em desespero em grupos de WhatsApp.`
+        script: `<span class="stage-cue">[APONTAR PARA AS FRASES À DIREITA]</span><br>O Brasil possui hoje <strong>39 milhões de trabalhadores na informalidade</strong>. Quando um garçom ou cozinheiro falta de última hora, o comércio perde faturamento e entra em grupos caóticos de WhatsApp.`
       },
       {
         name: "Cap. 01 — Validação do Problema (The Mom Test)",
@@ -1318,9 +1441,14 @@
         script: `<span class="stage-cue">[APONTAR EXPANSÃO NACIONAL]</span><br>A oportunidade em camadas foca na <strong>expansão nacional</strong>. Nossa estratégia de tração inicial concentra tráfego pago geolocalizado com raio e contexto selecionados na cidade de São Paulo para atingir 1.000 comércios pagantes no Ano 1, escalando com previsibilidade para outros estados e o país inteiro.`
       },
       {
-        name: "Cap. 03 — Monetização e Projeção (3 Anos)",
+        name: "Cap. 03 — Precificação nos Dois Mundos",
+        duration: 20,
+        script: `<span class="stage-cue">[EXPLICAR O MODELO DE MONETIZAÇÃO DUPLO]</span><br>Nossa precificação respeita a realidade dos dois lados: pacotes de vagas avulsas de R$ 1,99 a R$ 1,59 para o contratante, sem qualquer mensalidade fixa obrigatória; e gratuidade integral para o candidato, com plano Premium opcional (R$ 19,90/mês ou R$ 4,16/mês no anual) para obter selo VIP e topo da lista.`
+      },
+      {
+        name: "Cap. 03 — Projeções Financeiras e Unit Economics (3 Anos)",
         duration: 25,
-        script: `<span class="stage-cue">[MOSTRAR OS DOIS MUNDOS E A PROJEÇÃO FINANCEIRA]</span><br>Nossa monetização abrange os dois lados: pacotes de vagas de R$ 1,99 a R$ 1,59 para contratantes e gratuidade com plano Premium opcional para candidatos. Pelas nossas projeções financeiras validadas, atingimos <strong>R$ 432 mil de ARR no Ano 1</strong> com 2.400 clientes, saltando para <strong>R$ 1,64 milhão no Ano 2</strong> (+280%) e <strong>R$ 5,86 milhões no Ano 3</strong> com quase 20 mil clientes ativos, mantendo um LTV/CAC próximo de 6 vezes e payback de 1,7 a 3,4 meses.`
+        script: `<span class="stage-cue">[MOSTRAR NÚMEROS DA PLANILHA FIAP]</span><br>Pelas nossas projeções financeiras oficiais, atingimos <strong>R$ 432 mil de ARR no Ano 1</strong> com 2.400 clientes e EBITDA de R$ 400 mil. No <strong>Ano 2</strong> escalamos para <strong>R$ 1,64 milhão de ARR</strong> (+280%) e no <strong>Ano 3</strong> consolidamos <strong>R$ 5,86 milhões</strong> com 19.536 clientes ativos pagantes e EBITDA de R$ 5,94 milhões, com LTV/CAC sustentável em torno de 6 vezes e payback de 1,7 a 3,4 meses.`
       },
       {
         name: "Cap. 04 e 05 — Ciclo Lean e Mitigação de Riscos",
