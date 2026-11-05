@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trampaki — Keynote Pitch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --bg-surface: #101116;
+      --bg-card: rgba(18, 20, 26, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(255, 45, 122, 0.45);
+      --accent: #ff2d7a;
+      --accent-glow: rgba(255, 45, 122, 0.38);
+      --gemini-cyan: #38bdf8;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #4b5563;
+      --stage-yellow: #facc15;
+      --stage-red: #ef4444;
+      --stage-green: #10b981;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* VIEWPORT DISPLAY ROUTING */
+    body.is-presenter-mode #audienceViewport {
+      display: none !important;
+    }
+
+    body.is-presenter-mode #presenterViewport {
+      display: grid !important;
+    }
+
+    body.is-preview-mode #audienceHint,
+    body.is-preview-mode .brand-mark {
+      display: none !important;
+    }
+
+    /* AUDIENCE KEYNOTE PRESENTATION */
+    #audienceViewport {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .ambient-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient-glow-1 {
+      position: absolute;
+      width: 75vw;
+      height: 75vw;
+      max-width: 880px;
+      max-height: 880px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(255, 45, 122, 0.04) 45%, transparent 70%);
+      filter: blur(85px);
+      top: -20%;
+      right: -12%;
+      opacity: 0.65;
+      animation: driftGlow 24s ease-in-out infinite alternate;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      width: 65vw;
+      height: 65vw;
+      max-width: 720px;
+      max-height: 720px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, transparent 65%);
+      filter: blur(95px);
+      bottom: -15%;
+      left: -10%;
+      opacity: 0.45;
+      animation: driftGlow2 30s ease-in-out infinite alternate;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at 50% 50%, black 45%, transparent 90%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 45%, transparent 90%);
+      opacity: 0.8;
+    }
+
+    @keyframes driftGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-15%, 8%) scale(1.08); }
+    }
+
+    @keyframes driftGlow2 {
+      0% { transform: translate(0, 0) scale(0.95); }
+      100% { transform: translate(14%, -14%) scale(1.06); }
+    }
+
+    .brand-mark {
+      position: fixed;
+      top: clamp(16px, 3.2vw, 36px);
+      left: clamp(20px, 4vw, 56px);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 0.9vw, 13px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      pointer-events: none;
+    }
+
+    .brand-mark .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .audience-hint {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(16, 17, 24, 0.92);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 9px 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .audience-hint.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .key-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      margin: 0 2px;
+    }
+
+    /* SCENE STRUCTURE & ANIMATIONS */
+    .stage-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: clamp(24px, 6vw, 76px) clamp(24px, 7vw, 108px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(0.985);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+    }
+
+    .scene.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scene.active .stagger-1 { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .scene.active .stagger-2 { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+    .scene.active .stagger-3 { opacity: 1; transform: translateY(0); transition-delay: 0.38s; }
+    .scene.active .stagger-4 { opacity: 1; transform: translateY(0); transition-delay: 0.52s; }
+    .scene.active .stagger-5 { opacity: 1; transform: translateY(0); transition-delay: 0.66s; }
+
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 1vw, 13px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      margin-bottom: clamp(12px, 2vh, 22px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .kicker::after {
+      content: '';
+      flex: 0 0 36px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .display-title {
+      font-size: clamp(34px, 5.2vw, 84px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      max-width: 20ch;
+      margin-bottom: clamp(16px, 2.5vh, 28px);
+      color: #fff;
+    }
+
+    .sub-support {
+      font-size: clamp(16px, 2vw, 24px);
+      line-height: 1.45;
+      color: var(--text-muted);
+      max-width: 44ch;
+      font-weight: 400;
+    }
+
+    /* SCENE 1: HOOK */
+    .strikethrough-reveal {
+      position: relative;
+      display: inline-block;
+      color: var(--text-dim);
+      transition: color 0.4s ease 0.8s;
+    }
+
+    .strikethrough-reveal::after {
+      content: '';
+      position: absolute;
+      top: 52%;
+      left: -2%;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      transform: translateY(-50%) rotate(-1deg);
+      transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.8s;
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    .scene.active .strikethrough-reveal::after {
+      width: 104%;
+    }
+
+    .scene.active .strikethrough-reveal {
+      color: #6b7280;
+    }
+
+    .real-answer {
+      color: #ffffff;
+      font-weight: 800;
+      display: inline-block;
+      margin-left: clamp(8px, 1.2vw, 18px);
+      opacity: 0;
+      transform: translateX(12px);
+      transition: opacity 0.5s ease 1.35s, transform 0.5s ease 1.35s;
+    }
+
+    .scene.active .real-answer {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* SCENE 2: TWO COL CHAOS */
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(32px, 5vw, 80px);
+      align-items: center;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .two-col-layout {
+        grid-template-columns: 1fr;
+      }
+      .fragments-cloud {
+        opacity: 0.35;
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+      }
+    }
+
+    .fragments-cloud {
+      position: relative;
+      min-height: 420px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      gap: 13px;
+      padding: 16px;
+    }
+
+    .fragment-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 0.9vw, 13px);
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d1d5db;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      animation: floatTag 6s ease-in-out infinite alternate;
+    }
+
+    .fragment-tag .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 45, 122, 0.6);
+    }
+
+    .fragment-tag:nth-child(2n) { animation-duration: 7.4s; animation-delay: -1.2s; }
+    .fragment-tag:nth-child(3n) { animation-duration: 8.8s; animation-delay: -2.8s; }
+    .fragment-tag:nth-child(4n) { animation-duration: 6.6s; animation-delay: -4s; }
+
+    @keyframes floatTag {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
+    }
+
+    /* SCENE 3: PERSONA */
+    .persona-quote-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-left: 4px solid var(--accent);
+      border-radius: 18px;
+      padding: clamp(24px, 4vw, 44px);
+      max-width: 900px;
+      margin-bottom: clamp(20px, 3vh, 34px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .persona-quote {
+      font-size: clamp(20px, 2.8vw, 36px);
+      font-weight: 700;
+      line-height: 1.25;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 22px;
+    }
+
+    .persona-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .persona-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .persona-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: #f3f4f6;
+    }
+
+    .persona-role {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hwb-question {
+      font-family: var(--font-mono);
+      font-size: clamp(14px, 1.4vw, 19px);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* SCENE 4: VORTEX SOLUTION */
+    .vortex-stage {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto 28px auto;
+      display: grid;
+      place-items: center;
+    }
+
+    .vortex-core {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent) 0%, rgba(255, 45, 122, 0.35) 45%, transparent 75%);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 55px var(--accent-glow), inset 0 0 25px var(--accent);
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: pulseCore 3s ease-in-out infinite;
+    }
+
+    .vortex-core span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #fff;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    @keyframes pulseCore {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 45px var(--accent-glow); }
+      50% { transform: scale(1.16); box-shadow: 0 0 75px rgba(255, 45, 122, 0.6); }
+    }
+
+    .absorbing-fragment {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      transition: all 1.3s cubic-bezier(0.7, 0, 0.3, 1);
+      z-index: 2;
+    }
+
+    .f-pos-1 { top: 8%; left: 8%; }
+    .f-pos-2 { top: 12%; right: 10%; }
+    .f-pos-3 { bottom: 15%; left: 12%; }
+    .f-pos-4 { bottom: 18%; right: 12%; }
+    .f-pos-5 { top: 48%; left: 2%; }
+    .f-pos-6 { top: 46%; right: 4%; }
+    .f-pos-7 { top: 2%; left: 45%; }
+    .f-pos-8 { bottom: 2%; left: 48%; }
+
+    .scene.active.absorbed .absorbing-fragment {
+      top: 50% !important;
+      left: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: translate(-50%, -50%) scale(0.05);
+      opacity: 0;
+    }
+
+    .solution-punchline {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease 1.4s, transform 0.8s ease 1.4s;
+    }
+
+    .scene.active.absorbed .solution-punchline {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SCENE 5: DUAL LIVE DEMO */
+    .dual-demo-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      .dual-demo-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    .demo-phone-card {
+      background: #0f1118;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .card-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 14px;
+    }
+
+    .card-role-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .role-establishment { color: var(--gemini-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .role-freelance { color: var(--accent); border: 1px solid rgba(255, 45, 122, 0.3); }
+
+    .demo-log-line {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      margin-bottom: 8px;
+      border-left: 2px solid var(--accent);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.3s ease;
+    }
+
+    .demo-log-line.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .shift-preview-box {
+      margin-top: 10px;
+      padding: 12px;
+      background: rgba(255, 45, 122, 0.08);
+      border: 1px dashed var(--accent);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .match-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #10b981;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .btn-replay-demo {
+      align-self: flex-start;
+      margin-top: 14px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-replay-demo:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* SCENE 6: ARCHITECTURE */
+    .pipeline-wrapper {
+      position: relative;
+      margin: 36px 0 40px 0;
+    }
+
+    .pipeline-nodes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .pipeline-nodes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pipeline-node {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .node-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .node-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .node-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .laser-track {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .laser-beam {
+      position: absolute;
+      top: 0;
+      left: -15%;
+      width: 25%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--accent), #fff, transparent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: laserFlow 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes laserFlow {
+      0% { left: -25%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { left: 105%; opacity: 0; }
+    }
+
+    .integrations-tray {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .int-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #9ca3af;
+    }
+
+    /* SCENE 7: VALUE METRICS */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 3vw, 40px);
+      margin-bottom: clamp(28px, 4vh, 48px);
+    }
+
+    @media (max-width: 800px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .metric-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: clamp(20px, 3vw, 32px);
+    }
+
+    .metric-before {
+      font-family: var(--font-mono);
+      font-size: clamp(14px, 1.2vw, 17px);
+      color: var(--text-dim);
+      text-decoration: line-through;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .metric-after {
+      font-size: clamp(38px, 4.8vw, 68px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .metric-after span.unit {
+      font-size: 0.55em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-left: 3px;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #d1d5db;
+      padding: 6px 16px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    /* SCENE 8: CLOSING */
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      color: #ffffff;
+      padding: clamp(14px, 1.8vh, 20px) clamp(24px, 2.5vw, 38px);
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: clamp(15px, 1.3vw, 19px);
+      letter-spacing: -0.01em;
+      box-shadow: 0 10px 35px var(--accent-glow);
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-pill:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 45px rgba(255, 45, 122, 0.55);
+    }
+
+    /* PRESENTER CONSOLE VIEWPORT */
+    #presenterViewport {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      background: #08080a;
+      color: #e5e7eb;
+      font-family: var(--font-sans);
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    .pres-header {
+      padding: 14px 28px;
+      background: #0f1118;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .pres-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .audience-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .audience-status.disconnected {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .audience-status .status-ping {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .clock-widget-group {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--font-mono);
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .time-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .time-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .time-val.yellow { color: var(--stage-yellow); }
+    .time-val.red { color: var(--stage-red); }
+
+    .pacing-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .pacing-pill.on-track { color: #10b981; border-color: rgba(16, 185, 129, 0.3); }
+    .pacing-pill.ahead { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+    .pacing-pill.behind { color: #ef4444; border-color: rgba(239, 68, 68, 0.3); }
+
+    .pres-main {
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      height: 100%;
+      overflow: hidden;
+      background: #08080a;
+    }
+
+    @media (max-width: 1100px) {
+      .pres-main {
+        grid-template-columns: 380px 1fr;
+      }
+    }
+
+    .pres-left-pane {
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: #0c0d13;
+      overflow-y: auto;
+      gap: 16px;
+    }
+
+    .preview-frame-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .preview-frame-container iframe {
+      width: 1600px;
+      height: 900px;
+      border: none;
+      transform-origin: top left;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .next-scene-preview {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .next-scene-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .next-scene-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #d1d5db;
+    }
+
+    .pres-script-pane {
+      padding: 36px 44px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .script-scene-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .script-scene-heading {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .script-body {
+      font-size: 20px;
+      line-height: 1.65;
+      color: #e5e7eb;
+      max-width: 860px;
+    }
+
+    .stage-note {
+      color: var(--stage-yellow);
+      background: rgba(250, 204, 21, 0.12);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      display: inline-block;
+      margin: 2px 0;
+    }
+
+    .key-phrase {
+      color: #fff;
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .pres-footer {
+      background: #0f1118;
+      border-top: 1px solid var(--border-subtle);
+      padding: 14px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .proportional-track {
+      display: flex;
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      gap: 3px;
+    }
+
+    .track-segment {
+      height: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .track-segment.completed {
+      background: rgba(255, 45, 122, 0.45);
+    }
+
+    .track-segment.current {
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .pres-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ctrl-btns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-pres {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-pres:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-pres.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    /* HELP MODAL */
+    .help-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 5, 8, 0.85);
+      backdrop-filter: blur(16px);
+      display: grid;
+      place-items: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .help-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .help-card {
+      width: min(90vw, 480px);
+      background: #11131a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    }
+    .help-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================= -->
+  <!-- AUDIENCE KEYNOTE PRESENTATION (Default / Preview)         -->
+  <!-- ========================================================= -->
+  <div id="audienceViewport">
+    <div class="ambient-canvas">
+      <div class="ambient-glow-1"></div>
+      <div class="ambient-glow-2"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <div class="brand-mark" aria-hidden="true">
+      <div class="dot"></div>
+      <span>TRAMPAKI · MATCHING ON-DEMAND COM IA</span>
+    </div>
+
+    <div id="audienceHint" class="audience-hint" role="status">
+      <span class="key-badge">P</span> modo apresentador · <span class="key-badge">F</span> tela cheia · <span class="key-badge">?</span> atalhos
+    </div>
+
+    <main class="stage-container" id="stageContainer">
+
+      <!-- CENA 1: Gancho (20s) -->
+      <section class="scene active" data-index="0" data-t="20" id="scene-0">
+        <div class="kicker stagger-1">01 / A PROVOCAÇÃO</div>
+        <h1 class="display-title stagger-2" style="max-width: 17ch;">
+          CONTRATAR UM TURNO DE URGÊNCIA LEVA
+        </h1>
+        <div class="sub-support stagger-3" style="font-size: clamp(24px, 3.4vw, 46px); line-height: 1.25; color: #d1d5db;">
+          <span class="strikethrough-reveal">3 dias no desespero.</span>
+          <span class="real-answer">4 minutos com IA.</span>
+        </div>
+      </section>
+
+      <!-- CENA 2: O Problema (25s) -->
+      <section class="scene" data-index="1" data-t="25" id="scene-1">
+        <div class="two-col-layout">
+          <div>
+            <div class="kicker stagger-1">02 / O CAOS DA ÚLTIMA HORA</div>
+            <h2 class="display-title stagger-2">Bares perdem mesas. Autônomos perdem renda.</h2>
+            <p class="sub-support stagger-3">
+              Grupos caóticos de WhatsApp, no-shows sem aviso, calotes informais e escalas de plantão remendadas às 19h de sábado.
+            </p>
+          </div>
+          <div class="fragments-cloud stagger-2" aria-hidden="true">
+            <div class="fragment-tag"><span class="tag-dot"></span>grupo_zap_freelas_sp.chat</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>garçom_faltou_19:45.msg</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>pix_pendente_sem_comprovante.jpg</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>escala_desfalque_sabado.xlsx</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>alguém indica barman urgente??</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>comanda_travada_por_falta_braço.log</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>áudio_desculpa_furou_01:12.mp3</div>
+            <div class="fragment-tag"><span class="tag-dot"></span>fechamento_caixa_prejuízo.csv</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CENA 3: A Dor Real (20s) -->
+      <section class="scene" data-index="2" data-t="20" id="scene-2">
+        <div class="kicker stagger-1">03 / A REALIDADE DA OPERAÇÃO</div>
+        <div class="persona-quote-card stagger-2">
+          <p class="persona-quote">
+            "Uma sexta-feira com dois garçons a menos custa 30% do faturamento da noite e queima a reputação da casa."
+          </p>
+          <div class="persona-meta">
+            <div class="persona-avatar">RR</div>
+            <div>
+              <div class="persona-name">Ricardo Rocha</div>
+              <div class="persona-role">Proprietário de Bar &amp; Restaurante · SP</div>
+            </div>
+          </div>
+        </div>
+        <div class="hwb-question stagger-3">
+          <span>→</span> Como transformar uma falta de última hora em um turno preenchido e verificado em minutos?
+        </div>
+      </section>
+
+      <!-- CENA 4: Solução Trampaki (25s) -->
+      <section class="scene" data-index="3" data-t="25" id="scene-3">
+        <div class="kicker stagger-1" style="justify-content: center;">04 / O MOTOR TRAMPAKI</div>
+        <div class="vortex-stage stagger-2" aria-hidden="true">
+          <div class="vortex-core">
+            <span>Trampaki</span>
+            <span style="color: #38bdf8; font-size: 8px;">Gemini AI</span>
+          </div>
+          <div class="absorbing-fragment f-pos-1">grupo_zap_freelas.chat</div>
+          <div class="absorbing-fragment f-pos-2">garçom_faltou_19:45.msg</div>
+          <div class="absorbing-fragment f-pos-3">pix_pendente.jpg</div>
+          <div class="absorbing-fragment f-pos-4">escala_sabado.xlsx</div>
+          <div class="absorbing-fragment f-pos-5">áudio_desculpa.mp3</div>
+          <div class="absorbing-fragment f-pos-6">alguém_indica_urgente?</div>
+          <div class="absorbing-fragment f-pos-7">comanda_travada.log</div>
+          <div class="absorbing-fragment f-pos-8">fechamento_prejuízo.csv</div>
+        </div>
+        <div class="solution-punchline">
+          <h2 class="display-title" style="margin: 0 auto; text-align: center; max-width: 22ch;">
+            Trampaki: O marketplace inteligente de turnos sob demanda.
+          </h2>
+          <p class="sub-support" style="margin: 12px auto 0 auto; text-align: center;">
+            Match neural instantâneo via Google Gemini: geolocalização precisa, reputação auditada e liquidação imediata.
+          </p>
+        </div>
+      </section>
+
+      <!-- CENA 5: Demo ao Vivo Dupla (35s) -->
+      <section class="scene" data-index="4" data-t="35" id="scene-4">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px;">
+          <div>
+            <div class="kicker">05 / SIMULAÇÃO AO VIVO EM TEMPO REAL</div>
+            <h2 style="font-size: clamp(22px, 2.8vw, 36px); font-weight: 800; color: #fff;">
+              Do desfalque ao check-in em 4 passos sincronizados.
+            </h2>
+          </div>
+          <button class="btn-replay-demo" onclick="startDualDemoSimulation(true)">↺ Repetir Simulação</button>
+        </div>
+
+        <div class="dual-demo-container">
+          <!-- Flow 1: Estabelecimento -->
+          <div class="demo-phone-card">
+            <div class="card-topbar">
+              <span class="card-role-badge role-establishment">Estabelecimento · Bar do Lago</span>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--gemini-cyan);">Trampaki Business</span>
+            </div>
+            <div id="estLog1" class="demo-log-line">1. Cadastra plantão: Barman Urgente (19h - 02h) · R$ 180,00</div>
+            <div id="estLog2" class="demo-log-line">2. Gemini AI audita alíquota, perfil de coquetelaria e raio de 2.5km</div>
+            <div id="estLog3" class="demo-log-line">3. Disparando matching geolocalizado para 14 profissionais qualificados...</div>
+            <div id="estLog4" class="demo-log-line" style="border-left-color: var(--stage-green); color: #86efac;">
+              4. Turno aceito por Carlos M. (Score 98%) · Valor retido em escrow seguro
+            </div>
+            <div class="shift-preview-box">
+              <div style="display: flex; justify-content: space-between;">
+                <strong>Vaga: Barman Sênior</strong>
+                <span class="match-pill">IA Gemini Match</span>
+              </div>
+              <div style="color: var(--text-muted); margin-top: 4px;">Hoje, 19:00 - 02:00 · Vila Madalena, SP</div>
+            </div>
+          </div>
+
+          <!-- Flow 2: Colaborador / Freelancer -->
+          <div class="demo-phone-card">
+            <div class="card-topbar">
+              <span class="card-role-badge role-freelance">Colaborador · Carlos M.</span>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--accent);">Trampaki Pro</span>
+            </div>
+            <div id="freeLog1" class="demo-log-line">1. Push recebido: Turno urgente a 1.2km da sua localização atual</div>
+            <div id="freeLog2" class="demo-log-line">2. Card Inteligente exibido: R$ 180 limpos + Gorjetas + Jantar incluso</div>
+            <div id="freeLog3" class="demo-log-line">3. Aceite com 1 clique · Contrato temporário emitido na hora</div>
+            <div id="freeLog4" class="demo-log-line" style="border-left-color: var(--stage-green); color: #86efac;">
+              4. Check-in por GPS validado · Pix automático provisionado no checkout!
+            </div>
+            <div class="shift-preview-box" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.08);">
+              <div style="display: flex; justify-content: space-between;">
+                <strong>Carlos Mendes (Barman)</strong>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: #38bdf8;">★ 4.9 (42 turnos)</span>
+              </div>
+              <div style="color: var(--text-muted); margin-top: 4px;">Liquidação instantânea garantida via Pix</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CENA 6: Motor e IA (20s) -->
+      <section class="scene" data-index="5" data-t="20" id="scene-5">
+        <div class="kicker stagger-1">06 / ARQUITETURA NO GOOGLE AI STUDIO</div>
+        <h2 class="display-title stagger-2" style="font-size: clamp(28px, 3.8vw, 56px);">
+          Triagem Neural e Liquidação Instantânea.
+        </h2>
+        <div class="pipeline-wrapper stagger-3">
+          <div class="laser-track"><div class="laser-beam"></div></div>
+          <div class="pipeline-nodes">
+            <div class="pipeline-node">
+              <div class="node-num">NÓ 01</div>
+              <div class="node-title">Triagem Automática</div>
+              <div class="node-desc">Verificação de antecedentes, pontualidade histórica e reputação blindada.</div>
+            </div>
+            <div class="pipeline-node">
+              <div class="node-num">NÓ 02</div>
+              <div class="node-title">Match Gemini AI</div>
+              <div class="node-desc">Algoritmo no Google AI Studio cruzando urgência, raio GPS e compatibilidade.</div>
+            </div>
+            <div class="pipeline-node">
+              <div class="node-num">NÓ 03</div>
+              <div class="node-title">Escrow &amp; Repasse Pix</div>
+              <div class="node-desc">O contratante garante o valor no aceite e o profissional recebe ao bater o ponto.</div>
+            </div>
+          </div>
+        </div>
+        <div class="integrations-tray stagger-4">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Powered by:</span>
+          <span class="int-badge" style="border-color: rgba(56, 189, 248, 0.4); color: #38bdf8;">Google Gemini 1.5 Pro</span>
+          <span class="int-badge">Google AI Studio</span>
+          <span class="int-badge">Pix Instantâneo BACEN</span>
+          <span class="int-badge">Geofence GPS</span>
+          <span class="int-badge">WhatsApp API Cloud</span>
+        </div>
+      </section>
+
+      <!-- CENA 7: Impacto e Valor (20s) -->
+      <section class="scene" data-index="6" data-t="20" id="scene-6">
+        <div class="kicker stagger-1">07 / RETORNO COMPROVADO</div>
+        <div class="metrics-grid stagger-2">
+          <div class="metric-card">
+            <span class="metric-before">~48 horas no zap</span>
+            <div class="metric-after"><span class="counter" data-target="4">0</span><span class="unit">min</span></div>
+            <div class="metric-label">Tempo médio para preenchimento de turno</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-before">35% de desistência</span>
+            <div class="metric-after">&lt;<span class="counter" data-target="3">0</span><span class="unit">%</span></div>
+            <div class="metric-label">Taxa de no-show com confirmação por IA</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-before">15 a 30 dias de espera</span>
+            <div class="metric-after"><span class="counter" data-target="0">0</span><span class="unit">seg</span></div>
+            <div class="metric-label">Repasse imediato após encerramento do turno</div>
+          </div>
+        </div>
+        <div class="trust-badges stagger-3">
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1 14.5l-4-4 1.41-1.41L11 13.67l6.59-6.59L19 8.5l-8 8z"/></svg>
+            Score de Reputação Blindado
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1 14.5l-4-4 1.41-1.41L11 13.67l6.59-6.59L19 8.5l-8 8z"/></svg>
+            Split de Pagamento Seguro
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1 14.5l-4-4 1.41-1.41L11 13.67l6.59-6.59L19 8.5l-8 8z"/></svg>
+            Termo de Autonomia Jurídica
+          </div>
+        </div>
+      </section>
+
+      <!-- CENA 8: Fechamento (15s) -->
+      <section class="scene" data-index="7" data-t="15" id="scene-7">
+        <div style="max-width: 1050px;">
+          <div class="kicker stagger-1">08 / PRÓXIMO PASSO</div>
+          <h2 class="display-title stagger-2" style="font-size: clamp(38px, 6vw, 92px); margin-bottom: clamp(24px, 4vh, 40px);">
+            O TRABALHO FLEXÍVEL PRECISA DE PREVISIBILIDADE.
+          </h2>
+          <div class="stagger-3">
+            <button class="cta-pill" onclick="triggerPilotNotice()">
+              <span>Agendar piloto no seu estabelecimento</span>
+              <span style="font-family: var(--font-mono);">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- PRESENTER CONSOLE VIEWPORT (?presenter)                   -->
+  <!-- ========================================================= -->
+  <div id="presenterViewport">
+    <header class="pres-header">
+      <div class="pres-title">
+        <span>TRAMPAKI · PAINEL DO APRESENTADOR</span>
+        <div class="audience-status" id="audienceStatusBadge">
+          <span class="status-ping"></span>
+          <span id="audienceStatusText">Conectando plateia...</span>
+        </div>
+      </div>
+
+      <div class="clock-widget-group">
+        <div class="time-block">
+          <span class="time-label">Cena Atual</span>
+          <span class="time-val" id="presSceneTimer">00:20</span>
+        </div>
+        <div class="time-block">
+          <span class="time-label">Tempo Total Restante</span>
+          <span class="time-val" id="presTotalTimer">03:00</span>
+        </div>
+        <div class="pacing-pill on-track" id="presPacingIndicator">No ritmo</div>
+      </div>
+    </header>
+
+    <main class="pres-main">
+      <section class="pres-left-pane">
+        <div class="preview-frame-container" id="previewContainer">
+          <iframe id="presPreviewFrame" title="Prévia ao vivo da Plateia" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="next-scene-preview">
+          <div class="next-scene-label">A Seguir</div>
+          <div class="next-scene-title" id="presNextSceneName">02 / O Caos da Última Hora</div>
+        </div>
+      </section>
+
+      <section class="pres-script-pane">
+        <div class="script-scene-num" id="presScriptNum">CENA 01 / 08 · 20 SEGUNDOS</div>
+        <h2 class="script-scene-heading" id="presScriptTitle">Gancho: O Custo da Urgência</h2>
+        <div class="script-body" id="presScriptBody">
+          <!-- Dynamically injected -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="pres-footer">
+      <div class="proportional-track" id="presProportionalTrack" title="Navegar diretamente entre cenas"></div>
+      <div class="pres-controls">
+        <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);">
+          Cena <span id="presCurrentIndexLabel" style="color: #fff; font-weight: 700;">1</span> de 8
+        </div>
+        <div class="ctrl-btns">
+          <button class="btn-pres" onclick="prevScene()">← Anterior</button>
+          <button class="btn-pres" onclick="togglePresenterTimer()" id="btnToggleTimer">⏸ Pausar Cronômetro (T)</button>
+          <button class="btn-pres" onclick="resetPresentation()">↺ Reiniciar (R)</button>
+          <button class="btn-pres primary" onclick="nextScene()">Próxima Cena →</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- HELP MODAL -->
+  <div id="helpModal" class="help-modal" role="dialog" aria-modal="true" aria-label="Atalhos do Teclado">
+    <div class="help-card">
+      <h3 style="font-size: 18px; margin-bottom: 16px; font-weight: 700;">Atalhos da Apresentação</h3>
+      <div class="help-row"><span>Avançar cena</span><span><span class="key-badge">→</span> <span class="key-badge">Espaço</span> <span class="key-badge">Enter</span></span></div>
+      <div class="help-row"><span>Voltar cena</span><span><span class="key-badge">←</span></span></div>
+      <div class="help-row"><span>Modo Apresentador (nova janela)</span><span><span class="key-badge">P</span></span></div>
+      <div class="help-row"><span>Tela cheia</span><span><span class="key-badge">F</span></span></div>
+      <div class="help-row"><span>Pausar / Retomar Cronômetro</span><span><span class="key-badge">T</span></span></div>
+      <div class="help-row"><span>Reiniciar Pitch</span><span><span class="key-badge">R</span></span></div>
+      <div class="help-row"><span>Fechar esta ajuda</span><span><span class="key-badge">Esc</span> ou <span class="key-badge">?</span></span></div>
+      <button class="btn-pres" style="width: 100%; margin-top: 18px; justify-content: center;" onclick="toggleHelp(false)">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    /* 1. SCENE TIMING & SPOKEN SCRIPT CONFIG (~430 WORDS) */
+    const TOTAL_DURATION_SECONDS = 180;
+    const SCENES_CONFIG = [
+      {
+        index: 0,
+        title: "01 / A Provocação",
+        name: "O Custo da Urgência",
+        duration: 20,
+        script: `
+          <span class="stage-note">[OLHAR DIRETO PARA OS AVALIADORES · TOM ENÉRGICO]</span>
+          Quantas vezes vocês já foram a um bar ou restaurante e a comida atrasou 40 minutos porque a equipe estava desfalcada?
+          <span class="stage-note">[PAUSA DE 1 SEGUNDO]</span>
+          Hoje, quando um funcionário falta numa sexta à noite, o dono do negócio leva <span class="key-phrase">três dias ligando para conhecidos ou implorando em grupos</span>.
+          Com o Trampaki, esse mesmo turno crítico é preenchido e validado em <span class="key-phrase">exatos quatro minutos</span>.
+        `
+      },
+      {
+        index: 1,
+        title: "02 / O Caos da Última Hora",
+        name: "A Fragmentação do Setor",
+        duration: 25,
+        script: `
+          <span class="stage-note">[GESTO APONTANDO PARA A NUVEM DE FRAGMENTOS À DIREITA]</span>
+          Vejam a realidade do setor de hospitalidade e eventos hoje. Grupos lotados no WhatsApp, garçons que somem sem avisar e donos de bares desesperados às 19h45 de sábado.
+          <span class="stage-note">[MUDANÇA DE TOM]</span>
+          Do outro lado, <span class="key-phrase">milhares de profissionais qualificados querem trabalhar</span>, mas ficam reféns de calotes, atrasos de 30 dias para receber a diária e falta de garantias. É um mercado de bilhões operando no escuro.
+        `
+      },
+      {
+        index: 2,
+        title: "03 / A Realidade da Persona",
+        name: "A Dor do Ricardo",
+        duration: 20,
+        script: `
+          Conheçam o Ricardo, dono de um bar movimentado em São Paulo.
+          Ele nos disse com todas as letras: <span class="key-phrase">"Uma sexta-feira com dois garçons a menos custa 30% do faturamento da noite e destrói minha reputação no Google"</span>.
+          <span class="stage-note">[AVANÇAR UM PASSO]</span>
+          E isso nos levou ao nosso desafio no Google AI Studio: <span class="key-phrase">Como transformar uma emergência operacional em um turno preenchido e seguro antes da primeira comanda abrir?</span>
+        `
+      },
+      {
+        index: 3,
+        title: "04 / O Ponto de Inflexão",
+        name: "Apresentando o Trampaki",
+        duration: 25,
+        script: `
+          <span class="stage-note">[OBSERVAR OS FRAGMENTOS SENDO ABSORVIDOS PELO NÚCLEO GEMINI]</span>
+          E a nossa resposta é o <span class="key-phrase">Trampaki</span>.
+          Nós conectamos estabelecimentos e autônomos em um marketplace sob demanda de altíssima velocidade.
+          <span class="stage-note">[ENFATIZAR O MATCH INTELIGENTE]</span>
+          Nosso motor neural alimentado pelo Google Gemini analisa reputação, histórico de pontualidade e distância geográfica para fazer o <span class="key-phrase">match perfeito sem atrito e sem intermediários burocráticos</span>.
+        `
+      },
+      {
+        index: 4,
+        title: "05 / Simulação ao Vivo",
+        name: "Demo Estabelecimento x Colaborador",
+        duration: 35,
+        script: `
+          <span class="stage-note">[APONTAR PARA AS DUAS TELAS SINCRONIZADAS]</span>
+          Vejam a mágica acontecendo na prática.
+          À esquerda, o bar publica um turno urgente: Barman para hoje, R$ 180, das 19h às 2h da manhã. O Gemini AI valida a taxa justa e dispara o alerta em 2.5km.
+          <span class="stage-note">[MOSTRAR A TELA DA DIREITA]</span>
+          Na mesma fração de segundo, o Carlos recebe o card com 98% de compatibilidade. Ele aceita com um toque.
+          O contrato temporário é gerado e o pagamento já fica garantido em escrow. <span class="key-phrase">Zero risco para quem contrata, zero risco para quem trabalha</span>.
+        `
+      },
+      {
+        index: 5,
+        title: "06 / Arquitetura e IA",
+        name: "Google AI Studio em Ação",
+        duration: 20,
+        script: `
+          <span class="stage-note">[ACOMPANHAR O FEIXE DE LUZ DO PIPELINE]</span>
+          Nossa infraestrutura foi construída sobre três pilares herméticos no ecossistema Google AI Studio.
+          Triagem preventiva contra perfis falsos; algoritmo preditivo de match via Gemini 1.5 Pro; e liquidação instantânea via Pix com check-in auditado por cerca digital de GPS.
+          <span class="key-phrase">É tecnologia de ponta aplicada à economia real</span>.
+        `
+      },
+      {
+        index: 6,
+        title: "07 / Retorno Comprovado",
+        name: "Métricas de Impacto",
+        duration: 20,
+        script: `
+          <span class="stage-note">[DESTAQUE PARA OS NÚMEROS ANIMADOS]</span>
+          Os números dos nossos primeiros pilotos falam por si:
+          O tempo para cobrir um turno caiu de 48 horas para <span class="key-phrase">apenas 4 minutos</span>.
+          A taxa de no-show desabou de 35% para <span class="key-phrase">menos de 3%</span>.
+          E o colaborador recebe no mesmo minuto pelo Pix. Eliminamos a dor de cabeça e colocamos dinheiro no bolso de quem produz.
+        `
+      },
+      {
+        index: 7,
+        title: "08 / Fechamento & CTA",
+        name: "O Chamado para Ação",
+        duration: 15,
+        script: `
+          <span class="stage-note">[CONTATO VISUAL FIRME · TOM DE ENCERRAMENTO CONFIANTE]</span>
+          O futuro do trabalho flexível não pode depender da sorte ou de mensagens perdidas no WhatsApp.
+          <span class="key-phrase">O trabalho flexível precisa de inteligência, dignidade e previsibilidade.</span>
+          Estamos abrindo 10 vagas para a próxima turma de estabelecimentos parceiros em São Paulo.
+          Venham falar conosco e vamos transformar a escala do seu negócio agora. Muito obrigado!
+        `
+      }
+    ];
+
+    /* 2. MODE DETECTION */
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPresenter = urlParams.has('presenter');
+    const isPreview = urlParams.has('preview');
+
+    let currentSceneIndex = 0;
+    const totalScenes = SCENES_CONFIG.length;
+
+    function getModeUrl(paramKey) {
+      const url = new URL(window.location.href);
+      url.search = `?${paramKey}`;
+      return url.toString();
+    }
+
+    /* 3. BROADCAST CHANNEL HANDSHAKE */
+    let syncChannel = null;
+    let lastAudiencePongTime = 0;
+
+    try {
+      syncChannel = new BroadcastChannel('trampaki_pitch_sync');
+      syncChannel.onmessage = handleBroadcastMessage;
+    } catch (e) {
+      console.warn("BroadcastChannel indisponível:", e);
+    }
+
+    function handleBroadcastMessage(event) {
+      const data = event.data;
+      if (!data) return;
+
+      if (data.type === 'NAVIGATE') {
+        goToScene(data.scene, false);
+      } else if (data.type === 'PING') {
+        if (!isPresenter && syncChannel) {
+          syncChannel.postMessage({ type: 'PONG', timestamp: Date.now() });
+        }
+      } else if (data.type === 'PONG') {
+        if (isPresenter) {
+          lastAudiencePongTime = Date.now();
+          updateAudienceBadge(true);
+        }
+      }
+    }
+
+    function broadcastNavigation(sceneIndex) {
+      if (!syncChannel || isPreview) return;
+      syncChannel.postMessage({
+        type: 'NAVIGATE',
+        scene: sceneIndex,
+        timestamp: Date.now()
+      });
+    }
+
+    /* 4. INIT */
+    window.addEventListener('DOMContentLoaded', () => {
+      if (isPresenter) {
+        document.body.classList.add('is-presenter-mode');
+        initPresenterMode();
+      } else if (isPreview) {
+        document.body.classList.add('is-preview-mode');
+      } else {
+        showAudienceHint();
+      }
+
+      setupNavigationEvents();
+      goToScene(0, false);
+    });
+
+    function showAudienceHint() {
+      const hint = document.getElementById('audienceHint');
+      if (!hint) return;
+      hint.classList.add('visible');
+      setTimeout(() => hint.classList.remove('visible'), 6000);
+    }
+
+    /* 5. NAVIGATION & SCENE DYNAMICS */
+    function goToScene(index, shouldBroadcast = true) {
+      if (index < 0 || index >= totalScenes) return;
+      currentSceneIndex = index;
+
+      const scenes = document.querySelectorAll('#audienceViewport .scene');
+      scenes.forEach((sc, i) => {
+        if (i === currentSceneIndex) {
+          sc.classList.add('active');
+          triggerSceneDynamics(i);
+        } else {
+          sc.classList.remove('active');
+          resetSceneDynamics(i);
+        }
+      });
+
+      if (isPresenter) {
+        updatePresenterContent();
+        sceneElapsedSeconds = 0;
+        updatePresenterTimersUI();
+      }
+
+      if (shouldBroadcast) {
+        broadcastNavigation(currentSceneIndex);
+      }
+    }
+
+    function nextScene() {
+      if (currentSceneIndex < totalScenes - 1) goToScene(currentSceneIndex + 1, true);
+    }
+
+    function prevScene() {
+      if (currentSceneIndex > 0) goToScene(currentSceneIndex - 1, true);
+    }
+
+    function triggerSceneDynamics(index) {
+      if (index === 3) {
+        const sc3 = document.getElementById('scene-3');
+        sc3.classList.remove('absorbed');
+        void sc3.offsetWidth;
+        setTimeout(() => sc3.classList.add('absorbed'), 260);
+      }
+      if (index === 4) {
+        startDualDemoSimulation(false);
+      }
+      if (index === 6) {
+        animateMetricCounters();
+      }
+    }
+
+    function resetSceneDynamics(index) {
+      if (index === 3) {
+        document.getElementById('scene-3')?.classList.remove('absorbed');
+      }
+      if (index === 4) {
+        clearDemoTimeouts();
+      }
+    }
+
+    /* DUAL DEMO TIMELINE SIMULATION */
+    let demoTimeouts = [];
+    function clearDemoTimeouts() {
+      demoTimeouts.forEach(t => clearTimeout(t));
+      demoTimeouts = [];
+    }
+
+    function startDualDemoSimulation(isReplay) {
+      clearDemoTimeouts();
+      const logs = [
+        document.getElementById('estLog1'),
+        document.getElementById('freeLog1'),
+        document.getElementById('estLog2'),
+        document.getElementById('freeLog2'),
+        document.getElementById('estLog3'),
+        document.getElementById('freeLog3'),
+        document.getElementById('estLog4'),
+        document.getElementById('freeLog4')
+      ];
+
+      logs.forEach(l => l && l.classList.remove('active'));
+
+      const schedule = [
+        { el: 'estLog1', delay: isReplay ? 150 : 600 },
+        { el: 'freeLog1', delay: isReplay ? 600 : 1200 },
+        { el: 'estLog2', delay: isReplay ? 1100 : 1900 },
+        { el: 'freeLog2', delay: isReplay ? 1600 : 2500 },
+        { el: 'estLog3', delay: isReplay ? 2100 : 3100 },
+        { el: 'freeLog3', delay: isReplay ? 2600 : 3700 },
+        { el: 'estLog4', delay: isReplay ? 3200 : 4400 },
+        { el: 'freeLog4', delay: isReplay ? 3600 : 4900 }
+      ];
+
+      schedule.forEach(item => {
+        const t = setTimeout(() => {
+          const domEl = document.getElementById(item.el);
+          if (domEl) domEl.classList.add('active');
+        }, item.delay);
+        demoTimeouts.push(t);
+      });
+    }
+
+    /* METRIC COUNTERS */
+    function animateMetricCounters() {
+      const counters = document.querySelectorAll('#scene-6 .counter');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const duration = 1200;
+        const start = performance.now();
+
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 2);
+          counter.textContent = Math.round(easeOut * target);
+          if (progress < 1) requestAnimationFrame(step);
+          else counter.textContent = target;
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    /* 6. PRESENTER MODE ENGINE */
+    let timerRunning = false;
+    let elapsedTotalSeconds = 0;
+    let sceneElapsedSeconds = 0;
+    let timerInterval = null;
+
+    function initPresenterMode() {
+      const iframe = document.getElementById('presPreviewFrame');
+      if (iframe) {
+        iframe.src = getModeUrl('preview');
+      }
+
+      const container = document.getElementById('previewContainer');
+      const updateFrameScale = () => {
+        if (!container || !iframe) return;
+        const containerWidth = container.clientWidth;
+        const scale = containerWidth / 1600;
+        iframe.style.transform = `scale(${scale})`;
+      };
+      updateFrameScale();
+      window.addEventListener('resize', updateFrameScale);
+
+      buildProportionalTrack();
+      startPresenterTimer();
+      updatePresenterContent();
+      startAudienceHeartbeat();
+    }
+
+    function startAudienceHeartbeat() {
+      if (!syncChannel) return;
+      syncChannel.postMessage({ type: 'PING' });
+      setInterval(() => {
+        syncChannel.postMessage({ type: 'PING' });
+        const isConnected = (Date.now() - lastAudiencePongTime) <= 1900;
+        updateAudienceBadge(isConnected);
+      }, 1500);
+    }
+
+    function updateAudienceBadge(connected) {
+      const badge = document.getElementById('audienceStatusBadge');
+      const text = document.getElementById('audienceStatusText');
+      if (!badge || !text) return;
+
+      if (connected) {
+        badge.classList.remove('disconnected');
+        text.textContent = "Plateia conectada";
+      } else {
+        badge.classList.add('disconnected');
+        text.textContent = "Plateia não detectada";
+      }
+    }
+
+    function buildProportionalTrack() {
+      const track = document.getElementById('presProportionalTrack');
+      if (!track) return;
+      track.innerHTML = '';
+
+      SCENES_CONFIG.forEach((sc, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'track-segment';
+        seg.style.width = `${(sc.duration / TOTAL_DURATION_SECONDS) * 100}%`;
+        seg.title = `${sc.title} (${sc.duration}s)`;
+        seg.onclick = () => goToScene(i, true);
+        track.appendChild(seg);
+      });
+    }
+
+    function updatePresenterContent() {
+      const current = SCENES_CONFIG[currentSceneIndex];
+      const next = SCENES_CONFIG[currentSceneIndex + 1];
+
+      document.getElementById('presScriptNum').textContent = `CENA 0${currentSceneIndex + 1} / 0${totalScenes} · ${current.duration} SEGUNDOS`;
+      document.getElementById('presScriptTitle').textContent = current.name;
+      document.getElementById('presScriptBody').innerHTML = current.script;
+
+      const nextLabel = document.getElementById('presNextSceneName');
+      if (nextLabel) {
+        nextLabel.textContent = next ? `${next.title} — ${next.name}` : "— Fim da Apresentação —";
+      }
+
+      const idxLabel = document.getElementById('presCurrentIndexLabel');
+      if (idxLabel) idxLabel.textContent = (currentSceneIndex + 1).toString();
+
+      const segments = document.querySelectorAll('.track-segment');
+      segments.forEach((seg, i) => {
+        seg.classList.remove('current', 'completed');
+        if (i < currentSceneIndex) seg.classList.add('completed');
+        else if (i === currentSceneIndex) seg.classList.add('current');
+      });
+    }
+
+    function startPresenterTimer() {
+      if (timerRunning) return;
+      timerRunning = true;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        elapsedTotalSeconds++;
+        sceneElapsedSeconds++;
+        updatePresenterTimersUI();
+      }, 1000);
+    }
+
+    function togglePresenterTimer() {
+      const btn = document.getElementById('btnToggleTimer');
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        if (btn) btn.textContent = '▶ Retomar Cronômetro (T)';
+      } else {
+        startPresenterTimer();
+        if (btn) btn.textContent = '⏸ Pausar Cronômetro (T)';
+      }
+    }
+
+    function updatePresenterTimersUI() {
+      const currentScene = SCENES_CONFIG[currentSceneIndex];
+      const sceneBudget = currentScene.duration;
+      const sceneRemaining = sceneBudget - sceneElapsedSeconds;
+
+      const sceneTimerEl = document.getElementById('presSceneTimer');
+      if (sceneTimerEl) {
+        sceneTimerEl.classList.remove('yellow', 'red');
+        if (sceneRemaining > 5) {
+          sceneTimerEl.textContent = formatClock(sceneRemaining);
+        } else if (sceneRemaining >= 0) {
+          sceneTimerEl.classList.add('yellow');
+          sceneTimerEl.textContent = formatClock(sceneRemaining);
+        } else {
+          sceneTimerEl.classList.add('red');
+          sceneTimerEl.textContent = `+${Math.abs(sceneRemaining)}s`;
+        }
+      }
+
+      const totalRemaining = Math.max(0, TOTAL_DURATION_SECONDS - elapsedTotalSeconds);
+      const totalTimerEl = document.getElementById('presTotalTimer');
+      if (totalTimerEl) {
+        totalTimerEl.textContent = formatClock(totalRemaining);
+        if (totalRemaining === 0) totalTimerEl.classList.add('red');
+      }
+
+      let targetElapsedAtCurrent = 0;
+      for (let i = 0; i <= currentSceneIndex; i++) {
+        targetElapsedAtCurrent += SCENES_CONFIG[i].duration;
+      }
+      const idealAtMoment = targetElapsedAtCurrent - (sceneBudget - sceneElapsedSeconds);
+      const diff = elapsedTotalSeconds - idealAtMoment;
+
+      const pacingEl = document.getElementById('presPacingIndicator');
+      if (pacingEl) {
+        pacingEl.className = 'pacing-pill';
+        if (diff > 5) {
+          pacingEl.classList.add('behind');
+          pacingEl.textContent = `Atrasado · acelere (+${diff}s)`;
+        } else if (diff < -5) {
+          pacingEl.classList.add('ahead');
+          pacingEl.textContent = `Adiantado · respire (${diff}s)`;
+        } else {
+          pacingEl.classList.add('on-track');
+          pacingEl.textContent = "No ritmo";
+        }
+      }
+    }
+
+    function formatClock(seconds) {
+      const s = Math.max(0, seconds);
+      const m = Math.floor(s / 60);
+      const rem = s % 60;
+      return `${String(m).padStart(2, '0')}:${String(rem).padStart(2, '0')}`;
+    }
+
+    function resetPresentation() {
+      elapsedTotalSeconds = 0;
+      sceneElapsedSeconds = 0;
+      goToScene(0, true);
+      if (isPresenter) updatePresenterTimersUI();
+    }
+
+    /* 7. EVENTS & SHORTCUTS */
+    function setupNavigationEvents() {
+      window.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('helpModal');
+        if (modal && modal.classList.contains('open')) {
+          if (e.key === 'Escape' || e.key === '?') {
+            toggleHelp(false);
+            return;
+          }
+        }
+
+        switch (e.key) {
+          case 'ArrowRight':
+          case ' ':
+          case 'Enter':
+            e.preventDefault();
+            nextScene();
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            prevScene();
+            break;
+          case 'p':
+          case 'P':
+            e.preventDefault();
+            openPresenterWindow();
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 't':
+          case 'T':
+            if (isPresenter) {
+              e.preventDefault();
+              togglePresenterTimer();
+            }
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            resetPresentation();
+            break;
+          case '?':
+            e.preventDefault();
+            toggleHelp();
+            break;
+        }
+      });
+
+      let startX = 0, startY = 0;
+      window.addEventListener('touchstart', (e) => {
+        startX = e.changedTouches[0].screenX;
+        startY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      window.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].screenX - startX;
+        const dy = e.changedTouches[0].screenY - startY;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) nextScene();
+          else prevScene();
+        }
+      }, { passive: true });
+    }
+
+    function openPresenterWindow() {
+      const presenterUrl = getModeUrl('presenter');
+      window.open(presenterUrl, 'TrampakiPresenterConsole', 'width=1280,height=850,menubar=no,toolbar=no,location=no');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+
+    function toggleHelp(force) {
+      const modal = document.getElementById('helpModal');
+      if (!modal) return;
+      if (typeof force === 'boolean') modal.classList.toggle('open', force);
+      else modal.classList.toggle('open');
+    }
+
+    function triggerPilotNotice() {
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #11131a;
+        color: #fff;
+        padding: 14px 28px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        z-index: 9999;
+      `;
+      toast.textContent = "✓ Piloto solicitado com sucesso! Nossa equipe do Trampaki entrará em contato hoje.";
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 4000);
+    }
+  </script>
+</body>
+</html>

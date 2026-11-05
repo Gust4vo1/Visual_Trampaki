@@ -1352,6 +1352,45 @@
         </div>
       </article>
 
+      <!-- SLIDE 12: ANIMAÇÃO FINAL TRAMPAKÍ -->
+      <article class="scene" data-index="11" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:560px; padding:0; overflow:hidden; position:relative; background:radial-gradient(ellipse at center, rgba(206,24,99,0.22) 0%, rgba(16,18,26,0.95) 70%, #080a0f 100%); border-radius:24px;">
+        <div style="position:relative; width:100%; max-width:980px; aspect-ratio:16/9; max-height:550px; border-radius:20px; overflow:hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,45,122,0.35), 0 0 45px rgba(206,24,99,0.3); background:#ce1863; display:flex; align-items:center; justify-content:center;">
+          <video 
+            id="finalAnimationVideo" 
+            src="./assets/aistudio/Trampaki_d06b164b.mp4" 
+            playsinline 
+            preload="auto"
+            style="width:100%; height:100%; object-fit:contain; display:block; background:#ce1863; cursor:pointer;"
+            onclick="replayFinalVideo()"
+            title="Clique para reproduzir novamente"
+          ></video>
+          
+          <!-- Botão para Replay no canto inferior direito -->
+          <div style="position:absolute; bottom:18px; right:20px; display:flex; gap:10px; z-index:10;">
+            <button 
+              id="btnReplayFinalVideo"
+              onclick="replayFinalVideo()" 
+              style="background:rgba(15, 21, 35, 0.78); border:1px solid rgba(255,255,255,0.25); color:#fff; border-radius:30px; padding:9px 18px; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.84rem; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:8px; backdrop-filter:blur(10px); transition:all 0.2s ease; box-shadow:0 8px 20px rgba(0,0,0,0.5);"
+              onmouseover="this.style.background='var(--pink)'; this.style.borderColor='rgba(255,255,255,0.6)'; this.style.transform='scale(1.04)';"
+              onmouseout="this.style.background='rgba(15, 21, 35, 0.78)'; this.style.borderColor='rgba(255,255,255,0.25)'; this.style.transform='scale(1)';"
+              title="Clique para assistir novamente com áudio"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 4v6h6"></path>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>Repetir Animação</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top:16px; text-align:center;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:#f1f5f9; letter-spacing:0.14em; text-transform:uppercase; font-weight:700;">
+            TRAMPAKÍ • SEU PRÓXIMO EMPREGO NA PALMA DA SUA MÃO
+          </span>
+        </div>
+      </article>
+
     </section>
 
     <!-- CONSOLE DO APRESENTADOR -->
@@ -1386,7 +1425,7 @@
 
   <footer class="bottombar">
     <div style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-muted); min-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-      <strong style="color:var(--pink);" id="slideCounter">01 / 11</strong> — <span id="slideFooterName">Capa Executiva Trampakí</span>
+      <strong style="color:var(--pink);" id="slideCounter">01 / 12</strong> — <span id="slideFooterName">Capa Executiva Trampakí</span>
     </div>
     <div style="display:flex; align-items:center; gap:22px; margin-left:auto;">
       <div class="progress-dots" id="progressDots"></div>
@@ -1459,6 +1498,11 @@
         name: "Cap. 05 — Conexão com Investidores e Próximo Passo",
         duration: 15,
         script: `<span class="stage-cue">[ENCERRAMENTO CONFIANTE E NÚMEROS DE INVESTIDOR]</span><br>O trampakí cresce de forma conjunta: meta de 2.400 clientes ativos pagantes e mais de 25 mil profissionais no Ano 1. Com LTV/CAC de 5,8x e payback de 1,7 meses, buscamos R$ 300 mil em captação inicial para acelerar essa tração paga em São Paulo.`
+      },
+      {
+        name: "Encerramento — Animação Marca Trampakí",
+        duration: 15,
+        script: `<span class="stage-cue">[DEIXAR A ANIMAÇÃO RODAR COM O ÁUDIO • FECHAMENTO DE IMPACTO]</span><br>É para isso que existe o <strong>trampakí</strong>: seu próximo emprego na palma da sua mão.<br><br>Muito obrigado a todos os professores e membros da banca avaliadora!`
       }
     ];
 
@@ -1630,6 +1674,42 @@
       });
     }
 
+    function playFinalVideo() {
+      const vid = document.getElementById('finalAnimationVideo');
+      if (!vid) return;
+      vid.currentTime = 0;
+      vid.muted = false;
+      const p = vid.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          vid.muted = true;
+          vid.play().catch(() => {});
+        });
+      }
+    }
+
+    function pauseFinalVideo() {
+      const vid = document.getElementById('finalAnimationVideo');
+      if (vid && !vid.paused) {
+        vid.pause();
+      }
+    }
+
+    function replayFinalVideo() {
+      const vid = document.getElementById('finalAnimationVideo');
+      if (vid) {
+        vid.currentTime = 0;
+        vid.muted = false;
+        const p = vid.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            vid.muted = true;
+            vid.play().catch(() => {});
+          });
+        }
+      }
+    }
+
     function goToScene(index, fromRemote = false) {
       if (index < 0 || index >= SCENES_DATA.length) return;
       currentScene = index;
@@ -1645,6 +1725,12 @@
         dots.forEach((d, idx) => {
           d.classList.toggle('active', idx === currentScene);
         });
+      }
+
+      if (currentScene === 11) {
+        setTimeout(playFinalVideo, 80);
+      } else {
+        pauseFinalVideo();
       }
 
       const data = SCENES_DATA[currentScene];
@@ -1718,6 +1804,9 @@
           if (typeof audiencePopup.renderAppStep === 'function') {
             audiencePopup.renderAppStep(currentAppStep);
           }
+          if (currentScene === 11 && typeof audiencePopup.playFinalVideo === 'function') {
+            audiencePopup.playFinalVideo();
+          }
         } catch(e) {}
       }
     }
@@ -1727,6 +1816,7 @@
         if (ev.data && ev.data.type === 'SYNC') {
           goToScene(ev.data.scene, true);
           renderAppStep(ev.data.appStep || 0);
+          if (ev.data.scene === 11) playFinalVideo();
         }
       };
     }
@@ -1735,6 +1825,7 @@
       if (ev.data && ev.data.type === 'SYNC') {
         goToScene(ev.data.scene, true);
         renderAppStep(ev.data.appStep || 0);
+        if (ev.data.scene === 11) playFinalVideo();
       }
     });
 
