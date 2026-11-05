@@ -779,22 +779,16 @@
         <div class="kicker">03 / CAPÍTULO 01 • INVESTIGAÇÃO & ENTREVISTAS</div>
         <h2 class="slide-title">Validação do Problema Real <span class="pink-text">(The Mom Test)</span></h2>
         <p class="slide-subtitle">
-          Em vez de perguntar opiniões hipotéticas, fomos a campo investigar ocorrências passadas e prejuízos financeiros reais nos estabelecimentos locais.
+          Investigamos casos reais e prejuízos financeiros em estabelecimentos locais, indo além de opiniões hipotéticas.
         </p>
         <div class="grid-2-equal">
-          <div class="card">
+          <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
             <span class="card-tag" style="color:#94a3b8;">ABORDAGEM TRADICIONAL FALHA</span>
-            <h3 style="font-size:2rem; color:#cbd5e1; margin-bottom:18px;">“Você usaria um aplicativo para contratar ajudantes?”</h3>
-            <p>
-              Gera respostas complacentes, elogios vazios e opiniões hipotéticas que não validam disposição real de pagamento nem urgência operacional.
-            </p>
+            <h3 style="font-size:2rem; color:#cbd5e1; margin-bottom:0;">“Você usaria um aplicativo para contratar ajudantes?”</h3>
           </div>
-          <div class="card highlight">
+          <div class="card highlight" style="display:flex; flex-direction:column; justify-content:center;">
             <span class="card-tag">APLICAÇÃO PRÁTICA TRAMPAKÍ</span>
-            <h3 style="font-size:2rem; color:#ffffff; margin-bottom:18px;">“Quantas vezes faltou um garçom ou cozinheiro no último mês e o que você fez?”</h3>
-            <p>
-              Extrai prejuízos financeiros concretos (até 30% do faturamento da noite perdido), horas desperdiçadas em grupos de WhatsApp e dor aguda comprovada.
-            </p>
+            <h3 style="font-size:2rem; color:#ffffff; margin-bottom:0;">“Quantas vezes faltou um garçom ou cozinheiro no último mês e o que você fez?”</h3>
           </div>
         </div>
       </article>
@@ -804,16 +798,16 @@
         <div class="kicker">04 / CAPÍTULO 02 • PROPOSTA DE VALOR</div>
         <h2 class="slide-title">Jobs to Be Done <span class="pink-text">(JTBD) dos Dois Lados</span></h2>
         <p class="slide-subtitle">
-          Resolvemos simultaneamente a urgência do estabelecimento comercial e a barreira financeira de entrada do profissional autônomo.
+          Realizar o match em tempo real entre quem precisa trabalhar e quem precisa contratar.
         </p>
         <div class="grid-2-equal">
           <div class="card highlight">
             <span class="card-tag">LADO A • O CONTRATANTE LOCAL</span>
-            <h3>Restaurantes, Bares, Buffets e Eventos</h3>
+            <h3>Restaurantes, Comércios, Empreendimentos etc</h3>
             <div style="display:flex; flex-direction:column; gap:14px; margin-top:18px;">
               <div>
                 <strong class="pink-text">Job Funcional:</strong>
-                <p>Repor mão de obra urgente (cozinheiro, barman, diarista, segurança) dimensionando o raio de distância personalizado para o seu negócio.</p>
+                <p>Contratação de mão de obra, dimensionando o raio de distância personalizado para o seu negócio, sem burocracia.</p>
               </div>
               <div>
                 <strong class="pink-text">Dor Crítica:</strong>
@@ -821,21 +815,21 @@
               </div>
               <div>
                 <strong class="pink-text">Ganho Esperado:</strong>
-                <p>Anunciar vaga em 1 minuto, avaliar candidatos que curtiram a vaga, dar match e formalizar o início do serviço.</p>
+                <p>Praticidade de anunciar vaga, avaliar candidatos, dar match e formalizar o início do serviço.</p>
               </div>
             </div>
           </div>
           <div class="card">
             <span class="card-tag">LADO B • O PROFISSIONAL INFORMAL</span>
-            <h3>Trabalhadores Operacionais (Classes C e D)</h3>
+            <h3>Trabalhadores Autônomos</h3>
             <div style="display:flex; flex-direction:column; gap:14px; margin-top:18px;">
               <div>
                 <strong class="pink-text">Job Funcional:</strong>
-                <p>Encontrar turnos e diárias perto de casa, podendo ajustar e dimensionar livremente o seu próprio raio de distância.</p>
+                <p>Encontrar turnos e diárias perto de casa, podendo ajustar o seu próprio raio de distância, sem pagar nada por isso.</p>
               </div>
               <div>
                 <strong class="pink-text">Dor Crítica:</strong>
-                <p>Dependência de grupos de WhatsApp caóticos e sem garantia, perdendo tempo em vagas já ocupadas e correndo risco constante de calote ou atraso no Pix após cumprir a diária.</p>
+                <p>Vagas dispersas em grupos de WhatsApp, informações desorganizadas e insegurança para encontrar trabalho e receber pelo serviço prestado.</p>
               </div>
               <div>
                 <strong class="pink-text">Ganho Esperado:</strong>
@@ -856,9 +850,8 @@
             </h2>
           </div>
           <div style="display:flex; gap:8px; align-items:center;">
-            <span style="font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--text-muted);">Clique nas telas ao lado</span>
-            <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()">Pausar Auto-Play</button>
-            <button class="btn-top" onclick="setAppStep(0, true)">↺ Reiniciar</button>
+            <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()" title="Pausar Auto-Play" style="width:38px; height:38px; padding:0; display:inline-flex; align-items:center; justify-content:center; font-size:1.05rem;">⏸</button>
+            <button class="btn-top" onclick="setAppStep(0, true)" title="Reiniciar" style="width:38px; height:38px; padding:0; display:inline-flex; align-items:center; justify-content:center; font-size:1.15rem;">↺</button>
           </div>
         </div>
 
@@ -931,8 +924,8 @@
           <tbody>
             <tr>
               <td><strong>Quem Paga a Conta?</strong></td>
-              <td>Trabalhador (Compra pacote de moedas/leads)</td>
-              <td>Gratuito / Sem suporte ou filtro</td>
+              <td>Trabalhador</td>
+              <td>Gratuito, porém, sem suporte e avaliação</td>
               <td class="trampaki-col">Apenas o Contratante (100% Grátis para o Trabalhador)</td>
             </tr>
             <tr>
@@ -945,13 +938,13 @@
               <td><strong>Barreira de Entrada</strong></td>
               <td>Média / Burocrática (exige saldo prévio)</td>
               <td>Baixa / Caótica</td>
-              <td class="trampaki-col">Zero Fricção (Match por Joinha / Swipe em 3 cliques)</td>
+              <td class="trampaki-col">Zero Fricção (Match / Swipe)</td>
             </tr>
             <tr>
               <td><strong>Histórico e Confiança</strong></td>
               <td>Foco em serviços técnicos e reformas</td>
               <td>Nulo (risco alto de calote e no-show)</td>
-              <td class="trampaki-col">Duplo Aceite, Comprovante Pix Anexado e Avaliação Mútua 1 a 5★</td>
+              <td class="trampaki-col">Duplo Aceite, Comprovante Pix Anexado e Avaliação Mútua 1 a 5 ★</td>
             </tr>
           </tbody>
         </table>
@@ -962,7 +955,7 @@
         <div class="kicker">07 / CAPÍTULO 03 • DIMENSIONAMENTO DE MERCADO</div>
         <h2 class="slide-title">A Oportunidade em Camadas: <span class="pink-text">Expansão Nacional</span></h2>
         <p class="slide-subtitle">
-          Estratégia de tração com tráfego pago geolocalizado: concentramos a aquisição dentro de um raio estratégico na cidade de São Paulo para gerar liquidez e densidade comercial imediata, escalando com precisão para outros estados e todo o país.
+          Aquisição com tráfego pago geolocalizado: concentrando esforços na cidade de São Paulo para gerar liquidez e densidade comercial, construindo um modelo replicável para todo o país.
         </p>
         <div class="grid-3">
           <div class="card">
@@ -981,7 +974,7 @@
             <span class="card-tag">SOM • META PILOTO ANO 1</span>
             <div class="big-metric">1.000</div>
             <h3>Comércios Ativos em São Paulo</h3>
-            <p>Estabelecimentos pagantes ativados por tráfego pago geolocalizado na capital paulista, garantindo densidade e liquidez imediata antes da expansão nacional.</p>
+            <p>Estabelecimentos pagantes validadas na capital paulista antes do rollout nacional.</p>
           </div>
         </div>
       </article>
@@ -1046,7 +1039,7 @@
                 <h3 style="font-size:1.35rem; margin-bottom:4px; color:#fff;">Trabalho Grátis & Trampakí Premium</h3>
               </div>
               <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
-                0 Custo para Trabalhar
+                Zero Custo para Trabalhar
               </span>
             </div>
 
@@ -1182,18 +1175,18 @@
         <div class="grid-3">
           <div class="card highlight" style="padding:20px;">
             <span class="card-tag">RISCO 01 • O OVO E A GALINHA</span>
-            <h3>Aquisição via Tráfego Pago</h3>
-            <p style="font-size:0.95rem;">Campanhas segmentadas de tráfego pago nas principais redes sociais (Meta Ads, TikTok) e Google Ads, gerando base ativa de candidatos e clientes em raios estratégicos de São Paulo.</p>
+            <h3>Popular Plataforma</h3>
+            <p style="font-size:0.95rem;">Conseguir cadastros tanto de estabelecimentos, quanto de candidatos, ao mesmo tempo. Um precisa do outro para o aplicativo existir.</p>
           </div>
           <div class="card highlight" style="padding:20px;">
             <span class="card-tag">RISCO 02 • DESINTERMEDIAÇÃO</span>
-            <h3>Rotatividade & Reputação</h3>
-            <p style="font-size:0.95rem;">Alta rotatividade natural do setor aliada à necessidade constante de novos perfis avaliados e histórico de comprovantes Pix.</p>
+            <h3>Clientes Conversarem Fora do App</h3>
+            <p style="font-size:0.95rem;">Após uma primeira contratação, ambas as partes podem preferir fechar um próximo serviço por conta própria</p>
           </div>
           <div class="card highlight" style="padding:20px;">
             <span class="card-tag">RISCO 03 • CAC DIGITAL ALTO</span>
-            <h3>Aquisição Porta a Porta</h3>
-            <p style="font-size:0.95rem;">Venda direta de calçada em polos gastronômicos e parcerias com associações comerciais de bairro.</p>
+            <h3>Baixa Adesão Inicial</h3>
+            <p style="font-size:0.95rem;">Alto custo com adesão inicial por falta de comprovação de sucesso da plataforma.</p>
           </div>
         </div>
       </article>
@@ -1203,7 +1196,7 @@
         <div class="kicker">10 / CAPÍTULO 05 • CONEXÃO COM INVESTIDORES</div>
         <h2 class="slide-title">O Próximo Passo: <span class="pink-text">Metas de Crescimento Conjunto</span></h2>
         <p class="slide-subtitle">
-          Crescimento balanceado entre oferta e demanda: alavancando de forma sincronizada a base de clientes pagantes e profissionais qualificados, respaldados por fortes unit economics.
+          Crescimento balanceado entre oferta e demanda: alavancando de forma sincronizada a base de clientes pagantes e profissionais qualificados.
         </p>
         <div class="grid-3" style="margin-bottom:24px;">
           <div class="card highlight">
@@ -1456,7 +1449,8 @@
       appAutoPlaying = !appAutoPlaying;
       const btn = document.getElementById('btnAutoPlayApp');
       if (btn) {
-        btn.textContent = appAutoPlaying ? 'Pausar Auto-Play' : 'Retomar Auto-Play';
+        btn.textContent = appAutoPlaying ? '⏸' : '▶';
+        btn.title = appAutoPlaying ? 'Pausar Auto-Play' : 'Iniciar Auto-Play';
         btn.classList.toggle('active', appAutoPlaying);
       }
       restartAppAutoInterval();
