@@ -850,8 +850,12 @@
             </h2>
           </div>
           <div style="display:flex; gap:8px; align-items:center;">
-            <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()" title="Pausar Auto-Play" style="width:38px; height:38px; padding:0; display:inline-flex; align-items:center; justify-content:center; font-size:1.05rem;">⏸</button>
-            <button class="btn-top" onclick="setAppStep(0, true)" title="Reiniciar" style="width:38px; height:38px; padding:0; display:inline-flex; align-items:center; justify-content:center; font-size:1.15rem;">↺</button>
+            <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()" title="Pausar Auto-Play" style="width:36px; height:36px; padding:0; display:inline-flex; align-items:center; justify-content:center;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><rect x="5.5" y="4.5" width="4" height="15" rx="1"></rect><rect x="14.5" y="4.5" width="4" height="15" rx="1"></rect></svg>
+            </button>
+            <button class="btn-top" onclick="setAppStep(0, true)" title="Reiniciar" style="width:36px; height:36px; padding:0; display:inline-flex; align-items:center; justify-content:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+            </button>
           </div>
         </div>
 
@@ -1258,13 +1262,21 @@
   </main>
 
   <footer class="bottombar">
-    <div style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-muted);">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-muted); min-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
       <strong style="color:var(--pink);" id="slideCounter">01 / 10</strong> — <span id="slideFooterName">Capa Executiva Trampakí</span>
     </div>
-    <div class="progress-dots" id="progressDots"></div>
-    <div class="nav-btns">
-      <button class="btn-top" onclick="prevScene()">← Anterior</button>
-      <button class="btn-top active" onclick="nextScene()">Próximo →</button>
+    <div style="display:flex; align-items:center; gap:22px; margin-left:auto;">
+      <div class="progress-dots" id="progressDots"></div>
+      <div class="nav-btns">
+        <button class="btn-top" onclick="prevScene()" style="display:inline-flex; align-items:center; gap:8px; font-weight:700;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Anterior</span>
+        </button>
+        <button class="btn-top active" onclick="nextScene()" style="display:inline-flex; align-items:center; gap:8px; font-weight:700;">
+          <span>Próximo</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
     </div>
   </footer>
 
@@ -1450,11 +1462,14 @@
       }
     }
 
+    const ICON_PAUSE_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><rect x="5.5" y="4.5" width="4" height="15" rx="1"></rect><rect x="14.5" y="4.5" width="4" height="15" rx="1"></rect></svg>';
+    const ICON_PLAY_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:block; transform:translateX(1px);"><polygon points="6 4 20 12 6 20"></polygon></svg>';
+
     function toggleAppAutoPlay() {
       appAutoPlaying = !appAutoPlaying;
       const btn = document.getElementById('btnAutoPlayApp');
       if (btn) {
-        btn.textContent = appAutoPlaying ? '⏸' : '▶';
+        btn.innerHTML = appAutoPlaying ? ICON_PAUSE_SVG : ICON_PLAY_SVG;
         btn.title = appAutoPlaying ? 'Pausar Auto-Play' : 'Iniciar Auto-Play';
         btn.classList.toggle('active', appAutoPlaying);
       }
