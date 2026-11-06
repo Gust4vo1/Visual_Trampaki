@@ -1,0 +1,6 @@
+{
+  "name": "Trampaki — Keynote Pitch",
+  "description": "Apresentação Keynote interativa do Trampaki: marketplace inteligente de turnos sob demanda com IA e painel de apresentador integrado.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

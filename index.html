@@ -90,12 +90,17 @@
       line-height: 1;
     }
     .brand-logo .logo-i-pin {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      margin-left: -0.05em;
+      display: inline-block;
+      vertical-align: baseline;
       position: relative;
-      transform: translateY(2px);
+      line-height: 0;
+      margin-left: -0.06em;
+    }
+    .brand-logo .logo-i-pin svg {
+      width: 0.50em;
+      height: 1.10em;
+      display: block;
+      overflow: visible;
     }
     .brand-logo .sub-tag {
       font-size: 0.78rem;
@@ -226,71 +231,67 @@
 
     .final-logo-wrapper {
       display: inline-flex;
-      align-items: flex-end;
+      align-items: baseline;
       justify-content: center;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800;
-      font-size: clamp(4.5rem, 9.8vw, 10.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.04em;
+      font-family: 'Archivo Black', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      font-size: clamp(4.6rem, 9.4vw, 9.4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
       color: #ffffff;
+      user-select: none;
       margin-bottom: clamp(24px, 3.2vw, 42px);
     }
 
-    .final-logo-i {
+    .final-logo-i-pin {
+      display: inline-block;
+      vertical-align: baseline;
       position: relative;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      margin-left: -0.01em;
-      height: 1em;
+      line-height: 0;
+      margin-left: -0.06em;
     }
 
-    /* O pingo do i (ícone vazado de geolocalização) */
-    .final-pin-dot {
-      width: clamp(34px, 4.4vw, 82px);
-      height: clamp(46px, 5.8vw, 110px);
-      margin-bottom: clamp(8px, 1vw, 18px);
-      will-change: transform, opacity;
+    .final-logo-svg {
+      width: 0.50em;
+      height: 1.10em;
+      overflow: visible;
+      display: block;
+    }
+
+    /* O pingo do i (ícone vazado de geolocalização do logo oficial) */
+    .final-anim-pin {
+      transform-box: fill-box;
       transform-origin: 50% 100%;
-    }
-
-    /* A haste do i */
-    .final-i-stem {
-      width: clamp(20px, 2.5vw, 48px);
-      height: clamp(44px, 5.6vw, 106px);
-      background: #ffffff;
-      border-radius: clamp(3px, 0.4vw, 8px);
+      will-change: transform, opacity;
     }
 
     /* Animação do pino descendo e quicando no i */
-    .scene.active .final-pin-dot {
+    .scene.active .final-anim-pin {
       animation: dropPinBounce 1.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
 
     @keyframes dropPinBounce {
       0% {
         opacity: 0;
-        transform: translateY(-460px) scale(0.65);
+        transform: translateY(-420px) scale(0.65);
       }
-      20% {
+      18% {
         opacity: 1;
       }
-      52% {
+      50% {
         transform: translateY(0px) scale(1, 1);
       }
-      63% {
-        transform: translateY(-46px) scale(0.94, 1.1);
+      62% {
+        transform: translateY(-52px) scale(0.92, 1.12);
       }
-      76% {
-        transform: translateY(0px) scale(1.1, 0.9);
+      75% {
+        transform: translateY(0px) scale(1.08, 0.92);
       }
-      87% {
-        transform: translateY(-16px) scale(0.97, 1.04);
+      86% {
+        transform: translateY(-16px) scale(0.97, 1.05);
       }
-      95% {
-        transform: translateY(0px) scale(1.04, 0.96);
+      94% {
+        transform: translateY(0px) scale(1.02, 0.98);
       }
       100% {
         opacity: 1;
@@ -328,32 +329,112 @@
       }
     }
 
+    /* Botão de reiniciar animação (balãozinho redondo compacto apenas com o ícone) */
     .final-brand-replay-btn {
       position: absolute;
       bottom: 24px;
       right: 28px;
-      background: rgba(0, 0, 0, 0.38);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      width: 46px;
+      height: 46px;
+      background: rgba(0, 0, 0, 0.42);
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
       color: #ffffff;
-      border-radius: 30px;
-      padding: 10px 20px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
+      border-radius: 50%;
+      padding: 0;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
-      backdrop-filter: blur(10px);
-      transition: all 0.2s ease;
-      opacity: 0.85;
-      z-index: 10;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.9;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      z-index: 15;
     }
     .final-brand-replay-btn:hover {
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.72);
       border-color: #ffffff;
       opacity: 1;
-      transform: scale(1.04);
+      transform: scale(1.1);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+    }
+    .final-brand-replay-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* Layout Slide 1 - Top Right Logo */
+    .slide1-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    .slide1-titles {
+      flex: 1;
+      max-width: 66%;
+    }
+
+    .slide1-logo-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+
+    .slide1-hero-badge {
+      font-size: clamp(3.0rem, 4.8vw, 5.0rem);
+      background: #b3205d;
+      padding: 12px 28px 16px 28px;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(179, 32, 93, 0.45);
+      letter-spacing: -0.035em;
+      margin: 0;
+      line-height: 1;
+      align-self: flex-start;
+    }
+
+    .slide1-hero-badge .logo-i-pin {
+      display: inline-block;
+      vertical-align: baseline;
+      position: relative;
+      line-height: 0;
+      margin-left: -0.06em;
+    }
+    .slide1-hero-badge .logo-i-pin svg {
+      width: 0.50em;
+      height: 1.10em;
+      display: block;
+      overflow: visible;
+    }
+
+    /* Balõezinhos de Preço Interativos (Efeito Hover nos Mundos do Contratante e Candidato) */
+    .pricing-balloon {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .pricing-balloon:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 45, 122, 0.12) !important;
+      border-color: rgba(255, 45, 122, 0.55) !important;
+      box-shadow: 0 10px 26px rgba(255, 45, 122, 0.22) !important;
+    }
+    .pricing-balloon.highlight:hover {
+      background: rgba(255, 45, 122, 0.18) !important;
+      border-color: var(--pink) !important;
+      box-shadow: 0 12px 30px rgba(255, 45, 122, 0.35) !important;
+    }
+
+    /* No Slide 10, os cards não devem ficar transparentes no hover (manter fundo opaco sólido) */
+    .card.pricing-balloon:hover,
+    .card.highlight.pricing-balloon:hover {
+      background: var(--bg-card) !important;
+      border-color: var(--pink) !important;
+      box-shadow: 0 16px 45px rgba(255, 45, 122, 0.3) !important;
+      transform: translateY(-4px);
     }
 
     .kicker {
@@ -495,7 +576,24 @@
       color: #f1f5f9;
       box-shadow: 0 12px 30px rgba(0,0,0,0.5);
       animation: floatPill 3.4s ease-in-out infinite alternate;
-      transition: transform 0.3s ease;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      position: relative;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+    .chaos-pill:hover {
+      border-color: rgba(255, 45, 122, 0.7);
+      background: rgba(30, 32, 46, 0.98);
+      box-shadow: 0 16px 40px rgba(255, 45, 122, 0.35);
+    }
+    .chaos-pill.dragging {
+      cursor: grabbing !important;
+      z-index: 1000 !important;
+      box-shadow: 0 24px 60px rgba(255, 45, 122, 0.55) !important;
+      border-color: var(--pink) !important;
+      background: rgba(34, 36, 52, 1) !important;
+      animation-play-state: paused !important;
     }
     .chaos-pill:nth-child(1) {
       margin-left: 0px;
@@ -573,38 +671,42 @@
 
     .demo-layout {
       display: grid;
-      grid-template-columns: 295px 1fr;
+      grid-template-columns: 310px 1fr;
       gap: 22px;
       width: 100%;
-      align-items: center;
+      align-items: stretch;
+      margin-top: 18px;
     }
 
     .steps-sidebar {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      justify-content: space-between;
+      height: 100%;
     }
 
     .step-btn {
       text-align: left;
       padding: 10px 14px;
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(22, 24, 34, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.22s ease;
       font-family: inherit;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     }
     .step-btn:hover {
-      border-color: rgba(255, 45, 122, 0.4);
+      border-color: rgba(255, 45, 122, 0.5);
+      background: rgba(28, 30, 44, 0.98);
       color: #fff;
     }
     .step-btn.active {
-      background: rgba(255, 45, 122, 0.16);
+      background: rgba(255, 45, 122, 0.22);
       border-color: var(--pink);
       color: #fff;
-      box-shadow: 0 8px 25px rgba(255, 45, 122, 0.18);
+      box-shadow: 0 8px 25px rgba(255, 45, 122, 0.28);
     }
     .step-btn .step-num {
       font-family: 'JetBrains Mono', monospace;
@@ -619,6 +721,59 @@
       font-weight: 700;
       display: block;
       line-height: 1.25;
+    }
+
+    .step-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 45, 122, 0.55), transparent);
+      margin: 2px 0;
+    }
+
+    .prototype-btn {
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #b3205d;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      font-family: inherit;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(179, 32, 93, 0.45);
+      overflow: visible;
+    }
+    .prototype-btn:hover {
+      background: #c71960;
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(179, 32, 93, 0.65);
+    }
+    .prototype-btn.active {
+      background: #c71960;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 8px 24px rgba(255, 45, 122, 0.4);
+    }
+    .prototype-btn.rippling::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 45, 122, 0.9);
+      animation: rippleWave 0.85s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleWave {
+      0% {
+        inset: -2px;
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(255, 45, 122, 0.9);
+      }
+      100% {
+        inset: -18px;
+        opacity: 0;
+        box-shadow: 0 0 35px rgba(255, 45, 122, 0);
+      }
     }
 
     .real-screens-stage {
@@ -848,10 +1003,10 @@
     <div style="display:flex; align-items:center;">
       <a href="#1" class="brand-logo" onclick="goToScene(0); return false;">
         <span>trampak</span>
-        <span class="logo-i-pin" style="margin-left:-0.05em; transform:translateY(2px);">
-          <svg width="15" height="32" viewBox="0 0 24 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1ZM12 6.6A3.8 3.8 0 1 0 12 14.2A3.8 3.8 0 1 0 12 6.6Z" fill="#162b4d"/>
-            <rect x="7" y="27" width="10" height="17" rx="0.8" fill="#ffffff"/>
+        <span class="logo-i-pin">
+          <svg viewBox="0 0 100 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 120 L 15.2 74.9 A 44 44 0 1 1 84.8 74.9 Z M 50 28 A 20 20 0 1 0 50 68 A 20 20 0 1 0 50 28 Z" fill="#162b4d"/>
+            <rect x="25" y="132" width="50" height="88" rx="4" fill="#ffffff"/>
           </svg>
         </span>
         <span class="sub-tag">Seu próximo emprego na palma da sua mão • FIAP Startup One</span>
@@ -859,6 +1014,16 @@
     </div>
 
     <div class="top-controls">
+      <div style="display:flex; align-items:center; gap:6px; margin-right:4px;">
+        <button class="btn-top" onclick="downloadPitchFile('trampaki-pitch.pdf', 'PDF')" style="background:rgba(255,45,122,0.18); border-color:var(--pink); color:#fff; display:inline-flex; align-items:center; gap:6px; font-weight:700;" title="Baixar Apresentação em PDF (12 Slides)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Baixar PDF</span>
+        </button>
+        <button class="btn-top" onclick="downloadPitchFile('trampaki-pitch.pptx', 'PowerPoint')" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.25); color:#fff; display:inline-flex; align-items:center; gap:6px; font-weight:700;" title="Baixar Apresentação em PowerPoint (.pptx) com animação das Telas 1-6">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Baixar PPTX</span>
+        </button>
+      </div>
       <span id="syncIndicator" class="sync-badge">Telão pronto para sincronizar</span>
       <button id="btnAudienceMode" class="btn-top" onclick="setViewMode('audience')">Modo Plateia</button>
       <button id="btnPresenterMode" class="btn-top active" onclick="setViewMode('presenter')">Modo Apresentador + Teleprompter (P)</button>
@@ -872,22 +1037,26 @@
 
       <!-- SLIDE 01 -->
       <article class="scene active" data-index="0">
-        <div class="kicker">TRAMPAKÍ • EMPREENDEDORISMO & INOVAÇÃO • FIAP</div>
-        <div style="margin-bottom: 18px;">
-          <span class="brand-logo" style="font-size: clamp(3.3rem, 5.6vw, 5.8rem); background:#b3205d; padding: 12px 30px 16px 30px; border-radius: 20px; box-shadow: 0 16px 40px rgba(179, 32, 93, 0.45); letter-spacing:-0.035em;">
-            <span>trampak</span>
-            <span class="logo-i-pin" style="margin-left:-0.05em; transform:translateY(6px);">
-              <svg width="36" height="76" viewBox="0 0 24 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1ZM12 6.6A3.8 3.8 0 1 0 12 14.2A3.8 3.8 0 1 0 12 6.6Z" fill="#162b4d"/>
-                <rect x="7" y="27" width="10" height="17" rx="0.8" fill="#ffffff"/>
-              </svg>
+        <div class="slide1-header">
+          <div class="slide1-titles">
+            <div class="kicker">TRAMPAKÍ • EMPREENDEDORISMO & INOVAÇÃO • FIAP</div>
+            <h1 class="slide-title" style="white-space: nowrap; font-size: clamp(1.8rem, 2.5vw, 2.65rem);">A Conexão Ágil do <span class="pink-text">Mercado Informal</span></h1>
+            <p class="slide-subtitle">
+              Conectando comércios e autônomos sob demanda por geolocalização e interesse mútuo
+            </p>
+          </div>
+          <div class="slide1-logo-container">
+            <span class="brand-logo slide1-hero-badge">
+              <span>trampak</span>
+              <span class="logo-i-pin">
+                <svg viewBox="0 0 100 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 120 L 15.2 74.9 A 44 44 0 1 1 84.8 74.9 Z M 50 28 A 20 20 0 1 0 50 68 A 20 20 0 1 0 50 28 Z" fill="#162b4d"/>
+                  <rect x="25" y="132" width="50" height="88" rx="4" fill="#ffffff"/>
+                </svg>
+              </span>
             </span>
-          </span>
+          </div>
         </div>
-        <h1 class="slide-title">A Conexão Ágil do <span class="pink-text">Mercado Informal.</span></h1>
-        <p class="slide-subtitle">
-          Conectando comércios e autônomos sob demanda por geolocalização e interesse mútuo
-        </p>
         <div class="grid-3">
           <div class="card highlight">
             <span class="card-tag">01 / PROPOSTA CENTRAL</span>
@@ -896,7 +1065,7 @@
           </div>
           <div class="card">
             <span class="card-tag">02 / PÚBLICO-ALVO</span>
-            <h3>Comércios & Classes C/D</h3>
+            <h3>Comércios & Trabalhadores Informais</h3>
             <p>Bares, restaurantes, buffets e eventos que precisam repor equipe rápido, sem cobrar nada do trabalhador.</p>
           </div>
           <div class="card">
@@ -947,16 +1116,75 @@
         <div class="kicker">03 / CAPÍTULO 01 • INVESTIGAÇÃO & ENTREVISTAS</div>
         <h2 class="slide-title">Validação do Problema Real <span class="pink-text">(The Mom Test)</span></h2>
         <p class="slide-subtitle">
-          Investigamos casos reais e prejuízos financeiros em estabelecimentos locais, indo além de opiniões hipotéticas.
+          Investigamos casos reais e perdas no dia a dia com estabelecimentos e trabalhadores, indo além de opiniões hipotéticas.
         </p>
-        <div class="grid-2-equal">
-          <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
-            <span class="card-tag" style="color:#94a3b8;">ABORDAGEM TRADICIONAL FALHA</span>
-            <h3 style="font-size:2rem; color:#cbd5e1; margin-bottom:0;">“Você usaria um aplicativo para contratar ajudantes?”</h3>
+        <div class="grid-2-equal" style="margin-top: 14px; gap: 24px;">
+          <!-- COLUNA 1: ABORDAGEM TRADICIONAL (FALHA) -->
+          <div class="card" style="display:flex; flex-direction:column; gap:16px; padding: clamp(18px, 1.8vw, 26px); border-color: rgba(255,255,255,0.14); background: rgba(18, 20, 28, 0.75);">
+            <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px;">
+              <span class="card-tag" style="color:#f87171; margin-bottom:0; font-size:0.75rem; font-weight:800; letter-spacing:0.08em;">✕ ABORDAGEM TRADICIONAL (FALHA)</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted);">Perguntas Hipotéticas</span>
+            </div>
+
+            <!-- Bloco Estabelecimento/Comércio -->
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:700; color:#cbd5e1; text-transform:uppercase; letter-spacing:0.08em; background:rgba(255,255,255,0.08); padding:3px 9px; border-radius:6px;">Estabelecimento / Comércio</span>
+              </div>
+              <h3 style="font-size:clamp(1.05rem, 1.25vw, 1.3rem); color:#cbd5e1; font-weight:600; line-height:1.35; margin:0;">
+                “Você usaria um aplicativo para contratar ajudantes?”
+              </h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0; line-height:1.4;">
+                Gera resposta educada ("com certeza usaria"), mas zero compromisso ou validação de urgência real.
+              </p>
+            </div>
+
+            <!-- Bloco Candidato/Colaborador -->
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:700; color:#cbd5e1; text-transform:uppercase; letter-spacing:0.08em; background:rgba(255,255,255,0.08); padding:3px 9px; border-radius:6px;">Candidato / Colaborador</span>
+              </div>
+              <h3 style="font-size:clamp(1.05rem, 1.25vw, 1.3rem); color:#cbd5e1; font-weight:600; line-height:1.35; margin:0;">
+                “Você usaria um aplicativo no celular para encontrar bicos e freelas mais rápido?”
+              </h3>
+              <p style="font-size:0.8rem; color:#94a3b8; margin:0; line-height:1.4;">
+                Pergunta induzida de futuro que gera falsos positivos e mascara os atritos reais do dia a dia informal.
+              </p>
+            </div>
           </div>
-          <div class="card highlight" style="display:flex; flex-direction:column; justify-content:center;">
-            <span class="card-tag">APLICAÇÃO PRÁTICA TRAMPAKÍ</span>
-            <h3 style="font-size:2rem; color:#ffffff; margin-bottom:0;">“Quantas vezes faltou um garçom ou cozinheiro no último mês e o que você fez?”</h3>
+
+          <!-- COLUNA 2: APLICAÇÃO PRÁTICA TRAMPAKÍ -->
+          <div class="card highlight" style="display:flex; flex-direction:column; gap:16px; padding: clamp(18px, 1.8vw, 26px);">
+            <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,45,122,0.22); padding-bottom:10px;">
+              <span class="card-tag" style="margin-bottom:0; font-size:0.75rem; font-weight:800; letter-spacing:0.08em;">✓ APLICAÇÃO PRÁTICA TRAMPAKÍ</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pink);">The Mom Test Real</span>
+            </div>
+
+            <!-- Bloco Estabelecimento/Comércio -->
+            <div style="background:rgba(255,45,122,0.06); border:1px solid rgba(255,45,122,0.22); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:700; color:var(--pink); text-transform:uppercase; letter-spacing:0.08em; background:rgba(255,45,122,0.14); padding:3px 9px; border-radius:6px;">Estabelecimento / Comércio</span>
+              </div>
+              <h3 style="font-size:clamp(1.05rem, 1.25vw, 1.3rem); color:#ffffff; font-weight:700; line-height:1.35; margin:0;">
+                “Quantas vezes faltou um garçom ou cozinheiro no último mês e o que você fez?”
+              </h3>
+              <p style="font-size:0.8rem; color:#e2e8f0; margin:0; line-height:1.4;">
+                Investiga o prejuízo financeiro concreto, noites desfalcadas e soluções improvisadas recentes.
+              </p>
+            </div>
+
+            <!-- Bloco Candidato/Colaborador -->
+            <div style="background:rgba(255,45,122,0.06); border:1px solid rgba(255,45,122,0.22); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:700; color:var(--pink); text-transform:uppercase; letter-spacing:0.08em; background:rgba(255,45,122,0.14); padding:3px 9px; border-radius:6px;">Candidato / Colaborador</span>
+              </div>
+              <h3 style="font-size:clamp(1.05rem, 1.25vw, 1.3rem); color:#ffffff; font-weight:700; line-height:1.35; margin:0;">
+                “Quantos dias você ficou sem trabalhar no último mês por não achar um bico, e o que você fez para procurar serviço?”
+              </h3>
+              <p style="font-size:0.8rem; color:#e2e8f0; margin:0; line-height:1.4;">
+                Mede a dor real do trabalhador: frequência de dias sem renda e esforço real gasto buscando serviço.
+              </p>
+            </div>
           </div>
         </div>
       </article>
@@ -1010,21 +1238,11 @@
 
       <!-- SLIDE 05: SIMULADOR FIEL AO VÍDEO -->
       <article class="scene" data-index="4">
-        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
-          <div>
-            <div class="kicker">05 / PRODUTO EM OPERAÇÃO • TELAS REAIS DO PROJETO TRAMPAKÍ</div>
-            <h2 class="slide-title" style="font-size:clamp(1.6rem, 2.3vw, 2.3rem); margin-bottom:2px;">
-              Visão Lado a Lado: <span class="pink-text">Candidato & Estabelecimento</span>
-            </h2>
-          </div>
-          <div style="display:flex; gap:8px; align-items:center;">
-            <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()" title="Pausar Auto-Play" style="width:36px; height:36px; padding:0; display:inline-flex; align-items:center; justify-content:center;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:block;"><rect x="5.5" y="4.5" width="4" height="15" rx="1"></rect><rect x="14.5" y="4.5" width="4" height="15" rx="1"></rect></svg>
-            </button>
-            <button class="btn-top" onclick="setAppStep(0, true)" title="Reiniciar" style="width:36px; height:36px; padding:0; display:inline-flex; align-items:center; justify-content:center;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
-            </button>
-          </div>
+        <div style="margin-bottom:28px;">
+          <div class="kicker">05 / PRODUTO EM OPERAÇÃO • TELAS REAIS DO PROJETO TRAMPAKÍ</div>
+          <h2 class="slide-title" style="font-size:clamp(1.6rem, 2.3vw, 2.3rem); margin-bottom:2px;">
+            Visão Lado a Lado: <span class="pink-text">Candidato & Estabelecimento</span>
+          </h2>
         </div>
 
         <div class="demo-layout">
@@ -1053,6 +1271,11 @@
               <span class="step-num">TELA 06 • PAGAMENTO PIX & AVALIAÇÃO</span>
               <span class="step-title">Comprovante Pix anexado (R$ 225,00) e fluxo para avaliação 1 a 5★</span>
             </button>
+            <div class="step-divider"></div>
+            <button id="btnPrototypeNav" class="prototype-btn" onclick="openPrototypeStep(true)">
+              <span class="step-num" style="color: #ffffff; opacity: 0.95; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.06em; margin-bottom: 2px; display: block;">PROTÓTIPO VIVO • NAVEGAÇÃO</span>
+              <span class="step-title" style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 0.82rem; font-family: 'JetBrains Mono', monospace; line-height: 1.3;">(trampaki.netlify.app)</span>
+            </button>
           </div>
 
           <div class="real-screens-stage">
@@ -1064,13 +1287,37 @@
                   <span style="color:rgba(255,255,255,0.2);">|</span>
                   <span id="screenHeaderDesc" style="font-size:0.78rem; color:#cbd5e1; font-weight:600;">Candidato acessa login e Restaurante anuncia serviço com valor e raio definidos</span>
                 </div>
-                <div class="screen-nav-arrows">
-                  <button class="screen-nav-btn" onclick="prevAppStep()" title="Tela anterior">‹</button>
-                  <button class="screen-nav-btn" onclick="nextAppStep()" title="Próxima tela">›</button>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <a id="btnExternalPrototype" href="https://trampaki.netlify.app" target="_blank" rel="noopener noreferrer" class="btn-top" style="display:none; padding:4px 10px; font-size:0.72rem; background:#b3205d; border-color:#ff4d8d; color:#fff; text-decoration:none; font-weight:700; align-items:center; gap:4px;" title="Abrir em nova aba">
+                    <span>Abrir site</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+                  <div id="protoZoomControls" style="display:none; align-items:center; gap:3px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:2px 6px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); margin-right:2px;">Zoom:</span>
+                    <button onclick="changeProtoZoom(-0.05)" class="btn-top" style="padding:2px 7px; font-size:0.75rem; line-height:1; min-width:auto; height:24px;" title="Diminuir zoom (ver mais tela)">−</button>
+                    <span id="protoZoomBadge" style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#fff; font-weight:700; min-width:32px; text-align:center;">75%</span>
+                    <button onclick="changeProtoZoom(0.05)" class="btn-top" style="padding:2px 7px; font-size:0.75rem; line-height:1; min-width:auto; height:24px;" title="Aumentar zoom">+</button>
+                    <button onclick="setProtoZoom(0.75)" class="btn-top" style="padding:2px 6px; font-size:0.68rem; line-height:1; min-width:auto; height:24px; color:var(--text-muted);" title="Resetar zoom (75%)">Reset</button>
+                  </div>
+                  <div style="display:flex; gap:6px; align-items:center; margin-right:4px;">
+                    <button id="btnAutoPlayApp" class="btn-top active" onclick="toggleAppAutoPlay()" title="Pausar / Reproduzir Auto-Play" style="width:30px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:8px;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="5.5" y="4.5" width="4" height="15" rx="1"></rect><rect x="14.5" y="4.5" width="4" height="15" rx="1"></rect></svg>
+                    </button>
+                    <button class="btn-top" onclick="setAppStep(0, true)" title="Reiniciar do início" style="width:30px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:8px;">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                    </button>
+                  </div>
+                  <div class="screen-nav-arrows">
+                    <button class="screen-nav-btn" onclick="prevAppStep()" title="Tela anterior">‹</button>
+                    <button class="screen-nav-btn" onclick="nextAppStep()" title="Próxima tela">›</button>
+                  </div>
                 </div>
               </div>
-              <div class="real-screen-viewport" onclick="nextAppStep()" title="Clique na imagem para avançar a tela">
-                <img id="realScreenImage" src="./assets/aistudio/Tela_001_46e3b5d8.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Gust4vo1/Visual_Trampaki/main/assets/aistudio/Tela_001_46e3b5d8.png'" alt="Tela 01 Trampakí" class="real-screen-img" />
+              <div class="real-screen-viewport" id="appViewportFrame" style="position:relative; width:100%; height:540px; padding:0; background:#06080e; overflow:hidden;">
+                <img id="realScreenImage" src="./assets/aistudio/Tela_001_46e3b5d8.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Gust4vo1/Visual_Trampaki/main/assets/aistudio/Tela_001_46e3b5d8.png'" alt="Tela 01 Trampakí" class="real-screen-img" style="cursor:pointer;" onclick="nextAppStep()" />
+                <div id="livePrototypeContainer" style="display:none; width:100%; height:100%; position:absolute; inset:0; z-index:10; background:#06080e; overflow:hidden;">
+                  <iframe id="livePrototypeFrame" src="https://trampaki.netlify.app" style="width:133.333%; height:133.333%; transform:scale(0.75); transform-origin:top left; border:none; background:#06080e;" title="Protótipo Trampakí Interativo" allow="geolocation; microphone; camera; display-capture; clipboard-read; clipboard-write"></iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -1167,41 +1414,46 @@
                   <span class="card-tag" style="margin-bottom:6px;">MUNDO DO CONTRATANTE • DESCONTO PROGRESSIVO</span>
                   <h3 style="font-size:1.55rem; margin-bottom:6px; color:#fff;">Pacotes de Vagas Trampakí</h3>
                 </div>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
-                  Sem mensalidade fixa
-                </span>
+                <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-end;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700; white-space:nowrap;">
+                    Créditos nunca expiram
+                  </span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:4px 10px; border-radius:8px; background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.15); font-weight:700; white-space:nowrap;">
+                    Sem mensalidade fixa
+                  </span>
+                </div>
               </div>
               <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:18px; line-height:1.5;">
                 O comércio adquire créditos de vagas sob demanda. Quanto maior o pacote adquirido, menor o custo unitário por vaga anunciada.
               </p>
 
               <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; margin-top:8px;">
-                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div class="pricing-balloon" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
                   <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">01 VAGA</div>
                   <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 1,99</div>
                   <div style="font-size:0.68rem; color:#94a3b8;">R$ 1,99/vaga</div>
                 </div>
 
-                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div class="pricing-balloon" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
                   <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">03 VAGAS</div>
                   <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 5,67</div>
                   <div style="font-size:0.68rem; color:#94a3b8;">R$ 1,89/vaga</div>
                 </div>
 
-                <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:12px; padding:24px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center; box-shadow:0 0 22px rgba(255,45,122,0.2);">
+                <div class="pricing-balloon highlight" style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:12px; padding:24px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center; box-shadow:0 0 22px rgba(255,45,122,0.2);">
                   <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.58rem; background:var(--pink); color:#fff; padding:3px 8px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Popular</span>
                   <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">05 VAGAS</div>
                   <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 8,95</div>
                   <div style="font-size:0.68rem; color:#cbd5e1;">R$ 1,79/vaga</div>
                 </div>
 
-                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div class="pricing-balloon" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 8px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
                   <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">10 VAGAS</div>
                   <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 16,90</div>
                   <div style="font-size:0.68rem; color:#94a3b8;">R$ 1,69/vaga</div>
                 </div>
 
-                <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.22); border-radius:12px; padding:24px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center;">
+                <div class="pricing-balloon" style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.22); border-radius:12px; padding:24px 8px; text-align:center; position:relative; display:flex; flex-direction:column; justify-content:center;">
                   <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.58rem; background:#ffffff; color:#000; padding:3px 8px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economia</span>
                   <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">25 VAGAS</div>
                   <div style="font-size:1.32rem; font-weight:800; color:#fff; margin:6px 0;">R$ 39,75</div>
@@ -1209,17 +1461,12 @@
                 </div>
               </div>
             </div>
-
-            <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; color:#94a3b8;">
-              <span>Créditos nunca expiram</span>
-              <span style="color:#fff; font-weight:600;">Match sem limites até a vaga ser preenchida</span>
-            </div>
           </div>
 
           <!-- MUNDO 2: CANDIDATO -->
-          <div class="card" style="padding: clamp(24px, 2.3vw, 34px); display:flex; flex-direction:column; justify-content:space-between;">
+          <div class="card" style="padding: clamp(24px, 2.3vw, 34px); display:flex; flex-direction:column; justify-content:center;">
             <div>
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
                 <div>
                   <span class="card-tag" style="margin-bottom:6px;">MUNDO DO CANDIDATO • 100% GRÁTIS + PREMIUM</span>
                   <h3 style="font-size:1.55rem; margin-bottom:6px; color:#fff;">Trabalho Grátis & Trampakí Premium</h3>
@@ -1229,51 +1476,77 @@
                 </span>
               </div>
 
-              <!-- Faixa 100% Grátis -->
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px 16px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; font-size:0.86rem;">
-                <span style="color:#f8fafc;"><strong>Acesso Gratuito Universal:</strong> Cadastro, busca de vagas, match e recebimento via Pix sem taxa alguma.</span>
-                <span style="font-weight:800; color:var(--pink); font-family:'JetBrains Mono',monospace; font-size:1.05rem;">R$ 0,00</span>
-              </div>
-
-              <!-- Planos Premium Opcional (Balões Verticais) + Lista de Vantagens ao Lado -->
-              <div style="display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center; margin-top:14px;">
-                <!-- Balões de Plano Mensal e Anual -->
-                <div style="display:flex; gap:12px;">
-                  <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:22px 14px; text-align:center; min-width:125px; display:flex; flex-direction:column; justify-content:center;">
-                    <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO MENSAL</div>
-                    <div style="font-size:1.32rem; font-weight:800; color:#fff; margin:6px 0;">R$ 19,90</div>
-                    <div style="font-size:0.68rem; color:#94a3b8;">por mês</div>
+              <!-- Grade com Balão Grátis (à esquerda com itens fora) + Balão Maior de Benefícios Premium (contendo Mensal, Anual e lista) -->
+              <div style="display:grid; grid-template-columns: 140px 1fr; gap:18px; align-items:flex-start; margin-top:8px;">
+                <!-- Coluna 1: Plano Grátis -->
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div class="pricing-balloon" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:16px 10px; text-align:center;">
+                    <div style="font-size:0.72rem; font-weight:800; color:#38bdf8; letter-spacing:0.4px;">PLANO GRÁTIS</div>
+                    <div style="font-size:1.32rem; font-weight:800; color:#fff; margin:6px 0;">R$ 0,00</div>
+                    <div style="font-size:0.65rem; color:#94a3b8;">sem taxas</div>
                   </div>
-
-                  <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:12px; padding:22px 14px; text-align:center; min-width:130px; position:relative; display:flex; flex-direction:column; justify-content:center; box-shadow:0 0 22px rgba(255,45,122,0.2);">
-                    <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.58rem; background:var(--pink); color:#fff; padding:3px 8px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economize 75%</span>
-                    <div style="font-size:0.75rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO ANUAL</div>
-                    <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 49,90</div>
-                    <div style="font-size:0.68rem; color:#cbd5e1;">R$ 4,16/mês</div>
-                  </div>
-                </div>
-
-                <!-- Lista de Vantagens ao Lado com espaçamento para a direita e o mesmo Tique '✓' rosa -->
-                <div style="display:flex; flex-direction:column; gap:10px; font-size:0.86rem; color:#cbd5e1; padding-left:14px;">
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Selo VIP</strong> com destaque visual no perfil</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Topo da lista</strong> de inscritos do contratante</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Até 4x mais chances</strong> de match e visualizações</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="color:var(--pink); font-weight:800; font-size:1rem;">✓</span> <span><strong>Acesso prioritário</strong> a vagas recém-publicadas</span>
+                  <!-- Vantagens do Plano Grátis fora do quadro, logo abaixo -->
+                  <div style="font-size:0.76rem; color:#cbd5e1; display:flex; flex-direction:column; gap:6px; padding-left:2px; line-height:1.35;">
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <span style="color:var(--pink); font-weight:800; font-size:0.85rem;">✓</span> <span><strong>Cadastro</strong></span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <span style="color:var(--pink); font-weight:800; font-size:0.85rem;">✓</span> <span><strong>Busca</strong> de vagas</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <span style="color:var(--pink); font-weight:800; font-size:0.85rem;">✓</span> <span><strong>Match e Pix</strong> sem taxa</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; color:#94a3b8;">
-              <span>Assinatura 100% Opcional</span>
-              <span style="color:#fff; font-weight:600;">O profissional nunca paga nada para trabalhar ou receber</span>
+                <!-- Coluna 2: Balão Maior de Benefícios Premium com os planos Mensal e Anual dentro dele -->
+                <div style="background:rgba(255,255,255,0.02); border:1.5px solid rgba(255,45,122,0.25); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:12px;">
+                  <div style="display:grid; grid-template-columns: 255px 1fr; gap:18px; align-items:center;">
+                    <span style="font-size:0.76rem; text-transform:uppercase; color:var(--pink); font-weight:800; letter-spacing:0.5px;">Benefícios Premium</span>
+                    <div>
+                      <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#38bdf8; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.25); padding:2px 8px; border-radius:6px; font-weight:700; display:inline-block;">
+                        Inclui tudo do Grátis +
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style="display:grid; grid-template-columns: 255px 1fr; gap:18px; align-items:center;">
+                    <!-- No começo desse balão: balõezinhos de Plano Mensal e Anual -->
+                    <div style="display:flex; gap:10px; width:255px;">
+                      <!-- Plano Mensal -->
+                      <div class="pricing-balloon" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:16px 10px; text-align:center;">
+                        <div style="font-size:0.7rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO MENSAL</div>
+                        <div style="font-size:1.32rem; font-weight:800; color:#fff; margin:6px 0;">R$ 19,90</div>
+                        <div style="font-size:0.65rem; color:#94a3b8;">por mês</div>
+                      </div>
+
+                      <!-- Plano Anual -->
+                      <div class="pricing-balloon highlight" style="flex:1; background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:12px; padding:16px 10px; text-align:center; position:relative; box-shadow:0 0 20px rgba(255,45,122,0.18);">
+                        <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.55rem; background:var(--pink); color:#fff; padding:2px 6px; border-radius:4px; font-weight:800; text-transform:uppercase; white-space:nowrap; letter-spacing:0.4px;">Economize 75%</span>
+                        <div style="font-size:0.7rem; font-weight:800; color:#fff; letter-spacing:0.4px;">PLANO ANUAL</div>
+                        <div style="font-size:1.32rem; font-weight:800; color:var(--pink); margin:6px 0;">R$ 49,90</div>
+                        <div style="font-size:0.65rem; color:#cbd5e1;">R$ 4,16/mês</div>
+                      </div>
+                    </div>
+
+                    <!-- Na frente deles: Lista de Benefícios Ticados -->
+                    <div style="display:flex; flex-direction:column; gap:8px; font-size:0.83rem; color:#cbd5e1;">
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="color:var(--pink); font-weight:800; font-size:0.95rem;">✓</span> <span><strong>Selo VIP</strong> com destaque visual no perfil</span>
+                      </div>
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="color:var(--pink); font-weight:800; font-size:0.95rem;">✓</span> <span><strong>Topo da lista</strong> de inscritos do contratante</span>
+                      </div>
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="color:var(--pink); font-weight:800; font-size:0.95rem;">✓</span> <span><strong>Até 4x mais chances</strong> de match e visualizações</span>
+                      </div>
+                      <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="color:var(--pink); font-weight:800; font-size:0.95rem;">✓</span> <span><strong>Acesso prioritário</strong> a vagas recém-publicadas</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1282,29 +1555,28 @@
       <!-- SLIDE 09 -->
       <article class="scene" data-index="8">
         <div class="kicker">09 / CAPÍTULO 03 • PROJEÇÕES FINANCEIRAS & INDICADORES (FIAP)</div>
-        <h2 class="slide-title">Projeção Financeira e <span class="pink-text">Unit Economics (3 Anos)</span></h2>
+        <h2 class="slide-title">Projeção Financeira <span class="pink-text">(3 Anos)</span></h2>
         <p class="slide-subtitle">
           Evolução consolidada de receita recorrente anual, escala da base de clientes e eficiência de capital.
         </p>
 
-        <!-- 3 CARDS SUPERIORES: ANO 1, ANO 2, ANO 3 -->
+        <!-- 3 CARDS SUPERIORES: ANO 1, ANO 2, ANO 3 (SEM DUPLICAÇÃO DE CLIENTES) -->
         <div class="grid-3" style="margin-top: 14px; margin-bottom: 20px;">
           <!-- ANO 1 -->
           <div class="card" style="padding:22px; display:flex; flex-direction:column; justify-content:space-between;">
             <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <span class="card-tag" style="margin-bottom:0;">ANO 1 • VALIDAÇÃO INICIAL</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pink); font-weight:700;">Payback 1,7m</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--pink); font-weight:700;">EBITDA R$ 400.165</span>
               </div>
-              <div style="font-size:2.2rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
-                R$ 432 mil <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">ARR</span>
+              <div style="font-size:2.85rem; font-weight:800; color:#fff; line-height:1.05; margin-bottom:8px; letter-spacing:-0.02em;">
+                R$ 432 mil <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">ARR</span>
               </div>
-              <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
-                <strong>2.400 Clientes Ativos</strong> (500 novos/mês)<br>
-                <span style="color:#94a3b8; font-size:0.8rem;">EBITDA: R$ 400 mil (Margem 92,6%)</span>
+              <div style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px; line-height:1.4;">
+                <span style="color:#94a3b8;">Margem Bruta:</span> <strong style="color:#fff;">0,0%</strong> • <span style="color:#94a3b8;">Caixa:</span> <strong style="color:#fff;">R$ 700k</strong>
               </div>
             </div>
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#94a3b8; display:flex; justify-content:space-between; margin-top:8px;">
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#94a3b8; display:flex; justify-content:space-between; margin-top:10px;">
               <span>LTV: <strong style="color:#fff;">R$ 150</strong> / CAC: <strong style="color:#fff;">R$ 26</strong></span>
               <span style="color:var(--pink); font-weight:700;">LTV/CAC 5,8x</span>
             </div>
@@ -1313,19 +1585,18 @@
           <!-- ANO 2 -->
           <div class="card highlight" style="padding:22px; display:flex; flex-direction:column; justify-content:space-between;">
             <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span class="card-tag" style="margin-bottom:0;">ANO 2 • ESCALA (+280% YoY)</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pink); font-weight:700;">Payback 2,1m</span>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span class="card-tag" style="margin-bottom:0;">ANO 2 • ESCALA</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--pink); font-weight:700;">EBITDA R$ 1,52M</span>
               </div>
-              <div style="font-size:2.2rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
-                R$ 1,64 mi <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">ARR</span>
+              <div style="font-size:2.85rem; font-weight:800; color:#fff; line-height:1.05; margin-bottom:8px; letter-spacing:-0.02em;">
+                R$ 1,64 mi <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">ARR</span>
               </div>
-              <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
-                <strong>6.840 Clientes Ativos</strong> (1.000 novos/mês)<br>
-                <span style="color:#94a3b8; font-size:0.8rem;">EBITDA: R$ 1,52 mi • Margem Bruta: 21,1%</span>
+              <div style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px; line-height:1.4;">
+                <span style="color:#94a3b8;">Margem Bruta:</span> <strong style="color:#fff;">21,1%</strong> • <span style="color:#94a3b8;">Caixa:</span> <strong style="color:#fff;">R$ 2,72M</strong>
               </div>
             </div>
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:8px;">
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:10px;">
               <span>LTV: <strong style="color:#fff;">R$ 267</strong> / CAC: <strong style="color:#fff;">R$ 42</strong></span>
               <span style="color:var(--pink); font-weight:700;">LTV/CAC 6,3x</span>
             </div>
@@ -1334,19 +1605,18 @@
           <!-- ANO 3 -->
           <div class="card" style="padding:22px; display:flex; flex-direction:column; justify-content:space-between;">
             <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span class="card-tag" style="margin-bottom:0;">ANO 3 • CONSOLIDAÇÃO (+257% YoY)</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#fff; font-weight:700;">EBITDA R$ 5,9M</span>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span class="card-tag" style="margin-bottom:0;">ANO 3 • CONSOLIDAÇÃO</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--pink); font-weight:700;">EBITDA R$ 5,94M</span>
               </div>
-              <div style="font-size:2.2rem; font-weight:800; color:#fff; line-height:1.1; margin-bottom:6px;">
-                R$ 5,86 mi <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">ARR</span>
+              <div style="font-size:2.85rem; font-weight:800; color:#fff; line-height:1.05; margin-bottom:8px; letter-spacing:-0.02em;">
+                R$ 5,86 mi <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">ARR</span>
               </div>
-              <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:8px; line-height:1.45;">
-                <strong>19.536 Clientes Ativos</strong> (2.000 novos/mês)<br>
-                <span style="color:#94a3b8; font-size:0.8rem;">EBITDA: R$ 5,94 mi • Margem Bruta: 37,7%</span>
+              <div style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px; line-height:1.4;">
+                <span style="color:#94a3b8;">Margem Bruta:</span> <strong style="color:#fff;">37,7%</strong> • <span style="color:#94a3b8;">Caixa:</span> <strong style="color:var(--pink);">R$ 10,91M</strong>
               </div>
             </div>
-            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:8px;">
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; font-size:0.78rem; color:#cbd5e1; display:flex; justify-content:space-between; margin-top:10px;">
               <span>LTV: <strong style="color:#fff;">R$ 500</strong> / CAC: <strong style="color:#fff;">R$ 85</strong></span>
               <span style="color:var(--pink); font-weight:700;">LTV/CAC 5,9x</span>
             </div>
@@ -1355,80 +1625,128 @@
 
         <!-- VISUALIZAÇÃO GRÁFICA / BENCHMARKS DA PLANILHA FIAP -->
         <div class="grid-2-equal" style="gap:20px;">
-          <!-- GRÁFICO 1: EVOLUÇÃO DE ARR E EBITDA -->
-          <div class="card" style="padding:18px 22px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-              <span class="card-tag" style="margin-bottom:0;">EVOLUÇÃO DE RECEITA & RESULTADO (ARR / EBITDA)</span>
-              <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#94a3b8;">Fonte: Modelo Financeiro MVP FIAP</span>
+          <!-- GRÁFICO 1: EVOLUÇÃO DE MARGEM BRUTA & CAIXA (COMPACTADO, SEM RODAPÉ DE RUNWAY) -->
+          <div class="card" style="padding:16px 22px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span class="card-tag" style="margin-bottom:0;">EXPANSÃO DE MARGEM BRUTA & CAIXA</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#94a3b8;">Modelo Financeiro MVP FIAP</span>
             </div>
 
-            <!-- Barras Comparativas Visuais -->
-            <div style="display:flex; flex-direction:column; gap:12px;">
+            <!-- Barras de Margem Bruta Exata da Planilha -->
+            <div style="display:flex; flex-direction:column; gap:11px;">
               <!-- Ano 1 -->
               <div>
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
-                  <span style="color:#fff; font-weight:700;">Ano 1: R$ 432k ARR</span>
-                  <span style="color:#94a3b8;">EBITDA: R$ 400.165 • Caixa: R$ 700k</span>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:3px;">
+                  <span style="color:#fff; font-weight:700;">Ano 1: Margem Bruta 0,0%</span>
+                  <span style="color:#94a3b8; font-family:'JetBrains Mono',monospace;">Caixa: R$ 700.165</span>
                 </div>
-                <div style="width:100%; height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; display:flex;">
-                  <div style="width:7.4%; background:var(--pink); border-radius:6px;"></div>
+                <div style="width:100%; height:10px; background:rgba(255,255,255,0.06); border-radius:5px; overflow:hidden; position:relative;">
+                  <div style="width:2%; height:100%; background:rgba(255,255,255,0.2); border-radius:5px;"></div>
                 </div>
+                <div style="font-size:0.68rem; color:#94a3b8; margin-top:2px;">Custo direto 100% no MVP inicial (COGS R$ 432k)</div>
               </div>
 
               <!-- Ano 2 -->
               <div>
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
-                  <span style="color:#fff; font-weight:700;">Ano 2: R$ 1,64M ARR <span style="color:var(--pink); font-size:0.72rem; font-weight:800;">(+280% YoY)</span></span>
-                  <span style="color:#94a3b8;">EBITDA: R$ 1.522.526 • Caixa: R$ 2,72M</span>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:3px;">
+                  <span style="color:#fff; font-weight:700;">Ano 2: Margem Bruta 21,1%</span>
+                  <span style="color:#94a3b8; font-family:'JetBrains Mono',monospace;">Caixa: R$ 2.722.691</span>
                 </div>
-                <div style="width:100%; height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; display:flex;">
-                  <div style="width:28%; background:linear-gradient(90deg, var(--pink), #ff6b9d); border-radius:6px;"></div>
+                <div style="width:100%; height:10px; background:rgba(255,255,255,0.06); border-radius:5px; overflow:hidden;">
+                  <div style="width:21.1%; height:100%; background:linear-gradient(90deg, var(--pink), #ff6b9d); border-radius:5px;"></div>
                 </div>
+                <div style="font-size:0.68rem; color:#94a3b8; margin-top:2px;">Otimização de custos de infraestrutura e produto</div>
               </div>
 
               <!-- Ano 3 -->
               <div>
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
-                  <span style="color:#fff; font-weight:700;">Ano 3: R$ 5,86M ARR <span style="color:var(--pink); font-size:0.72rem; font-weight:800;">(+257% YoY • 13,5x)</span></span>
-                  <span style="color:#fff; font-weight:700;">EBITDA: R$ 5.943.515 • Caixa: R$ 10,91M</span>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:3px;">
+                  <span style="color:#fff; font-weight:700;">Ano 3: Margem Bruta 37,7%</span>
+                  <span style="color:var(--pink); font-family:'JetBrains Mono',monospace; font-weight:700;">Caixa: R$ 10.916.206</span>
                 </div>
-                <div style="width:100%; height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; display:flex;">
-                  <div style="width:100%; background:linear-gradient(90deg, var(--pink), #ff2d7a, #ffffff); border-radius:6px;"></div>
+                <div style="width:100%; height:10px; background:rgba(255,255,255,0.06); border-radius:5px; overflow:hidden;">
+                  <div style="width:37.7%; height:100%; background:linear-gradient(90deg, var(--pink), #ff2d7a, #ffffff); border-radius:5px;"></div>
                 </div>
+                <div style="font-size:0.68rem; color:#cbd5e1; margin-top:2px;">Escala acelerada com alavancagem operacional plena</div>
               </div>
             </div>
           </div>
 
-          <!-- GRÁFICO 2: EXPANSÃO DE CLIENTES & EFICIÊNCIA DE CAPITAL -->
-          <div class="card" style="padding:18px 22px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-              <span class="card-tag" style="margin-bottom:0;">TRAÇÃO DE CLIENTES & EFICIÊNCIA DE CAPITAL</span>
-              <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--pink); font-weight:700;">LTV/CAC ~ 6.0x</span>
+          <!-- GRÁFICO 2: GRÁFICO DE LINHA - TRAÇÃO DE CLIENTES (LINHA ROSA SÓLIDA + 3 CARDS INFERIORES) -->
+          <div class="card" style="padding:16px 20px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span class="card-tag" style="margin-bottom:0;">TRAÇÃO E CRESCIMENTO DE CLIENTES</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--pink); font-weight:700;">+714% em 3 Anos</span>
+              </div>
+
+              <!-- Gráfico de Linha Compacto com Linha Rosa Sólida e 3 Pontos Idênticos -->
+              <div style="width:100%; position:relative; padding:4px 0 2px 0;">
+                <svg viewBox="0 0 460 88" style="width:100%; height:auto; overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="clientAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ff2d7a" stop-opacity="0.25" />
+                      <stop offset="100%" stop-color="#ff2d7a" stop-opacity="0.0" />
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Linhas guias horizontais sutis -->
+                  <line x1="40" y1="16" x2="420" y2="16" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3" />
+                  <line x1="40" y1="44" x2="420" y2="44" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3" />
+                  <line x1="40" y1="72" x2="420" y2="72" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3" />
+
+                  <!-- Área preenchida sob a curva -->
+                  <path d="M 60 72 C 140 70, 180 56, 240 50 C 300 44, 350 24, 410 16 L 410 76 L 60 76 Z" fill="url(#clientAreaGrad)" />
+
+                  <!-- Linha inteira de cor sólida rosa (#ff2d7a) sem gradiente e sem filtro quadrado -->
+                  <path d="M 60 72 C 140 70, 180 56, 240 50 C 300 44, 350 24, 410 16" fill="none" stroke="#ff2d7a" stroke-width="3" stroke-linecap="round" />
+
+                  <!-- Ponto Ano 1 (2.400 clientes) - Idêntico -->
+                  <g transform="translate(60, 72)">
+                    <circle r="3.8" fill="#ff2d7a" stroke="#ffffff" stroke-width="1.8" />
+                    <text x="0" y="-9" fill="#ffffff" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">2.400</text>
+                    <text x="0" y="14" fill="#94a3b8" font-size="7.5" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono', monospace">Ano 1</text>
+                  </g>
+
+                  <!-- Ponto Ano 2 (6.840 clientes) - Idêntico -->
+                  <g transform="translate(240, 50)">
+                    <circle r="3.8" fill="#ff2d7a" stroke="#ffffff" stroke-width="1.8" />
+                    <text x="0" y="-9" fill="#ffffff" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">6.840</text>
+                    <text x="0" y="14" fill="#94a3b8" font-size="7.5" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono', monospace">Ano 2</text>
+                  </g>
+
+                  <!-- Ponto Ano 3 (19.536 clientes) - Idêntico e na mesma cor dos anos 1 e 2 -->
+                  <g transform="translate(410, 16)">
+                    <circle r="3.8" fill="#ff2d7a" stroke="#ffffff" stroke-width="1.8" />
+                    <text x="0" y="-9" fill="#ffffff" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">19.536</text>
+                    <text x="0" y="14" fill="#94a3b8" font-size="7.5" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono', monospace">Ano 3</text>
+                  </g>
+                </svg>
+              </div>
             </div>
 
-            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; text-align:center;">
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 8px;">
-                <div style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Clientes Ano 1</div>
-                <div style="font-size:1.45rem; font-weight:800; color:#fff; margin:4px 0;">2.400</div>
-                <div style="font-size:0.68rem; color:var(--pink); font-weight:600;">500 novos/mês</div>
+            <!-- 3 Blocos Abaixo da Linha com Novos Clientes/mês e Churn da Planilha FIAP -->
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
+              <!-- Ano 1 -->
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:7px 8px; text-align:center;">
+                <div style="font-size:0.68rem; color:#94a3b8; font-weight:700; font-family:'JetBrains Mono',monospace; margin-bottom:2px;">ANO 1</div>
+                <div style="font-size:0.78rem; color:#fff; font-weight:700;">500 novos/mês</div>
+                <div style="font-size:0.72rem; color:var(--pink); font-weight:600; margin-top:2px;">Churn: 10,0%</div>
               </div>
 
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 8px;">
-                <div style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase; font-weight:700;">Clientes Ano 2</div>
-                <div style="font-size:1.45rem; font-weight:800; color:#fff; margin:4px 0;">6.840</div>
-                <div style="font-size:0.68rem; color:var(--pink); font-weight:600;">1.000 novos/mês</div>
+              <!-- Ano 2 -->
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:7px 8px; text-align:center;">
+                <div style="font-size:0.68rem; color:#94a3b8; font-weight:700; font-family:'JetBrains Mono',monospace; margin-bottom:2px;">ANO 2</div>
+                <div style="font-size:0.78rem; color:#fff; font-weight:700;">1.000 novos/mês</div>
+                <div style="font-size:0.72rem; color:var(--pink); font-weight:600; margin-top:2px;">Churn: 7,5%</div>
               </div>
 
-              <div style="background:rgba(255,45,122,0.08); border:1.5px solid var(--border-pink); border-radius:10px; padding:12px 8px;">
-                <div style="font-size:0.7rem; color:#cbd5e1; text-transform:uppercase; font-weight:700;">Clientes Ano 3</div>
-                <div style="font-size:1.45rem; font-weight:800; color:var(--pink); margin:4px 0;">19.536</div>
-                <div style="font-size:0.68rem; color:#fff; font-weight:600;">2.000 novos/mês</div>
+              <!-- Ano 3 -->
+              <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,45,122,0.3); border-radius:8px; padding:7px 8px; text-align:center;">
+                <div style="font-size:0.68rem; color:var(--pink); font-weight:700; font-family:'JetBrains Mono',monospace; margin-bottom:2px;">ANO 3</div>
+                <div style="font-size:0.78rem; color:#fff; font-weight:700;">2.000 novos/mês</div>
+                <div style="font-size:0.72rem; color:var(--pink); font-weight:600; margin-top:2px;">Churn: 5,0%</div>
               </div>
-            </div>
-
-            <div style="margin-top:14px; display:flex; justify-content:space-between; align-items:center; font-size:0.76rem; color:#94a3b8; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
-              <span>Ticket Médio: <strong style="color:#fff;">R$ 15 → R$ 25</strong></span>
-              <span>Caixa Final Ano 3: <strong style="color:var(--pink);">R$ 10.916.206</strong></span>
             </div>
           </div>
         </div>
@@ -1438,35 +1756,35 @@
       <article class="scene" data-index="9">
         <div class="kicker">10 / CAPÍTULOS 04 & 05 • VALIDAÇÃO LEAN & ANÁLISE CRÍTICA DE BANCA</div>
         <h2 class="slide-title">Ciclo Lean e Mitigação dos <span class="pink-text">Três Riscos Fatais</span></h2>
-        <div class="grid-3" style="margin-bottom:20px;">
-          <div class="card" style="padding:20px;">
+        <div class="grid-3" style="margin-top:24px; margin-bottom:20px;">
+          <div class="card pricing-balloon" style="padding:20px;">
             <span class="card-tag">FASE 1 • CONSTRUIR (MVP)</span>
             <h3>Protótipo Funcional</h3>
             <p style="font-size:0.95rem;">Plataforma web mobile com jornada dupla (Candidato e Contratante), match, chat e confirmação de Pix.</p>
           </div>
-          <div class="card" style="padding:20px;">
+          <div class="card pricing-balloon" style="padding:20px;">
             <span class="card-tag">FASE 2 • MEDIR MÉTRICAS</span>
             <h3>Liquidez & Show-up</h3>
             <p style="font-size:0.95rem;">Medição do tempo até o primeiro match (&lt; 60 min) e taxa de comparecimento efetivo ao turno.</p>
           </div>
-          <div class="card" style="padding:20px;">
+          <div class="card pricing-balloon" style="padding:20px;">
             <span class="card-tag">FASE 3 • APRENDER & PIVOTAR</span>
             <h3>Calibragem por Raio e Região</h3>
             <p style="font-size:0.95rem;">Ajuste de pacotes de créditos e tráfego pago geolocalizado por raio na cidade de São Paulo e novas praças.</p>
           </div>
         </div>
         <div class="grid-3">
-          <div class="card highlight" style="padding:20px;">
+          <div class="card highlight pricing-balloon" style="padding:20px;">
             <span class="card-tag">RISCO 01 • O OVO E A GALINHA</span>
             <h3>Popular Plataforma</h3>
             <p style="font-size:0.95rem;">Conseguir cadastros tanto de estabelecimentos, quanto de candidatos, ao mesmo tempo. Um precisa do outro para o aplicativo existir.</p>
           </div>
-          <div class="card highlight" style="padding:20px;">
+          <div class="card highlight pricing-balloon" style="padding:20px;">
             <span class="card-tag">RISCO 02 • DESINTERMEDIAÇÃO</span>
             <h3>Clientes Conversarem Fora do App</h3>
             <p style="font-size:0.95rem;">Após uma primeira contratação, ambas as partes podem preferir fechar um próximo serviço por conta própria</p>
           </div>
-          <div class="card highlight" style="padding:20px;">
+          <div class="card highlight pricing-balloon" style="padding:20px;">
             <span class="card-tag">RISCO 03 • CAC DIGITAL ALTO</span>
             <h3>Baixa Adesão Inicial</h3>
             <p style="font-size:0.95rem;">Alto custo com adesão inicial por falta de comprovação de sucesso da plataforma.</p>
@@ -1507,31 +1825,30 @@
       <article class="scene" data-index="11">
         <div class="final-brand-card" onclick="replayFinalAnimation()" title="Clique para reiniciar a animação">
           
-          <!-- LOGO TRAMPAKÍ COM O 'I' ANIMADO -->
+          <!-- LOGO TRAMPAKÍ COM O 'I' ANIMADO (IDENTICO AO SLIDE 1) -->
           <div class="final-logo-wrapper">
             <span>trampak</span>
-            <div class="final-logo-i">
-              <!-- Ícone vazado de geolocalização que desce até o 'i' -->
-              <div class="final-pin-dot">
-                <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block; filter: drop-shadow(0 10px 22px rgba(0,0,0,0.5));">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C6.8 1 2.5 5.2 2.5 10.4C2.5 16.5 12 24.5 12 24.5C12 24.5 21.5 16.5 21.5 10.4C21.5 5.2 17.2 1 12 1ZM12 6.6A3.8 3.8 0 1 0 12 14.2A3.8 3.8 0 1 0 12 6.6Z" fill="#162b4d"/>
-                </svg>
-              </div>
-              <!-- Haste branca do i -->
-              <div class="final-i-stem"></div>
-            </div>
+            <span class="final-logo-i-pin">
+              <svg class="final-logo-svg" viewBox="0 0 100 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ícone vazado de geolocalização que cai com bounce no 'i' -->
+                <g class="final-anim-pin">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 120 L 15.2 74.9 A 44 44 0 1 1 84.8 74.9 Z M 50 28 A 20 20 0 1 0 50 68 A 20 20 0 1 0 50 28 Z" fill="#162b4d"/>
+                </g>
+                <!-- Haste branca do i, idêntica ao slide 1 -->
+                <rect x="25" y="132" width="50" height="88" rx="4" fill="#ffffff"/>
+              </svg>
+            </span>
           </div>
 
           <!-- FRASE ABAIXO DO LOGO -->
           <h2 class="final-tagline">Seu próximo emprego na palma da sua mão.</h2>
 
-          <!-- Botão para reiniciar a animação -->
-          <button class="final-brand-replay-btn" onclick="event.stopPropagation(); replayFinalAnimation();" title="Clique para ver a animação novamente">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Botão para reiniciar a animação (apenas ícone em balãozinho) -->
+          <button class="final-brand-replay-btn" onclick="event.stopPropagation(); replayFinalAnimation();" title="Reiniciar animação" aria-label="Reiniciar animação">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M1 4v6h6"></path>
               <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
             </svg>
-            <span>Reiniciar Animação</span>
           </button>
         </div>
       </article>
@@ -1601,8 +1918,8 @@
       },
       {
         name: "Cap. 01 — Validação do Problema (The Mom Test)",
-        duration: 20,
-        script: `<span class="stage-cue">[DESTACAR A PERGUNTA PRÁTICA]</span><br>Para validar essa dor sem elogios vazios, aplicamos a metodologia <strong>The Mom Test</strong>. Perguntamos: "Quantas vezes faltou alguém no último mês e quanto isso custou?". Uma sexta desfalcada custa até 30% da noite.`
+        duration: 25,
+        script: `<span class="stage-cue">[DESTACAR A COMPARAÇÃO DOS DOIS LADOS]</span><br>Para validar essa dor sem elogios vazios, aplicamos a metodologia <strong>The Mom Test</strong> investigando o passado real de estabelecimentos e candidatos.<br><br>Em vez de perguntas hipotéticas como <em>"Você usaria um app?"</em>, investigamos os fatos: <em>"Quantas vezes faltou alguém no último mês e o que você fez?"</em> para o comércio, e <em>"Quantos dias você ficou sem trabalhar e como procurou serviço?"</em> para o autônomo.`
       },
       {
         name: "Cap. 02 — Proposta de Valor (JTBD dos Dois Lados)",
@@ -1699,6 +2016,13 @@
         subtitle: "Modal de pagamento via Pix com upload de comprovante e avaliação mútua por estrelas",
         img: "./assets/aistudio/Tela_006_e6e7b79f.png",
         alt: "Tela 6: Modal de pagamento via Pix com comprovante e avaliação"
+      },
+      {
+        stepNum: "PROTÓTIPO VIVO • NAVEGAÇÃO",
+        badge: "PROTÓTIPO VIVO • APP TRAMPAKÍ",
+        title: "Navegação livre pelo protótipo funcional ao vivo",
+        subtitle: "Navegue pelo aplicativo real diretamente no frame ao lado (trampaki.netlify.app)",
+        isLiveIframe: true
       }
     ];
 
@@ -1713,9 +2037,39 @@
     const syncChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('trampaki_pitch_v4') : null;
     let audiencePopup = null;
 
+    let currentProtoZoom = 0.75;
+
+    function applyProtoZoom() {
+      const frame = document.getElementById('livePrototypeFrame');
+      const badge = document.getElementById('protoZoomBadge');
+      if (frame) {
+        const inv = 1 / currentProtoZoom;
+        frame.style.width = (inv * 100) + '%';
+        frame.style.height = (inv * 100) + '%';
+        frame.style.transform = `scale(${currentProtoZoom})`;
+        frame.style.transformOrigin = 'top left';
+      }
+      if (badge) {
+        badge.textContent = Math.round(currentProtoZoom * 100) + '%';
+      }
+    }
+
+    function setProtoZoom(val) {
+      currentProtoZoom = Math.min(1.15, Math.max(0.5, Math.round(val * 100) / 100));
+      applyProtoZoom();
+    }
+
+    function changeProtoZoom(delta) {
+      setProtoZoom(currentProtoZoom + delta);
+    }
+
     function renderAppStep(stepIdx) {
       currentAppStep = stepIdx;
       const screenImg = document.getElementById('realScreenImage');
+      const liveContainer = document.getElementById('livePrototypeContainer');
+      const liveFrame = document.getElementById('livePrototypeFrame');
+      const extBtn = document.getElementById('btnExternalPrototype');
+      const zoomControls = document.getElementById('protoZoomControls');
       const stepHeaderNum = document.getElementById('screenHeaderStep');
       const stepHeaderDesc = document.getElementById('screenHeaderDesc');
       const stepData = APP_STEPS[stepIdx];
@@ -1723,29 +2077,69 @@
       if (stepData) {
         if (stepHeaderNum) stepHeaderNum.textContent = stepData.stepNum;
         if (stepHeaderDesc) stepHeaderDesc.textContent = stepData.subtitle;
-        if (screenImg) {
-          screenImg.style.opacity = '0';
-          screenImg.style.transform = 'scale(0.985)';
-          delete screenImg.dataset.triedFallback;
-          screenImg.onerror = function() {
-            if (!this.dataset.triedFallback) {
-              this.dataset.triedFallback = '1';
-              const cleanPath = stepData.img.replace(/^\.\//, '').replace(/^\//, '');
-              this.src = 'https://raw.githubusercontent.com/Gust4vo1/Visual_Trampaki/main/' + cleanPath;
-            }
-          };
-          setTimeout(() => {
-            screenImg.src = stepData.img;
-            screenImg.alt = stepData.alt;
-            screenImg.style.opacity = '1';
-            screenImg.style.transform = 'scale(1)';
-          }, 90);
+
+        if (stepData.isLiveIframe) {
+          if (screenImg) screenImg.style.display = 'none';
+          if (liveContainer) liveContainer.style.display = 'block';
+          if (extBtn) extBtn.style.display = 'inline-flex';
+          if (zoomControls) zoomControls.style.display = 'inline-flex';
+          if (liveFrame && (!liveFrame.src || liveFrame.src === 'about:blank')) {
+            liveFrame.src = 'https://trampaki.netlify.app';
+          }
+          applyProtoZoom();
+          if (appAutoPlaying) {
+            toggleAppAutoPlay(); // Pausa o auto-play para navegação livre
+          }
+        } else {
+          if (liveContainer) liveContainer.style.display = 'none';
+          if (extBtn) extBtn.style.display = 'none';
+          if (zoomControls) zoomControls.style.display = 'none';
+          if (screenImg) {
+            screenImg.style.display = 'block';
+            screenImg.style.opacity = '0';
+            screenImg.style.transform = 'scale(0.985)';
+            delete screenImg.dataset.triedFallback;
+            screenImg.onerror = function() {
+              if (!this.dataset.triedFallback) {
+                this.dataset.triedFallback = '1';
+                const cleanPath = stepData.img.replace(/^\.\//, '').replace(/^\//, '');
+                this.src = 'https://raw.githubusercontent.com/Gust4vo1/Visual_Trampaki/main/' + cleanPath;
+              }
+            };
+            setTimeout(() => {
+              screenImg.src = stepData.img;
+              screenImg.alt = stepData.alt;
+              screenImg.style.opacity = '1';
+              screenImg.style.transform = 'scale(1)';
+            }, 90);
+          }
         }
       }
 
-      document.querySelectorAll('.step-btn').forEach((btn, idx) => {
+      document.querySelectorAll('.steps-sidebar .step-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', idx === stepIdx);
       });
+      const protoBtn = document.getElementById('btnPrototypeNav');
+      if (protoBtn) {
+        protoBtn.classList.toggle('active', stepIdx === 6);
+      }
+    }
+
+    function openPrototypeStep(manualClick = false) {
+      const btn = document.getElementById('btnPrototypeNav');
+      if (btn) {
+        btn.classList.remove('rippling');
+        void btn.offsetWidth; // trigger reflow
+        btn.classList.add('rippling');
+      }
+      setAppStep(6, manualClick);
+    }
+
+    function handleViewportClick(event) {
+      if (APP_STEPS[currentAppStep] && APP_STEPS[currentAppStep].isLiveIframe) {
+        return;
+      }
+      nextAppStep();
     }
 
     function setAppStep(stepIdx, manualClick = false) {
@@ -1764,10 +2158,12 @@
       setAppStep(prev, true);
     }
 
-    // Pré-carregamento imediato das 6 telas do produto real
+    // Pré-carregamento imediato das telas do produto real
     APP_STEPS.forEach(step => {
-      const preImg = new Image();
-      preImg.src = step.img;
+      if (step.img) {
+        const preImg = new Image();
+        preImg.src = step.img;
+      }
     });
 
     function animateSwipe(dir) {
@@ -1820,15 +2216,38 @@
     }
 
     function replayFinalAnimation() {
-      const pin = document.querySelector('.final-pin-dot');
+      const pin = document.querySelector('.final-anim-pin');
       const tag = document.querySelector('.final-tagline');
-      if (pin && tag) {
+      if (!pin && !tag) return;
+
+      if (pin) {
         pin.style.animation = 'none';
-        tag.style.animation = 'none';
-        void pin.offsetWidth;
-        pin.style.animation = '';
-        tag.style.animation = '';
+        pin.style.opacity = '0';
+        pin.style.transform = 'translateY(-420px) scale(0.65)';
       }
+      if (tag) {
+        tag.style.animation = 'none';
+        tag.style.opacity = '0';
+        tag.style.transform = 'translateY(24px)';
+      }
+
+      // Forçar reflow sincrono
+      void document.body.offsetWidth;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (pin) {
+            pin.style.animation = '';
+            pin.style.opacity = '';
+            pin.style.transform = '';
+          }
+          if (tag) {
+            tag.style.animation = '';
+            tag.style.opacity = '';
+            tag.style.transform = '';
+          }
+        });
+      });
     }
 
     function goToScene(index, fromRemote = false) {
@@ -1974,10 +2393,89 @@
       else if (e.key.toLowerCase() === 'f') toggleFullScreen();
     });
 
+    function initDraggableChaosPills() {
+      const pills = document.querySelectorAll('.chaos-pill');
+      pills.forEach((pill) => {
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let currentX = 0, currentY = 0;
+
+        pill.addEventListener('pointerdown', (e) => {
+          if (e.button !== 0) return;
+          isDragging = true;
+          startX = e.clientX - currentX;
+          startY = e.clientY - currentY;
+          pill.classList.add('dragging');
+          try { pill.setPointerCapture(e.pointerId); } catch(err) {}
+          e.preventDefault();
+          e.stopPropagation();
+        });
+
+        pill.addEventListener('pointermove', (e) => {
+          if (!isDragging) return;
+          currentX = e.clientX - startX;
+          currentY = e.clientY - startY;
+          pill.style.left = `${currentX}px`;
+          pill.style.top = `${currentY}px`;
+          e.preventDefault();
+        });
+
+        const stopDragging = (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          pill.classList.remove('dragging');
+          try { pill.releasePointerCapture(e.pointerId); } catch(err) {}
+        };
+
+        pill.addEventListener('pointerup', stopDragging);
+        pill.addEventListener('pointercancel', stopDragging);
+      });
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      if (!box) return;
+      box.textContent = msg;
+      box.style.display = 'block';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { box.style.display = 'none'; }, 3200);
+    }
+
+    async function downloadPitchFile(filename, label) {
+      showToast(`Iniciando download de ${label}...`);
+      try {
+        const resp = await fetch('/' + filename);
+        if (!resp.ok) throw new Error('Status HTTP ' + resp.status);
+        const blob = await resp.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          if (a.parentNode) document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }, 1500);
+        showToast(`✓ Download de ${filename} concluído!`);
+      } catch (err) {
+        console.warn('Fallback download:', err);
+        const a = document.createElement('a');
+        a.href = '/' + filename;
+        a.download = filename;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => { if (a.parentNode) document.body.removeChild(a); }, 1000);
+      }
+    }
+
     initProgressDots();
     renderAppStep(0);
     goToScene(0);
     restartAppAutoInterval();
+    initDraggableChaosPills();
 
     setInterval(() => {
       if (timerRunning) {
