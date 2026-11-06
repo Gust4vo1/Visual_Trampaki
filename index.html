@@ -221,12 +221,34 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75), inset 0 0 100px rgba(0, 0, 0, 0.22);
       border: 1px solid rgba(255, 255, 255, 0.16);
       padding: clamp(40px, 5vw, 80px) 24px;
       cursor: pointer;
       user-select: none;
+    }
+    .final-brand-card.rippling::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 32px;
+      border: 3px solid rgba(255, 45, 122, 0.95);
+      animation: rippleWaveFinalCard 0.95s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      pointer-events: none;
+      z-index: 25;
+    }
+    @keyframes rippleWaveFinalCard {
+      0% {
+        inset: -2px;
+        opacity: 1;
+        box-shadow: 0 0 24px rgba(255, 45, 122, 0.95);
+      }
+      100% {
+        inset: -26px;
+        opacity: 0;
+        box-shadow: 0 0 65px rgba(255, 45, 122, 0);
+      }
     }
 
     .final-logo-wrapper {
@@ -241,6 +263,28 @@
       color: #ffffff;
       user-select: none;
       margin-bottom: clamp(24px, 3.2vw, 42px);
+      position: relative;
+    }
+    .final-logo-wrapper.rippling::after {
+      content: '';
+      position: absolute;
+      inset: -8px -18px;
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      animation: rippleWaveFinalLogo 0.85s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleWaveFinalLogo {
+      0% {
+        inset: -4px -10px;
+        opacity: 1;
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.85);
+      }
+      100% {
+        inset: -20px -36px;
+        opacity: 0;
+        box-shadow: 0 0 45px rgba(255, 255, 255, 0);
+      }
     }
 
     .final-logo-i-pin {
@@ -395,6 +439,37 @@
       margin: 0;
       line-height: 1;
       align-self: flex-start;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.18s ease, box-shadow 0.22s ease;
+    }
+    .slide1-hero-badge:hover {
+      box-shadow: 0 20px 48px rgba(179, 32, 93, 0.65);
+    }
+    .slide1-hero-badge:active {
+      transform: scale(0.98);
+    }
+    .slide1-hero-badge.rippling::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 24px;
+      border: 2.5px solid rgba(255, 45, 122, 0.95);
+      animation: rippleWaveHero 0.85s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleWaveHero {
+      0% {
+        inset: -2px;
+        opacity: 1;
+        box-shadow: 0 0 16px rgba(255, 45, 122, 0.95);
+      }
+      100% {
+        inset: -24px;
+        opacity: 0;
+        box-shadow: 0 0 45px rgba(255, 45, 122, 0);
+      }
     }
 
     .slide1-hero-badge .logo-i-pin {
@@ -1046,7 +1121,7 @@
             </p>
           </div>
           <div class="slide1-logo-container">
-            <span class="brand-logo slide1-hero-badge">
+            <span class="brand-logo slide1-hero-badge" onclick="triggerHeroLogoRipple(this)" title="Clique no logo para ver o efeito de onda">
               <span>trampak</span>
               <span class="logo-i-pin">
                 <svg viewBox="0 0 100 220" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1842,14 +1917,6 @@
 
           <!-- FRASE ABAIXO DO LOGO -->
           <h2 class="final-tagline">Seu próximo emprego na palma da sua mão.</h2>
-
-          <!-- Botão para reiniciar a animação (apenas ícone em balãozinho) -->
-          <button class="final-brand-replay-btn" onclick="event.stopPropagation(); replayFinalAnimation();" title="Reiniciar animação" aria-label="Reiniciar animação">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 4v6h6"></path>
-              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-            </svg>
-          </button>
         </div>
       </article>
 
@@ -2142,6 +2209,29 @@
       nextAppStep();
     }
 
+    function triggerHeroLogoRipple(el) {
+      if (!el) el = document.querySelector('.slide1-hero-badge');
+      if (!el) return;
+      el.classList.remove('rippling');
+      void el.offsetWidth;
+      el.classList.add('rippling');
+    }
+
+    function triggerFinalCardRipple() {
+      const card = document.querySelector('.final-brand-card');
+      const logo = document.querySelector('.final-logo-wrapper');
+      if (card) {
+        card.classList.remove('rippling');
+        void card.offsetWidth;
+        card.classList.add('rippling');
+      }
+      if (logo) {
+        logo.classList.remove('rippling');
+        void logo.offsetWidth;
+        logo.classList.add('rippling');
+      }
+    }
+
     function setAppStep(stepIdx, manualClick = false) {
       renderAppStep(stepIdx);
       if (manualClick && appAutoPlaying) restartAppAutoInterval();
@@ -2149,12 +2239,20 @@
     }
 
     function nextAppStep() {
-      const next = (currentAppStep + 1) % APP_STEPS.length;
+      // Loop estrito entre as telas 01 a 06 (índices 0 a 5).
+      // A visualização do protótipo vivo (índice 6) é opcional e só é aberta ao clicar no botão "Protótipo Vivo".
+      let next = currentAppStep + 1;
+      if (next >= 6) {
+        next = 0;
+      }
       setAppStep(next, true);
     }
 
     function prevAppStep() {
-      const prev = (currentAppStep - 1 + APP_STEPS.length) % APP_STEPS.length;
+      let prev = currentAppStep - 1;
+      if (prev < 0 || prev >= 6) {
+        prev = 5;
+      }
       setAppStep(prev, true);
     }
 
@@ -2194,7 +2292,9 @@
       if (appAutoPlaying) {
         appAutoTimer = setInterval(() => {
           if (currentScene === 4) {
-            const next = (currentAppStep + 1) % APP_STEPS.length;
+            // Ciclo automático estrito apenas entre as telas 01 a 06 (índices 0 a 5)
+            // Jamais avança automaticamente para o protótipo vivo (índice 6)
+            const next = (currentAppStep >= 5 || currentAppStep < 0) ? 0 : (currentAppStep + 1);
             renderAppStep(next);
             broadcastState();
           }
@@ -2216,6 +2316,7 @@
     }
 
     function replayFinalAnimation() {
+      triggerFinalCardRipple();
       const pin = document.querySelector('.final-anim-pin');
       const tag = document.querySelector('.final-tagline');
       if (!pin && !tag) return;
@@ -2268,7 +2369,10 @@
       }
 
       if (currentScene === 11) {
-        setTimeout(replayFinalAnimation, 50);
+        setTimeout(() => {
+          replayFinalAnimation();
+          triggerFinalCardRipple();
+        }, 50);
       }
 
       const data = SCENES_DATA[currentScene];
